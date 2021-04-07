@@ -2,9 +2,9 @@ export default {
   name: "figure",
   title: "Image",
   type: "image",
-  options: {
-    hotspot: true,
-  },
+  // options: {
+  //   hotspot: true,
+  // },
   fields: [
     {
       title: "Caption",
@@ -19,6 +19,8 @@ export default {
       type: "string",
       title: "Alternative text",
       description: "Important for SEO and accessiblity.",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
       options: {
         isHighlighted: true,
       },

@@ -16,7 +16,7 @@ const CartSummary = () => {
     redirectToCheckout,
   } = useShoppingCart();
 
-  // useEffect(() => setCartEmpty(!cartCount), [cartCount]);
+  useEffect(() => setCartEmpty(!cartCount), [cartCount]);
 
   const handleCheckout: React.FormEventHandler<HTMLFormElement> = async (
     event
@@ -38,14 +38,14 @@ const CartSummary = () => {
   };
 
   return (
-    <form onSubmit={handleCheckout}>
+    <form onSubmit={handleCheckout} className="bg-white p-4">
       {console.log(`cartDetails`, cartDetails)}
       <h2>Cart summary</h2>
       {/* This is where we'll render our cart */}
-      <p>
+      <p suppressHydrationWarning>
         <strong>Number of Items:</strong> {cartCount}
       </p>
-      <p>
+      <p suppressHydrationWarning>
         <strong>Total:</strong> {formattedTotalPrice}
       </p>
 

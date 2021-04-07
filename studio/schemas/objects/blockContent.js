@@ -59,7 +59,20 @@ export default {
     // as a block type.
     {
       type: "image",
-      options: { hotspot: true },
+      // options: { hotspot: true },
+      // fields: [
+      //   {
+      //     name: "alt",
+      //     type: "string",
+      //     title: "Alternative text",
+      //     codegen: { required: true },
+      //     validation: (Rule) => Rule.required(),
+      //     description: "Important for SEO and accessiblity.",
+      //     options: {
+      //       isHighlighted: true,
+      //     },
+      //   },
+      // ],
     },
   ],
 };

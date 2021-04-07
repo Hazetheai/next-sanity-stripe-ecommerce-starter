@@ -9,12 +9,16 @@ export default {
       name: "title",
       type: "string",
       title: "Site title",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "URL",
       name: "url",
       type: "url",
       description: "The main site url. Used to create canonical url",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "frontpage",
@@ -33,18 +37,22 @@ export default {
         "Best choice is to use an SVG where the color are set with currentColor",
       name: "logo",
       type: "image",
-      options: { hotspot: true },
-      fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alternative text",
-          description: "Important for SEO and accessiblity.",
-          options: {
-            isHighlighted: true,
-          },
-        },
-      ],
+      // options: { hotspot: true },
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+      // fields: [
+      //   {
+      //     name: "alt",
+      //     type: "string",
+      //     title: "Alternative text",
+      //     codegen: { required: true },
+      //     validation: (Rule) => Rule.required(),
+      //     description: "Important for SEO and accessiblity.",
+      //     options: {
+      //       isHighlighted: true,
+      //     },
+      //   },
+      // ],
     },
     {
       title: "Main navigation",

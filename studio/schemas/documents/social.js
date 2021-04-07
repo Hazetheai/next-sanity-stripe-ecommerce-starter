@@ -11,6 +11,8 @@ export default {
       options: {
         list: ["twitter", "instagram", "linkedin"],
       },
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "text",
@@ -20,7 +22,20 @@ export default {
       name: "attachment",
       type: "image",
       title: "Attachment",
-      options: { hotspot: true },
+      // options: { hotspot: true },
+      // fields: [
+      //   {
+      //     name: "alt",
+      //     type: "string",
+      //     title: "Alternative text",
+      //     codegen: { required: true },
+      //     validation: (Rule) => Rule.required(),
+      //     description: "Important for SEO and accessiblity.",
+      //     options: {
+      //       isHighlighted: true,
+      //     },
+      //   },
+      // ],
     },
   ],
 };

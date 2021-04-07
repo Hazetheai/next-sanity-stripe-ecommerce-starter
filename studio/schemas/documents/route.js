@@ -10,11 +10,15 @@ export default {
       name: "slug",
       type: "slug",
       title: "Slug",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "page",
       type: "reference",
       description: "Select the page that this route should point to",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
       to: [
         {
           type: "page",

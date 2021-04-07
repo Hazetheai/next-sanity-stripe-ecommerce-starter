@@ -1,14 +1,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import Footer from "./Footer";
+import { useShoppingCart } from "use-shopping-cart";
+import FloatingCart from "./commerce/FloatingCart";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const handleMenu = () => setMenuOpen(!menuOpen);
-  const handleOpen = () => setCartOpen(!cartOpen);
+  const handleCart = () => setCartOpen(!cartOpen);
+
+  const { addItem, removeItem, cartCount, cartDetails } = useShoppingCart();
   return (
-    <div className="bg-white">
+    <div className="bg-white relative">
       <header>
         <div className="container mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
@@ -37,10 +41,12 @@ function Layout({ children }) {
             <div className="w-full text-gray-700 md:text-center text-2xl font-semibold">
               Pulp Inc.
             </div>
-            <div className="flex items-center justify-end w-full">
-              <button
-                onClick={handleOpen}
-                className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
+            <div className="flex items-center justify-end w-full ">
+              <div
+                tabIndex="0"
+                role="button"
+                onClick={handleCart}
+                className="text-gray-600 focus:outline-none mx-4 sm:mx-0 flex relative"
               >
                 <svg
                   className="h-5 w-5"
@@ -53,8 +59,14 @@ function Layout({ children }) {
                 >
                   <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-              </button>
-
+                {cartCount}
+                {cartOpen && (
+                  <FloatingCart
+                    cartDetails={cartDetails}
+                    cartItems={Object.values(cartDetails)}
+                  />
+                )}
+              </div>
               <div className="flex sm:hidden">
                 <button
                   onClick={handleMenu}
@@ -93,6 +105,16 @@ function Layout({ children }) {
                   About
                 </a>
               </Link>
+              <Link href="/use-shopping-cart">
+                <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
+                  Cart
+                </a>
+              </Link>
+              <Link href="/donate-with-checkout">
+                <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
+                  Checkout
+                </a>
+              </Link>
             </div>
           </nav>
           <div className="relative mt-6 max-w-lg mx-auto">
@@ -122,7 +144,7 @@ function Layout({ children }) {
       </header>
       {/*
       // This Cart doesn't really work… yet!
-      <Cart cartOpen={cartOpen} handleOpen={handleOpen} />
+      <Cart cartOpen={cartOpen} handleCart={handleCart} />
       */}
       <main className="my-8">{children}</main>
       <Footer />

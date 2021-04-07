@@ -10,6 +10,8 @@ export default {
       name: "name",
       type: "string",
       title: "Full name",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "photo",

@@ -9,10 +9,14 @@ export default {
     {
       name: "name",
       type: "string",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "location",
       type: "geopoint",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "openingHours",

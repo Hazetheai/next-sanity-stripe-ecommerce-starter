@@ -7,6 +7,8 @@ export default {
       name: "heading",
       type: "string",
       title: "Heading",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "label",
@@ -22,7 +24,20 @@ export default {
       name: "image",
       type: "figure",
       title: "Image",
-      options: { hotspot: true },
+      // options: { hotspot: true },
+      // fields: [
+      //   {
+      //     name: "alt",
+      //     type: "string",
+      //     title: "Alternative text",
+      //     codegen: { required: true },
+      //     validation: (Rule) => Rule.required(),
+      //     description: "Important for SEO and accessiblity.",
+      //     options: {
+      //       isHighlighted: true,
+      //     },
+      //   },
+      // ],
     },
     {
       name: "cta",

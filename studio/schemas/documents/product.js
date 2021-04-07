@@ -10,24 +10,45 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Main image",
       name: "mainImage",
       type: "image",
-      options: {
-        hotspot: true,
-      },
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+      // options: {
+      //   hotspot: true,
+      // },
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+          codegen: { required: true },
+          validation: (Rule) => Rule.required(),
+          description: "Important for SEO and accessiblity.",
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
     },
     {
       name: "blurb",
       title: "Blurb",
       type: "localeString",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "body",
       title: "Body",
       type: "localeBlockContent",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Tags",
@@ -46,6 +67,8 @@ export default {
       title: "Default variant",
       name: "defaultProductVariant",
       type: "productVariant",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Variants",
@@ -83,6 +106,8 @@ export default {
         source: "title",
         maxLength: 96,
       },
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
   ],
 

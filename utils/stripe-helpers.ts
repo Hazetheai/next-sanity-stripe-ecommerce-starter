@@ -1,3 +1,6 @@
+import { Product } from "use-shopping-cart";
+import { ProductVariant } from "./sanity/types";
+
 export function formatAmountForDisplay(
   amount: number,
   currency: string
@@ -27,4 +30,10 @@ export function formatAmountForStripe(
     }
   }
   return zeroDecimalCurrency ? amount : Math.round(amount * 100);
+}
+
+export function sanityProductToStripe(productVariant: ProductVariant): Product {
+  const stripeProduct = { ...productVariant, name: productVariant.title };
+
+  return stripeProduct;
 }

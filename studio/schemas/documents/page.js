@@ -13,6 +13,8 @@ export default {
       name: "title",
       type: "string",
       title: "Title",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "content",
@@ -31,6 +33,8 @@ export default {
       title: "Description",
       description: "This description populates meta-tags on the webpage",
       fieldset: "metadata",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "openGraphImage",
@@ -38,7 +42,20 @@ export default {
       title: "Open Graph Image",
       description: "Image for sharing previews on Facebook, Twitter etc.",
       fieldset: "metadata",
-      options: { hotspot: true },
+      // options: { hotspot: true },
+      // fields: [
+      //   {
+      //     name: "alt",
+      //     type: "string",
+      //     title: "Alternative text",
+      //     codegen: { required: true },
+      //     validation: (Rule) => Rule.required(),
+      //     description: "Important for SEO and accessiblity.",
+      //     options: {
+      //       isHighlighted: true,
+      //     },
+      //   },
+      // ],
     },
   ],
 

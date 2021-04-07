@@ -18,6 +18,8 @@ export default {
       title: "Title",
       name: "title",
       type: "string",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Internal link",

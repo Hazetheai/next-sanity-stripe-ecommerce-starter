@@ -7,6 +7,8 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
@@ -16,6 +18,8 @@ export default {
         source: "title",
         maxLength: 96,
       },
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "description",
