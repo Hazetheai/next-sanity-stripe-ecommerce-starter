@@ -1,9 +1,13 @@
 import PropTypes from "prop-types";
 import Cta from "../Cta";
 import { PortableText, urlFor } from "../../utils/sanity";
+import { ComposerHero } from "./index";
 
-function Hero(props) {
-  const { heading, backgroundImage, tagline, ctas } = props;
+function Hero({ heading, backgroundImage, tagline, ctas }) {
+  // console.log(`tagline`, tagline);
+  if (heading === "About Us") {
+    return <ComposerHero />;
+  }
 
   return (
     <div>
@@ -23,11 +27,14 @@ function Hero(props) {
           <div className="w-full h-64 md:w-1/2 lg:h-96">
             <img
               className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
-              src={urlFor(backgroundImage)
-                .auto("format")
-                .width(1051)
-                .fit("crop")
-                .quality(80)}
+              src={
+                urlFor(backgroundImage)
+                  .auto("format")
+                  .width(1051)
+                  .fit("crop")
+                  .quality(80)
+                  .url() || ""
+              }
               alt={backgroundImage.alt}
             />
           </div>

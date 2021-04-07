@@ -32,6 +32,7 @@ import contactInfo from "./objects/contactInfo";
 import hero from "./objects/hero";
 import imageSection from "./objects/imageSection";
 import textSection from "./objects/textSection";
+import featureSection from "./objects/featureSection";
 
 import localeString from "./locale/String";
 import localeText from "./locale/Text";
@@ -66,6 +67,7 @@ export default createSchema({
     hero,
     imageSection,
     textSection,
+    featureSection,
     portableText,
     simplePortableText,
     contactInfo,

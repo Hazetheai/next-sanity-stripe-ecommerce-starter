@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import Footer from "./Footer";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -82,12 +83,12 @@ function Layout({ children }) {
                   Home
                 </a>
               </Link>
-              <Link href="/products">
+              <Link href="/shop">
                 <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
                   Shop
                 </a>
               </Link>
-              <Link href="/about">
+              <Link href="/all-about-us">
                 <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
                   About
                 </a>
@@ -124,17 +125,7 @@ function Layout({ children }) {
       <Cart cartOpen={cartOpen} handleOpen={handleOpen} />
       */}
       <main className="my-8">{children}</main>
-      <footer className="bg-gray-200">
-        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-          <a
-            href="#"
-            className="text-xl font-bold text-gray-500 hover:text-gray-400"
-          >
-            Pulp Inc.
-          </a>
-          <p className="py-2 text-gray-500 sm:py-0">All rights reserved</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

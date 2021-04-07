@@ -6,7 +6,8 @@ import * as SectionComponents from "./sections";
 function resolveSections(section) {
   // eslint-disable-next-line import/namespace
   const Section = SectionComponents[upperFirst(section._type)];
-
+  // console.log(`upperFirst(section._type)`, upperFirst(section._type));
+  // console.log(`SectionComponents`, SectionComponents);
   if (Section) {
     return Section;
   }
@@ -19,7 +20,7 @@ function RenderSections(props) {
   const { sections } = props;
 
   if (!sections) {
-    console.error("Missing section");
+    console.error("Missing sections");
     return <div>Missing sections</div>;
   }
 

@@ -17,7 +17,7 @@ function ImageSection(props) {
             <figure>
               <img
                 className="rounded-md object-cover mx-auto"
-                src={urlFor(image).auto("format").width(2000).url()}
+                src={urlFor(image).auto("format").width(2000).url() || ""}
                 alt={heading}
               />
               <figcaption>
