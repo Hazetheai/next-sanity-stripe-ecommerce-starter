@@ -9,9 +9,11 @@ import { NextApiRequest, NextApiResponse } from "next";
  * so you know the pricing information is accurate.
  */
 import { validateCartItems } from "use-shopping-cart/src/serverUtil";
-import inventory from "../../../data/products.json";
+// import inventory from "../../../data/products.json";
 
 import Stripe from "stripe";
+import { getAllProducts } from "utils/sanity/api";
+import { sanityProductToStripe } from "utils/stripe-helpers";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
   apiVersion: "2020-03-02",
@@ -22,10 +24,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
+    const inventory = await getAllProducts();
+
+    const stripeInventory = inventory.map((el) =>
+      sanityProductToStripe(el.defaultProductVariant)
+    );
     try {
       // Validate the cart details that were sent from the client.
       const cartItems = req.body;
-      const line_items = validateCartItems(inventory, cartItems);
+      const line_items = validateCartItems(stripeInventory, cartItems);
       // Create Checkout Sessions from body params.
       const params: Stripe.Checkout.SessionCreateParams = {
         submit_type: "pay",

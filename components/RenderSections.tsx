@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { upperFirst } from "lodash";
 import * as SectionComponents from "./sections";
+import { Page } from "utils/sanity/types";
 
 function resolveSections(section) {
   // eslint-disable-next-line import/namespace
@@ -16,9 +17,10 @@ function resolveSections(section) {
   return null;
 }
 
-function RenderSections(props) {
-  const { sections } = props;
-
+interface Props {
+  sections: Page["content"];
+}
+const RenderSections: React.FC<Props> = ({ sections }) => {
   if (!sections) {
     console.error("Missing sections");
     return <div>Missing sections</div>;
@@ -35,16 +37,16 @@ function RenderSections(props) {
       })}
     </Fragment>
   );
-}
-
-RenderSections.propTypes = {
-  sections: PropTypes.arrayOf(
-    PropTypes.shape({
-      _type: PropTypes.string,
-      _key: PropTypes.string,
-      section: PropTypes.instanceOf(PropTypes.object),
-    })
-  ),
 };
+
+// RenderSections.propTypes = {
+//   sections: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       _type: PropTypes.string,
+//       _key: PropTypes.string,
+//       section: PropTypes.instanceOf(PropTypes.object),
+//     })
+//   ),
+// };
 
 export default RenderSections;

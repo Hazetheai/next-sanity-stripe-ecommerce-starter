@@ -3,6 +3,7 @@ import { groq } from "next-sanity";
 import { useRouter } from "next/router";
 import LandingPage from "../components/LandingPage";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
+import { GetStaticProps } from "next";
 
 const query = groq`*[_type == "route" && slug.current == $slug][0]{
   page->{
@@ -36,7 +37,10 @@ function ProductPageContainer({ pageData, preview, slug }) {
   return <LandingPage page={page.content ? page : pageData} />;
 }
 
-export async function getStaticProps({ params = {}, preview = false }) {
+export const getStaticProps: GetStaticProps = async ({
+  params = {},
+  preview = false,
+}) => {
   const { slug } = params;
   const { page: pageData } = await getClient(preview).fetch(query, {
     slug,
@@ -45,7 +49,7 @@ export async function getStaticProps({ params = {}, preview = false }) {
   return {
     props: { preview, pageData, slug },
   };
-}
+};
 
 export async function getStaticPaths() {
   const routes = await getClient()

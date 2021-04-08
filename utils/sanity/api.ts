@@ -29,7 +29,7 @@ const getUniqueArticles = (posts) => {
 
 const getClient = (preview = false) => (preview ? previewClient : sanityClient);
 
-export async function getAllProducts() {
+export async function getAllProducts(): Promise<Product[]> {
   const products = await getClient().fetch(Q_ALL_PRODUCTS);
 
   return products;

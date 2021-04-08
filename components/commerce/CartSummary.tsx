@@ -50,7 +50,7 @@ const CartSummary = () => {
       </p>
 
       {/* Redirects the user to Stripe */}
-      <StripeTestCards />
+      {/* <StripeTestCards /> */}
       <button
         className="cart-style-background"
         type="submit"

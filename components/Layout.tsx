@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Footer from "./Footer";
 import { useShoppingCart } from "use-shopping-cart";
 import FloatingCart from "./commerce/FloatingCart";
+import useOnClickOutside from "hooks/useOutsideClick";
+import useKeyPress from "hooks/useKeyPress";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +12,24 @@ function Layout({ children }) {
   const handleMenu = () => setMenuOpen(!menuOpen);
   const handleCart = () => setCartOpen(!cartOpen);
 
+  function closeDrawers() {
+    console.log(`Close Drawers`, cartOpen, menuOpen);
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
+    if (cartOpen) {
+      setCartOpen(false);
+    }
+  }
+
   const { addItem, removeItem, cartCount, cartDetails } = useShoppingCart();
+  const escapePress = useKeyPress("Escape");
+
+  useEffect(() => {
+    if (escapePress) {
+      closeDrawers();
+    }
+  }, [escapePress]);
   return (
     <div className="bg-white relative">
       <header>
@@ -43,7 +62,7 @@ function Layout({ children }) {
             </div>
             <div className="flex items-center justify-end w-full ">
               <div
-                tabIndex="0"
+                tabIndex={0}
                 role="button"
                 onClick={handleCart}
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0 flex relative"
@@ -62,8 +81,10 @@ function Layout({ children }) {
                 {cartCount}
                 {cartOpen && (
                   <FloatingCart
+                    closeHandler={closeDrawers}
                     cartDetails={cartDetails}
                     cartItems={Object.values(cartDetails)}
+                    removeItem={removeItem}
                   />
                 )}
               </div>

@@ -1,26 +1,39 @@
-import React from "react";
+import useOnClickOutside from "hooks/useOutsideClick";
+import React, { RefObject, useRef } from "react";
 import { CartDetails, Product } from "use-shopping-cart";
+import { urlFor } from "utils/sanity";
 import CartSummary from "./CartSummary";
 
 interface FloatingCartProps {
   cartItems: Product[];
   cartDetails: CartDetails;
+  removeItem: (sku: string) => void;
+  closeHandler: () => void;
 }
 
 const FloatingCart: React.FC<FloatingCartProps> = ({
   cartItems,
   cartDetails,
+  removeItem,
+  closeHandler,
 }) => {
+  /* prettier-ignore */
+  const ref = useRef<HTMLDivElement>(null);
+  useOnClickOutside(ref, closeHandler);
   return (
     <>
       {/* component */}
       <div
+        ref={ref}
         className="p-5 absolute top-0 right-0 mt-2 mr-2 z-10"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
       >
+        {console.log(`ref`, ref)}
         <div className="shadow-xl w-64">
-          {console.log(`cartItems`, cartItems)}
-          {console.log(`cartDetails`, cartDetails)}
+          {/* {console.log(`cartItems`, cartItems)} */}
+          {/* {console.log(`cartDetails`, cartDetails)} */}
           {cartItems.map((item) => {
             return (
               <div
@@ -29,7 +42,7 @@ const FloatingCart: React.FC<FloatingCartProps> = ({
               >
                 <div className="p-2 w-12">
                   <img
-                    src="https://dummyimage.com/50x50/bababa/0011ff&text=50x50"
+                    src={urlFor(item.images[0]).url() || ""}
                     alt="img product"
                   />
                 </div>
@@ -42,7 +55,10 @@ const FloatingCart: React.FC<FloatingCartProps> = ({
                 </div>
                 <div className="flex flex-col w-18 font-medium items-end">
                   <button
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeItem(item.sku);
+                    }}
                     className="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
                   >
                     <svg
