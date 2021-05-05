@@ -1,13 +1,13 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import Layout from "../components/commerce/Layout";
 import PrintObject from "../components/commerce/PrintObject";
-import Cart from "../components/commerce/Cart";
+import Cart from "../components/commerce/CartState";
 import ClearCart from "../components/commerce/ClearCart";
 
 import { fetchGetJSON } from "../utils/api-helpers";
 import useSWR from "swr";
+import ThankYouHero from "components/commerce/ThankYouHero";
 
 const ResultPage: NextPage = () => {
   const router = useRouter();
@@ -25,15 +25,9 @@ const ResultPage: NextPage = () => {
 
   return (
     <>
-      <div className="page-container">
-        <h1>Checkout Payment Result</h1>
-        <h2>Status: {data?.payment_intent?.status ?? "loading..."}</h2>
-        <h3>CheckoutSession response:</h3>
-        <PrintObject content={data ?? "loading..."} />
-        <Cart>
-          <ClearCart />
-        </Cart>
-      </div>
+      <ThankYouHero data={data} />
+
+      {/* <PrintObject content={data ?? "loading..."} /> */}
     </>
   );
 };

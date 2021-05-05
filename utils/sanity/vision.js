@@ -1,14 +1,36 @@
 const route = `
 *[_type == "route" && slug.current == $slug][0]{
-    page->{
+  page->{
+  ...,
+  content[]{
     ...,
-    content[]{
+    productCategories->{...},
+    products[]->{
+      ...
+    },
+    ctas[]{
       ...,
-      ctas[]{
-        ...,
-        "route": route->slug
-      }
+      "route": route->
     }
   }
-  }
+}
+}
+`;
+
+const siteConfig = `
+
+*[_type == "siteConfig"]{
+  mainNavigation[]->{...,page->},
+  ...,
+   footerNavigation[]{
+  ...,
+    footerNavigationItem[]->{
+      ...,
+      "page":page->title,
+      "slug":slug.current
+    }
+  },
+frontPage->,
+}
+
 `;

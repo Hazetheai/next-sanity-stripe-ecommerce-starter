@@ -4,6 +4,11 @@ import StripeTestCards from "./StripeTestCards";
 
 import { useShoppingCart } from "use-shopping-cart";
 import { fetchPostJSON } from "../../utils/api-helpers";
+import NextLink from "next/link";
+import Link from "components/elements/Link";
+import Button from "components/elements/Button";
+import { isBrowser } from "utils/booleans";
+import { useRouter } from "next/router";
 
 const CartSummary = () => {
   const [loading, setLoading] = useState(false);
@@ -15,7 +20,7 @@ const CartSummary = () => {
     cartDetails,
     redirectToCheckout,
   } = useShoppingCart();
-
+  const router = useRouter();
   useEffect(() => setCartEmpty(!cartCount), [cartCount]);
 
   const handleCheckout: React.FormEventHandler<HTMLFormElement> = async (
@@ -24,10 +29,10 @@ const CartSummary = () => {
     event.preventDefault();
     setLoading(true);
 
-    const response = await fetchPostJSON(
-      "/api/checkout_sessions/cart",
-      cartDetails
-    );
+    const response = await fetchPostJSON("/api/checkout_sessions/cart", {
+      cartItems: cartDetails,
+      metadata: { note: "" },
+    });
 
     if (response.statusCode === 500) {
       console.error(response.message);
@@ -39,32 +44,66 @@ const CartSummary = () => {
 
   return (
     <form onSubmit={handleCheckout} className="bg-white p-4">
-      {console.log(`cartDetails`, cartDetails)}
-      <h2>Cart summary</h2>
+      <h2 className="text-gray-600">Summary</h2>
       {/* This is where we'll render our cart */}
-      <p suppressHydrationWarning>
-        <strong>Number of Items:</strong> {cartCount}
+      <p className="text-gray-500 w-full flex justify-between">
+        <span>Number of Items:</span>{" "}
+        <span className="text-gray-900">{cartCount}</span>
       </p>
-      <p suppressHydrationWarning>
-        <strong>Total:</strong> {formattedTotalPrice}
+      <p className="text-gray-500 w-full flex justify-between">
+        <span>Total:</span>{" "}
+        <span className="text-gray-900">{formattedTotalPrice}</span>
       </p>
 
       {/* Redirects the user to Stripe */}
       {/* <StripeTestCards /> */}
-      <button
+      <div className="flex justify-between">
+        <Link
+          btnStyle="secondary"
+          hrefProp="cart"
+          text="View"
+          disabled={cartEmpty || loading}
+          className="  my-2 "
+          icon={{ name: "none" }}
+        />
+        <Button
+          btnStyle="secondary"
+          func={clearCart}
+          text="Clear"
+          disabled={cartEmpty || loading}
+          className=" my-2"
+        />
+      </div>
+      <Button
+        btnStyle="primary"
+        // hrefProp={router.pathname.slice(1)}
+        text="Checkout"
+        title={"Go to checkout"}
+        disabled={cartEmpty || loading}
+        className="w-full my-2"
+        type="submit"
+        icon={{ name: "arrow" }}
+      />
+      {console.log(`router`, router)}
+      {/* <button
         className="cart-style-background"
         type="submit"
         disabled={cartEmpty || loading}
       >
         Checkout
-      </button>
-      <button
+      </button> */}
+      {/* <button
         className="cart-style-background"
         type="button"
         onClick={clearCart}
       >
         Clear Cart
-      </button>
+      </button> */}
+      {/* <NextLink href="/cart" passHref>
+        <a className="cart-style-background" href="0#">
+          View Cart
+        </a>
+      </NextLink> */}
     </form>
   );
 };

@@ -30,20 +30,26 @@ export default async function handler(
       sanityProductToStripe(el.defaultProductVariant)
     );
     try {
+      // console.log(`req.body`, req.body);
       // Validate the cart details that were sent from the client.
-      const cartItems = req.body;
+      const { cartItems, metadata } = req.body;
+      // console.log(`cartItems`, cartItems);
       const line_items = validateCartItems(stripeInventory, cartItems);
+
+      console.log(`line_items`, line_items);
+      console.log(`metadata`, metadata);
       // Create Checkout Sessions from body params.
       const params: Stripe.Checkout.SessionCreateParams = {
         submit_type: "pay",
         payment_method_types: ["card"],
         billing_address_collection: "auto",
+        metadata,
         shipping_address_collection: {
-          allowed_countries: ["US", "CA"],
+          allowed_countries: ["IE", "GB"],
         },
         line_items,
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/use-shopping-cart`,
+        cancel_url: `${req.headers.origin}/cart`,
       };
       const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(
         params

@@ -3,6 +3,7 @@ import { MdWeb, MdSettings, MdWhatshot, MdLooks } from "react-icons/md";
 import ads from "./ads";
 import categories from "./categories";
 import person from "./person";
+import React from "react";
 
 import siteSettings from "./siteSettings";
 
@@ -23,7 +24,22 @@ const hiddenDocTypes = (listItem) =>
     "product",
     "route",
     "siteConfig",
+    "brand",
   ].includes(listItem.getId());
+
+const JsonPreview = ({ document }) => (
+  // The JSON preview
+  <pre>{JSON.stringify(document.displayed, null, 2)}</pre>
+);
+
+// export const getDefaultDocumentNode = () => {
+//   // Give all documents the JSON preview,
+//   // as well as the default form view
+//   return S.document().views([
+//     S.view.form(),
+//     S.view.component(JsonPreview).title("JSON"),
+//   ]);
+// };
 
 export default () =>
   S.list()
@@ -50,7 +66,8 @@ export default () =>
               S.documentTypeListItem("page").title("Pages"),
             ])
         ),
-      ads,
+      // ads,
+      categories,
       ...S.documentTypeListItems().filter(hiddenDocTypes),
     ]);
 
@@ -66,6 +83,7 @@ export const getDefaultDocumentNode = (props) => {
   if (schemaType === "product") {
     return S.document().views([
       S.view.form(),
+      S.view.component(JsonPreview).title("JSON"),
       S.view.component(ProductsOverviewPreview).title("Products Overview"),
       S.view.component(ProductPagePreview).title("Product Page"),
     ]);
@@ -73,9 +91,14 @@ export const getDefaultDocumentNode = (props) => {
   if (schemaType === "swag") {
     return S.document().views([
       S.view.form(),
+      S.view.component(JsonPreview).title("JSON"),
       S.view.component(TotebagPreview).title("Totebag"),
       S.view.component(ShirtPreview).title("Shirt"),
     ]);
   }
-  return S.document().views([S.view.form()]);
+
+  return S.document().views([
+    S.view.form(),
+    S.view.component(JsonPreview).title("JSON"),
+  ]);
 };

@@ -22,9 +22,11 @@ export default {
       title: "Page sections",
       of: [
         { type: "hero" },
-        { type: "imageSection" },
-        { type: "textSection" },
+        { type: "imageText" },
+        { type: "centerPiece" },
         { type: "featureSection" },
+        { type: "form" },
+        { type: "productSection" },
       ],
     },
     {

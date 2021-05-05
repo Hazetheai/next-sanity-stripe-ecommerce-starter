@@ -1,0 +1,61 @@
+{
+  "id": "cs_test_b1BdcnQIMO2UVMcDxZmGa2t4L3K1sNv9G2YZpHm8Isdi1LX22F4pFXQAVQ",
+  "object": "checkout.session",
+  "allow_promotion_codes": null,
+  "amount_subtotal": 17000,
+  "amount_total": 17000,
+  "billing_address_collection": "auto",
+  "cancel_url": "http://localhost:3000/cart",
+  "client_reference_id": null,
+  "currency": "eur",
+  "customer": null,
+  "customer_details": null,
+  "customer_email": null,
+  "display_items": [
+    {
+      "amount": 2000,
+      "currency": "eur",
+      "custom": {
+        "description": null,
+        "images": [
+          "https://cdn.sanity.io/images/10j0zmvn/production/068cdcc9de65a45869d7cef6387f93d39acfb3f5-157x150.jpg"
+        ],
+        "name": "Never Be The Sun"
+      },
+      "quantity": 1,
+      "type": "custom"
+    },
+    {
+      "amount": 5000,
+      "currency": "eur",
+      "custom": {
+        "description": null,
+        "images": [
+          "https://cdn.sanity.io/images/10j0zmvn/production/53e525a4a5d67d4b7fe692e8a9aeca923e31bb31-800x533.png"
+        ],
+        "name": "Left Shoe"
+      },
+      "quantity": 3,
+      "type": "custom"
+    }
+  ],
+  "livemode": false,
+  "locale": null,
+  "metadata": { "note": "This is a nice product" },
+  "mode": "payment",
+  "payment_intent": "pi_1Ig6OvCKKxrNXMSQXfgafSGZ",
+  "payment_method_options": {},
+  "payment_method_types": ["card"],
+  "payment_status": "unpaid",
+  "setup_intent": null,
+  "shipping": null,
+  "shipping_address_collection": { "allowed_countries": ["IE", "GB"] },
+  "submit_type": "pay",
+  "subscription": null,
+  "success_url": "http://localhost:3000/result?session_id={CHECKOUT_SESSION_ID}",
+  "total_details": {
+    "amount_discount": 0,
+    "amount_shipping": 0,
+    "amount_tax": 0
+  }
+}

@@ -6,7 +6,7 @@ import StripeTestCards from "./StripeTestCards";
 import getStripe from "../../utils/get-stripejs";
 import { fetchPostJSON } from "../../utils/api-helpers";
 import { formatAmountForDisplay } from "../../utils/stripe-helpers";
-import * as config from "../../stripe-config";
+import * as config from "../../config/stripe";
 
 const CheckoutForm = () => {
   const [loading, setLoading] = useState(false);

@@ -318,26 +318,14 @@ export interface Social extends SanityDocument {
    *
    *
    */
-  channel: "twitter" | "instagram" | "linkedin";
+  channel: "twitter" | "instagram" | "linkedin" | "youtube" | "facebook";
 
   /**
-   * text — `text`
+   * Handle — `string`
    *
-   *
+   * No "@" symbol required.
    */
-  text?: string;
-
-  /**
-   * Attachment — `image`
-   *
-   *
-   */
-  attachment?: {
-    _type: "image";
-    asset: SanityAsset;
-    crop?: SanityImageCrop;
-    hotspot?: SanityImageHotspot;
-  };
+  handle?: string;
 }
 
 /**
@@ -457,8 +445,10 @@ export interface Page extends SanityDocument {
   content?: Array<
     | SanityKeyed<Hero>
     | SanityKeyed<ImageSection>
-    | SanityKeyed<TextSection>
+    | SanityKeyed<CenterPiece>
     | SanityKeyed<FeatureSection>
+    | SanityKeyed<Form>
+    | SanityKeyed<ProductSection>
   >;
 
   /**
@@ -534,18 +524,18 @@ export interface SiteConfig extends SanityDocument {
   title: string;
 
   /**
+   * Site description — `text`
+   *
+   *
+   */
+  description: string;
+
+  /**
    * URL — `url`
    *
    * The main site url. Used to create canonical url
    */
   url: string;
-
-  /**
-   * frontpage — `reference`
-   *
-   * Choose page to be the frontpage
-   */
-  frontpage?: SanityReference<Page>;
 
   /**
    * Site language — `string`
@@ -564,6 +554,32 @@ export interface SiteConfig extends SanityDocument {
     asset: SanityAsset;
     crop?: SanityImageCrop;
     hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     * Important for SEO and accessiblity.
+     */
+    alt: string;
+  };
+
+  /**
+   * Social Image — `image`
+   *
+   * The default image when sharing on social media
+   */
+  socialImage: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     * Important for SEO and accessiblity.
+     */
+    alt: string;
   };
 
   /**
@@ -578,14 +594,45 @@ export interface SiteConfig extends SanityDocument {
    *
    *
    */
-  footerNavigation?: Array<SanityKeyedReference<Route>>;
+  footerNavigation?: Array<
+    SanityKeyed<{
+      _type: "footerNavigationSection";
+      /**
+       * Title — `string`
+       *
+       *
+       */
+      title?: string;
+
+      /**
+       * Footer navigation items — `array`
+       *
+       *
+       */
+      footerNavigationItem?: Array<SanityKeyedReference<Route | Product>>;
+    }>
+  >;
 
   /**
-   * footerText — `simplePortableText`
+   * Contact Email — `string`
    *
    *
    */
-  footerText?: SimplePortableText;
+  contactEmail?: string;
+
+  /**
+   * Contact Phone — `string`
+   *
+   *
+   */
+  contactPhone?: string;
+
+  /**
+   * Address — `text`
+   *
+   *
+   */
+  contactAddress?: string;
 }
 
 /**
@@ -625,6 +672,166 @@ export interface Person extends SanityDocument {
   contactInfo?: ContactInfo;
 }
 
+/**
+ * Photographers
+ *
+ *
+ */
+export interface Photographer extends SanityDocument {
+  _type: "photographer";
+
+  /**
+   * Name — `string`
+   *
+   *
+   */
+  name: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Photographer Website — `url`
+   *
+   *
+   */
+  website?: string;
+
+  /**
+   * Photographer Instagram Handle — `string`
+   *
+   * No "@"
+   */
+  instagram?: string;
+
+  /**
+   * Image — `image`
+   *
+   *
+   */
+  image?: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     *
+     */
+    alt: string;
+  };
+}
+
+export type ProductSection = {
+  _type: "productSection";
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Tagline — `string`
+   *
+   *
+   */
+  tagline?: string;
+
+  /**
+   * Products — `array`
+   *
+   *
+   */
+  products?: Array<SanityKeyedReference<Product>>;
+};
+
+export type PhotoCredits = SanityReference<Photographer>;
+
+export type TextWithImage = {
+  _type: "textWithImage";
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Body — `blockContent`
+   *
+   *
+   */
+  body: BlockContent;
+
+  /**
+   * Image — `image`
+   *
+   *
+   */
+  image: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     *
+     */
+    alt: string;
+
+    /**
+     * Image Fit — `string`
+     *
+     * How would you like the image to fit? 💡 "Cover" Recommended
+     */
+    imageFit: "contain" | "cover";
+
+    /**
+     * Image Position — `string`
+     *
+     * How would you like the image to be positioned? 💡 "Center" Recommended
+     */
+    imagePosition: "left" | "center" | "right" | "top" | "bottom";
+
+    /**
+     * Image Orientation — `string`
+     *
+     * Which side for the image? 💡 Alternating ajacent items recommended
+     */
+    imageOrientation: "left" | "right";
+
+    /**
+     * Lightbox — `boolean`
+     *
+     * Allow the image to be clicked and show in a lightbox?
+     */
+    lightbox?: boolean;
+
+    /**
+     * Photo Credits — `reference`
+     *
+     *
+     */
+    photoCredits?: SanityReference<Photographer>;
+  };
+};
+
 export type Cta = {
   _type: "cta";
   /**
@@ -639,7 +846,7 @@ export type Cta = {
    *
    * Use this to link between pages on the website
    */
-  route?: SanityReference<Route>;
+  route?: SanityReference<Route | Product>;
 
   /**
    * External link — `url`
@@ -708,7 +915,21 @@ export type Hero = {
     asset: SanityAsset;
     crop?: SanityImageCrop;
     hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     * Important for SEO and accessiblity.
+     */
+    alt: string;
   };
+
+  /**
+   * Image Layout — `string`
+   *
+   *
+   */
+  layout?: "imageOnly" | "framed" | "halfScreen" | "fullScreen";
 
   /**
    * Call to actions — `array`
@@ -756,8 +977,8 @@ export type ImageSection = {
   cta?: Cta;
 };
 
-export type TextSection = {
-  _type: "textSection";
+export type CenterPiece = {
+  _type: "centerPiece";
   /**
    * Label — `string`
    *
@@ -773,11 +994,25 @@ export type TextSection = {
   heading?: string;
 
   /**
-   * Text — `portableText`
+   * Signup Form — `boolean`
    *
    *
    */
-  text?: PortableText;
+  signup?: boolean;
+
+  /**
+   * Call to actions — `array`
+   *
+   *
+   */
+  ctas?: Array<SanityKeyed<Cta>>;
+
+  /**
+   * Text — `blockContent`
+   *
+   *
+   */
+  text?: BlockContent;
 };
 
 export type FeatureSection = {
@@ -844,9 +1079,29 @@ export type FeatureSection = {
   ctas?: Array<SanityKeyed<Cta>>;
 };
 
-export type PortableText = Array<
-  SanityKeyed<SanityBlock> | SanityKeyed<Figure>
->;
+export type Form = {
+  _type: "form";
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Tagline — `string`
+   *
+   *
+   */
+  tagline?: string;
+
+  /**
+   * Form Type — `string`
+   *
+   *
+   */
+  formType: "newsletter" | "contact";
+};
 
 export type SimplePortableText = Array<SanityKeyed<SanityBlock>>;
 
@@ -952,6 +1207,13 @@ export type ProductVariant = {
   title: string;
 
   /**
+   * Name — `string`
+   *
+   *
+   */
+  name?: string;
+
+  /**
    * Weight in grams — `number`
    *
    *
@@ -1013,7 +1275,8 @@ export type Documents =
   | Page
   | Route
   | SiteConfig
-  | Person;
+  | Person
+  | Photographer;
 
 /**
  * This interface is a stub. It was referenced in your sanity schema but

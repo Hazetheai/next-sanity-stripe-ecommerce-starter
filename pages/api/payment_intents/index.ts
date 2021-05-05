@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from "../../../stripe-config";
+import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from "../../../config/stripe";
 import { formatAmountForStripe } from "../../../utils/stripe-helpers";
 
 import Stripe from "stripe";

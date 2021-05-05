@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
-import Cta from "../Cta";
+import Cta from "../common/Cta";
 import { PortableText, urlFor } from "../../utils/sanity";
+import { nextSanityImage } from "utils/sanity/nextSanityImage";
+import MyImage from "components/common/Image";
 
 function ImageSection(props) {
   const { heading, label, text, image, cta } = props;
@@ -15,10 +17,16 @@ function ImageSection(props) {
         <div className="flex items-center">
           <div>
             <figure>
-              <img
-                className="rounded-md object-cover mx-auto"
-                src={urlFor(image).auto("format").width(2000).url() || ""}
-                alt={heading}
+              <MyImage
+                nextImageProps={{
+                  ...nextSanityImage(image),
+                  alt: heading,
+                  layout: "fill",
+                  width: undefined,
+                  height: undefined,
+                  objectFit: "cover",
+                }}
+                containerClassName="mx-auto h-64 w-full"
               />
               <figcaption>
                 <div>

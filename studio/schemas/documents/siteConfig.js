@@ -1,3 +1,5 @@
+import footerNavigationSection from "../objects/footerNavigationSection";
+
 export default {
   name: "siteConfig",
   type: "document",
@@ -13,6 +15,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "description",
+      type: "text",
+      title: "Site description",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       title: "URL",
       name: "url",
       type: "url",
@@ -20,12 +29,12 @@ export default {
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
     },
-    {
-      name: "frontpage",
-      type: "reference",
-      description: "Choose page to be the frontpage",
-      to: { type: "page" },
-    },
+    // {
+    //   name: "frontpage",
+    //   type: "reference",
+    //   description: "Choose page to be the frontpage",
+    //   to: { type: "page" },
+    // },
     {
       title: "Site language",
       name: "lang",
@@ -40,19 +49,41 @@ export default {
       // options: { hotspot: true },
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
-      // fields: [
-      //   {
-      //     name: "alt",
-      //     type: "string",
-      //     title: "Alternative text",
-      //     codegen: { required: true },
-      //     validation: (Rule) => Rule.required(),
-      //     description: "Important for SEO and accessiblity.",
-      //     options: {
-      //       isHighlighted: true,
-      //     },
-      //   },
-      // ],
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+          codegen: { required: true },
+          validation: (Rule) => Rule.required(),
+          description: "Important for SEO and accessiblity.",
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
+    },
+    {
+      title: "Social Image",
+      description: "The default image when sharing on social media",
+      name: "socialImage",
+      type: "image",
+      // options: { hotspot: true },
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+          codegen: { required: true },
+          validation: (Rule) => Rule.required(),
+          description: "Important for SEO and accessiblity.",
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
     },
     {
       title: "Main navigation",
@@ -75,21 +106,31 @@ export default {
       name: "footerNavigation",
       type: "array",
       validation: (Rule) => [
-        Rule.max(10).warning("Are you sure you want more than 10 items?"),
+        Rule.max(4).warning("Are you sure you want more than 4 items?"),
         Rule.unique().error("You have duplicate menu items"),
       ],
       fieldset: "footer",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "route" }],
-        },
-      ],
+      of: [footerNavigationSection],
+    },
+    // {
+    //   name: "footerText",
+    //   type: "simplePortableText",
+    //   fieldset: "footer",
+    // },
+    {
+      name: "contactEmail",
+      title: "Contact Email",
+      type: "string",
     },
     {
-      name: "footerText",
-      type: "simplePortableText",
-      fieldset: "footer",
+      name: "contactPhone",
+      title: "Contact Phone",
+      type: "string",
+    },
+    {
+      name: "contactAddress",
+      title: "Address",
+      type: "text",
     },
   ],
 };

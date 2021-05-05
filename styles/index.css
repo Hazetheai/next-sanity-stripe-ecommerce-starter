@@ -16,3 +16,29 @@
 /* Stop purging. */
 
 /* Your own custom utilities */
+@layer base {
+  h1 {
+    max-width: 80ch;
+    @apply text-6xl;
+  }
+  h2 {
+    max-width: 80ch;
+    @apply text-4xl;
+  }
+  h3 {
+    max-width: 80ch;
+    @apply text-2xl;
+  }
+  h4 {
+    max-width: 80ch;
+    @apply text-xl;
+  }
+
+  p {
+    max-width: 80ch;
+  }
+
+  .text-center p {
+    @apply mx-auto;
+  }
+}

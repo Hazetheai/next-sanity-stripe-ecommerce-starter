@@ -1,6 +1,8 @@
+import MyImage from "components/common/Image";
 import React from "react";
+import { nextSanityImage } from "utils/sanity/nextSanityImage";
 import { PortableText, urlFor } from "../../utils/sanity";
-import Cta from "../Cta";
+import Cta from "../common/Cta";
 
 function FeatureSection({
   heading1,
@@ -16,17 +18,16 @@ function FeatureSection({
     <section className="text-gray-400 bg-gray-900 body-font">
       <div className="container px-5 py-24 mx-auto flex flex-wrap">
         <div className="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
-          <img
-            src={
-              urlFor(image)
-                .auto("format")
-                .width(1051)
-                .fit("crop")
-                .quality(80)
-                .url() || "https://dummyimage.com/460x500"
-            }
-            alt={image.alt}
-            className="object-cover object-center h-full w-full"
+          <MyImage
+            nextImageProps={{
+              ...nextSanityImage(image),
+              alt: image.alt,
+              layout: "fill",
+              width: undefined,
+              height: undefined,
+              objectFit: "cover",
+            }}
+            containerClassName="h-full w-full"
           />
         </div>
         <div className="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">

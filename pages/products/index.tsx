@@ -1,13 +1,13 @@
 import Error from "next/error";
 import { useRouter } from "next/router";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
-import ProductsPage from "../../components/ProductsPage";
+import ProductsList from "../../components/commerce/ProductList";
 
 const query = `//groq
   *[_type == "product" && defined(slug.current)]
 `;
 
-function ProductsPageContainer({ productsData, preview }) {
+function ProductsListContainer({ productsData, preview }) {
   const router = useRouter();
   if (!router.isFallback && !productsData) {
     return <Error statusCode={404} />;
@@ -17,7 +17,7 @@ function ProductsPageContainer({ productsData, preview }) {
     enabled: preview || router.query.preview !== null,
   });
 
-  return <ProductsPage products={products} />;
+  return <ProductsList products={products} />;
 }
 
 export async function getStaticProps({ params = {}, preview = false }) {
@@ -28,4 +28,4 @@ export async function getStaticProps({ params = {}, preview = false }) {
   };
 }
 
-export default ProductsPageContainer;
+export default ProductsListContainer;

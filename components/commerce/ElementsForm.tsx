@@ -6,7 +6,7 @@ import PrintObject from "./PrintObject";
 
 import { fetchPostJSON } from "../../utils/api-helpers";
 import { formatAmountForDisplay } from "../../utils/stripe-helpers";
-import * as config from "../../stripe-config";
+import * as config from "../../config/stripe";
 
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 

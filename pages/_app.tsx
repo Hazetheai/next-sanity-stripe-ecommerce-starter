@@ -1,7 +1,9 @@
 import "../styles/index.css";
-import Layout from "../components/Layout";
+import "intersection-observer";
+import "nprogress/nprogress.css";
+import Layout from "../components/common/Layout";
 import { AppProps } from "next/app";
-import Cart from "components/commerce/Cart";
+import Cart from "components/commerce/CartState";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

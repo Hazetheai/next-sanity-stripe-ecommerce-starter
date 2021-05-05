@@ -1,4 +1,5 @@
 import { Product } from "use-shopping-cart";
+import { urlFor } from "./sanity";
 import { ProductVariant } from "./sanity/types";
 
 export function formatAmountForDisplay(
@@ -33,7 +34,15 @@ export function formatAmountForStripe(
 }
 
 export function sanityProductToStripe(productVariant: ProductVariant): Product {
-  const stripeProduct = { ...productVariant, name: productVariant.title };
+  const hasImages = productVariant?.images
+    ? urlFor(productVariant?.images[0]).url()
+    : null;
+  const stripeProduct = {
+    ...productVariant,
+    name: productVariant.title,
+    image: hasImages ?? "",
+    price: productVariant.price * 100,
+  };
 
   return stripeProduct;
 }

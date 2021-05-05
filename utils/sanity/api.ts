@@ -12,7 +12,7 @@
 //     Q_SHIPPING_INFO,
 // } from './queries';
 import { previewClient, sanityClient } from "./index";
-import { Q_ALL_PRODUCTS } from "./queries";
+import { Q_ALL_PRODUCTS, Q_SITE_CONFIG } from "./queries";
 
 import { Page, Product } from "./types";
 const getUniqueArticles = (posts) => {
@@ -33,6 +33,11 @@ export async function getAllProducts(): Promise<Product[]> {
   const products = await getClient().fetch(Q_ALL_PRODUCTS);
 
   return products;
+}
+
+export async function getSiteConfig() {
+  const siteConfig = await getClient().fetch(Q_SITE_CONFIG);
+  return siteConfig;
 }
 
 // export async function getCurrentAlert(): Promise<Alertbar> {

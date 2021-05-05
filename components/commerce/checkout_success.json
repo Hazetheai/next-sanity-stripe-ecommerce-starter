@@ -1,0 +1,263 @@
+{
+  "id": "cs_test_b1YFg6sIBRg6PPMNg2eJ96T4X8G5KKun0vDMmFcxjQhYLlQ65v9dbGRYvp",
+  "object": "checkout.session",
+  "allow_promotion_codes": null,
+  "amount_subtotal": 14500,
+  "amount_total": 14500,
+  "billing_address_collection": "auto",
+  "cancel_url": "http://localhost:3000/cart",
+  "client_reference_id": null,
+  "currency": "eur",
+  "customer": "cus_JGU83iukf94JlV",
+  "customer_details": {
+    "email": "jacobstefan92@gmail.com",
+    "tax_exempt": "none",
+    "tax_ids": []
+  },
+  "customer_email": null,
+  "display_items": [
+    {
+      "amount": 2000,
+      "currency": "eur",
+      "custom": {
+        "description": null,
+        "images": [
+          "https://cdn.sanity.io/images/10j0zmvn/production/068cdcc9de65a45869d7cef6387f93d39acfb3f5-157x150.jpg"
+        ],
+        "name": "Never Be The Sun"
+      },
+      "quantity": 1,
+      "type": "custom"
+    },
+    {
+      "amount": 5000,
+      "currency": "eur",
+      "custom": {
+        "description": null,
+        "images": [
+          "https://cdn.sanity.io/images/10j0zmvn/production/53e525a4a5d67d4b7fe692e8a9aeca923e31bb31-800x533.png"
+        ],
+        "name": "Left Shoe"
+      },
+      "quantity": 1,
+      "type": "custom"
+    },
+    {
+      "amount": 7500,
+      "currency": "eur",
+      "custom": {
+        "description": null,
+        "images": [
+          "https://cdn.sanity.io/images/10j0zmvn/production/597f07154211d7dfbe11906b8224e92859b1856b-800x1085.png"
+        ],
+        "name": "Backpack"
+      },
+      "quantity": 1,
+      "type": "custom"
+    }
+  ],
+  "livemode": false,
+  "locale": null,
+  "metadata": {},
+  "mode": "payment",
+  "payment_intent": {
+    "id": "pi_1Idx97CKKxrNXMSQjNqsN60d",
+    "object": "payment_intent",
+    "amount": 14500,
+    "amount_capturable": 0,
+    "amount_received": 14500,
+    "application": null,
+    "application_fee_amount": null,
+    "canceled_at": null,
+    "cancellation_reason": null,
+    "capture_method": "automatic",
+    "charges": {
+      "object": "list",
+      "data": [
+        {
+          "id": "ch_1IdxAWCKKxrNXMSQU870m2zj",
+          "object": "charge",
+          "amount": 14500,
+          "amount_captured": 14500,
+          "amount_refunded": 0,
+          "application": null,
+          "application_fee": null,
+          "application_fee_amount": null,
+          "balance_transaction": "txn_1IdxAWCKKxrNXMSQJ6O30mRY",
+          "billing_details": {
+            "address": {
+              "city": "Montreal",
+              "country": "CA",
+              "line1": "495 Prince Arthur Street West",
+              "line2": null,
+              "postal_code": "H2X 1T4",
+              "state": "QC"
+            },
+            "email": "jacobstefan92@gmail.com",
+            "name": "Jake Riordan",
+            "phone": null
+          },
+          "calculated_statement_descriptor": "STEFAR",
+          "captured": true,
+          "created": 1617885668,
+          "currency": "eur",
+          "customer": "cus_JGU83iukf94JlV",
+          "description": null,
+          "destination": null,
+          "dispute": null,
+          "disputed": false,
+          "failure_code": null,
+          "failure_message": null,
+          "fraud_details": {},
+          "invoice": null,
+          "livemode": false,
+          "metadata": {},
+          "on_behalf_of": null,
+          "order": null,
+          "outcome": {
+            "network_status": "approved_by_network",
+            "reason": null,
+            "risk_level": "normal",
+            "risk_score": 41,
+            "seller_message": "Payment complete.",
+            "type": "authorized"
+          },
+          "paid": true,
+          "payment_intent": "pi_1Idx97CKKxrNXMSQjNqsN60d",
+          "payment_method": "pm_1IdxAVCKKxrNXMSQ7RkjTtkZ",
+          "payment_method_details": {
+            "card": {
+              "brand": "visa",
+              "checks": {
+                "address_line1_check": "pass",
+                "address_postal_code_check": "pass",
+                "cvc_check": null
+              },
+              "country": "US",
+              "exp_month": 12,
+              "exp_year": 2021,
+              "fingerprint": "OpRKt5UUvY8ElxYI",
+              "funding": "credit",
+              "installments": null,
+              "last4": "7225",
+              "network": "visa",
+              "three_d_secure": null,
+              "wallet": {
+                "dynamic_last4": "4242",
+                "google_pay": {},
+                "type": "google_pay"
+              }
+            },
+            "type": "card"
+          },
+          "receipt_email": null,
+          "receipt_number": null,
+          "receipt_url": "https://pay.stripe.com/receipts/acct_1G4zrdCKKxrNXMSQ/ch_1IdxAWCKKxrNXMSQU870m2zj/rcpt_JGU8bQyGGQME8WrUT9YMXk27uWQkVrU",
+          "refunded": false,
+          "refunds": {
+            "object": "list",
+            "data": [],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/charges/ch_1IdxAWCKKxrNXMSQU870m2zj/refunds"
+          },
+          "review": null,
+          "shipping": {
+            "address": {
+              "city": "Montreal",
+              "country": "CA",
+              "line1": "495 Prince Arthur Street West",
+              "line2": null,
+              "postal_code": "H2X 1T4",
+              "state": "QC"
+            },
+            "carrier": null,
+            "name": "Jake Riordan",
+            "phone": null,
+            "tracking_number": null
+          },
+          "source": null,
+          "source_transfer": null,
+          "statement_descriptor": null,
+          "statement_descriptor_suffix": null,
+          "status": "succeeded",
+          "transfer_data": null,
+          "transfer_group": null
+        }
+      ],
+      "has_more": false,
+      "total_count": 1,
+      "url": "/v1/charges?payment_intent=pi_1Idx97CKKxrNXMSQjNqsN60d"
+    },
+    "client_secret": "pi_1Idx97CKKxrNXMSQjNqsN60d_secret_XPQLNQoXWEuRdXXxQDsfnHhSg",
+    "confirmation_method": "automatic",
+    "created": 1617885581,
+    "currency": "eur",
+    "customer": "cus_JGU83iukf94JlV",
+    "description": null,
+    "invoice": null,
+    "last_payment_error": null,
+    "livemode": false,
+    "metadata": {},
+    "next_action": null,
+    "on_behalf_of": null,
+    "payment_method": "pm_1IdxAVCKKxrNXMSQ7RkjTtkZ",
+    "payment_method_options": {
+      "card": {
+        "installments": null,
+        "network": null,
+        "request_three_d_secure": "automatic"
+      }
+    },
+    "payment_method_types": ["card"],
+    "receipt_email": null,
+    "review": null,
+    "setup_future_usage": null,
+    "shipping": {
+      "address": {
+        "city": "Montreal",
+        "country": "CA",
+        "line1": "495 Prince Arthur Street West",
+        "line2": null,
+        "postal_code": "H2X 1T4",
+        "state": "QC"
+      },
+      "carrier": null,
+      "name": "Jake Riordan",
+      "phone": null,
+      "tracking_number": null
+    },
+    "source": null,
+    "statement_descriptor": null,
+    "statement_descriptor_suffix": null,
+    "status": "succeeded",
+    "transfer_data": null,
+    "transfer_group": null
+  },
+  "payment_method_options": {},
+  "payment_method_types": ["card"],
+  "payment_status": "paid",
+  "setup_intent": null,
+  "shipping": {
+    "address": {
+      "city": "Montreal",
+      "country": "CA",
+      "line1": "495 Prince Arthur Street West",
+      "line2": null,
+      "postal_code": "H2X 1T4",
+      "state": "QC"
+    },
+    "name": "Jake Riordan"
+  },
+  "shipping_address_collection": {
+    "allowed_countries": ["US", "CA"]
+  },
+  "submit_type": "pay",
+  "subscription": null,
+  "success_url": "http://localhost:3000/result?session_id={CHECKOUT_SESSION_ID}",
+  "total_details": {
+    "amount_discount": 0,
+    "amount_shipping": 0,
+    "amount_tax": 0
+  }
+}

@@ -17,6 +17,7 @@ import route from "./documents/route";
 import siteConfig from "./documents/siteConfig";
 import person from "./documents/person";
 import popup from "./documents/popup";
+import photographer from "./documents/photographer";
 
 // Object types
 import blockContent from "./objects/blockContent";
@@ -24,14 +25,18 @@ import cta from "./objects/cta";
 import figure from "./objects/figure";
 import internalLink from "./objects/internalLink";
 import link from "./objects/link";
-import portableText from "./objects/portableText";
+
+import photoCredits from "./objects/photoCredits";
 import simplePortableText from "./objects/simplePortableText";
 import contactInfo from "./objects/contactInfo";
 
 // Landing page sections
+import productSection from "./objects/productSection";
+import imageText from "./objects/imageText";
+import form from "./objects/form";
 import hero from "./objects/hero";
 import imageSection from "./objects/imageSection";
-import textSection from "./objects/textSection";
+import centerPiece from "./objects/centerPiece";
 import featureSection from "./objects/featureSection";
 
 import localeString from "./locale/String";
@@ -59,16 +64,20 @@ export default createSchema({
     route,
     siteConfig,
     person,
+    photographer,
     // When added to this list, object types can be used as
+    productSection,
+    photoCredits,
+    imageText,
     cta,
     figure,
     internalLink,
     link,
     hero,
     imageSection,
-    textSection,
+    centerPiece,
     featureSection,
-    portableText,
+    form,
     simplePortableText,
     contactInfo,
     blockContent,

@@ -30,5 +30,7 @@
     "react-moveable": "^0.22.6",
     "resize-observer": "^1.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "val-loader": "^3.1.0"
+  }
 }

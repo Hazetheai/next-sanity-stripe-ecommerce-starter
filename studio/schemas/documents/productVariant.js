@@ -83,4 +83,14 @@ export default {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "title",
+      media: "images",
+    },
+
+    prepare({ title, media }) {
+      return { title, media: !!media.length ? media[0] : "" };
+    },
+  },
 };

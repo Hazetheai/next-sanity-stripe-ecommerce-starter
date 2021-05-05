@@ -2,7 +2,7 @@ import React from "react";
 
 const ComposerHero = ({}) => {
   return (
-    <section className="text-gray-400 bg-gray-900 body-font">
+    <section className="ABOUT text-gray-400 bg-gray-900 body-font">
       <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
         <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
           <img
@@ -10,6 +10,17 @@ const ComposerHero = ({}) => {
             alt="hero"
             src="https://dummyimage.com/720x600"
           />
+          {/* <MyImage
+            nextImageProps={{
+              ...nextSanityImage(mainImage),
+              alt: title,
+              layout: "fill",
+              width: undefined,
+              height: undefined,
+              objectFit: "cover",
+            }}
+            containerClassName="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+          /> */}
         </div>
         <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
           <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">

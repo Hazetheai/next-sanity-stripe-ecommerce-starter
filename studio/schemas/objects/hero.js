@@ -20,19 +20,32 @@ export default {
       // options: {
       //   hotspot: true,
       // },
-      // fields: [
-      //   {
-      //     name: "alt",
-      //     type: "string",
-      //     title: "Alternative text",
-      //     codegen: { required: true },
-      //     validation: (Rule) => Rule.required(),
-      //     description: "Important for SEO and accessiblity.",
-      //     options: {
-      //       isHighlighted: true,
-      //     },
-      //   },
-      // ],
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+          codegen: { required: true },
+          validation: (Rule) => Rule.required(),
+          description: "Important for SEO and accessiblity.",
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
+    },
+    {
+      name: "layout",
+      title: "Image Layout",
+      type: "string",
+      options: {
+        list: [
+          { title: "Image Only", value: "imageOnly" },
+          { title: "Framed", value: "framed" },
+          { title: "Half Screen", value: "halfScreen" },
+          { title: "Full Screen", value: "fullScreen" },
+        ],
+      },
     },
     {
       name: "ctas",

@@ -1,31 +1,18 @@
+import ProductList from "components/commerce/ProductList";
 import Error from "next/error";
 import { useRouter } from "next/router";
+import { Q_ROUTE_BY_SLUG } from "utils/sanity/queries";
+import LandingPage from "../components/common/LandingPage";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
-import ProductsPage from "../components/ProductsPage";
-import LandingPage from "../components/LandingPage";
 
 const query = `//groq
   *[_type == "product" && defined(slug.current)]
 `;
 
-const pageQuery = `//groq
-*[_type == "route" && slug.current == "home"][0]{
-  page->{
-    ...,
-    content[]{
-      ...,
-      ctas[]{
-        ...,
-        "route": route->slug
-      }
-    }
-  }
-}`;
-
 function IndexPage(props) {
   const { productsData, preview, pageData } = props;
   const router = useRouter();
-  console.log(`pageData`, pageData);
+
   if (!router.isFallback && !productsData) {
     return <Error statusCode={404} />;
   }
@@ -39,7 +26,7 @@ function IndexPage(props) {
       <LandingPage page={pageData} />
       <div className="my-8">
         <div className="mt-4">
-          <ProductsPage products={products} />
+          <ProductList products={products} />
         </div>
       </div>
     </>
@@ -49,7 +36,9 @@ function IndexPage(props) {
 export async function getStaticProps({ params = {}, preview = false }) {
   const productsData = await getClient(preview).fetch(query);
 
-  const { page: pageData } = await getClient(preview).fetch(pageQuery);
+  const { page: pageData } = await getClient(preview).fetch(Q_ROUTE_BY_SLUG, {
+    slug: "home",
+  });
 
   return {
     props: {

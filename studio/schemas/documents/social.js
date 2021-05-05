@@ -9,33 +9,35 @@ export default {
       name: "channel",
       type: "string",
       options: {
-        list: ["twitter", "instagram", "linkedin"],
+        list: ["twitter", "instagram", "linkedin", "youtube", "facebook"],
       },
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "text",
-      type: "text",
+      title: "Handle",
+      name: "handle",
+      description: 'No "@" symbol required.',
+      type: "string",
     },
     {
       name: "attachment",
       type: "image",
       title: "Attachment",
       // options: { hotspot: true },
-      // fields: [
-      //   {
-      //     name: "alt",
-      //     type: "string",
-      //     title: "Alternative text",
-      //     codegen: { required: true },
-      //     validation: (Rule) => Rule.required(),
-      //     description: "Important for SEO and accessiblity.",
-      //     options: {
-      //       isHighlighted: true,
-      //     },
-      //   },
-      // ],
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+          codegen: { required: true },
+          validation: (Rule) => Rule.required(),
+          description: "Important for SEO and accessiblity.",
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
     },
   ],
 };
