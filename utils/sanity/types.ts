@@ -242,12 +242,12 @@ export interface Category extends SanityDocument {
 }
 
 /**
- * Brand
+ * Act
  *
- *
+ * A monikor, artist name, band etc.
  */
-export interface Brand extends SanityDocument {
-  _type: "brand";
+export interface Act extends SanityDocument {
+  _type: "act";
 
   /**
    * name — `string`
@@ -264,35 +264,6 @@ export interface Brand extends SanityDocument {
   tagline?: string;
 
   /**
-   * colors — `object`
-   *
-   *
-   */
-  colors?: {
-    _type: "colors";
-    /**
-     * primary — `color`
-     *
-     *
-     */
-    primary?: Color;
-
-    /**
-     * secondary — `color`
-     *
-     *
-     */
-    secondary?: Color;
-
-    /**
-     * ambient — `color`
-     *
-     *
-     */
-    ambient?: Color;
-  };
-
-  /**
    * logo — `image`
    *
    *
@@ -302,7 +273,28 @@ export interface Brand extends SanityDocument {
     asset: SanityAsset;
     crop?: SanityImageCrop;
     hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     * Important for SEO and accessiblity.
+     */
+    alt: string;
   };
+
+  /**
+   * Members — `array`
+   *
+   *
+   */
+  members?: Array<SanityKeyed<string>>;
+
+  /**
+   * Active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
 }
 
 /**
@@ -326,6 +318,25 @@ export interface Social extends SanityDocument {
    * No "@" symbol required.
    */
   handle?: string;
+
+  /**
+   * Attachment — `image`
+   *
+   *
+   */
+  attachment?: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     * Important for SEO and accessiblity.
+     */
+    alt: string;
+  };
 }
 
 /**
@@ -444,7 +455,7 @@ export interface Page extends SanityDocument {
    */
   content?: Array<
     | SanityKeyed<Hero>
-    | SanityKeyed<ImageSection>
+    | SanityKeyed<ImageText>
     | SanityKeyed<CenterPiece>
     | SanityKeyed<FeatureSection>
     | SanityKeyed<Form>
@@ -728,6 +739,454 @@ export interface Photographer extends SanityDocument {
   };
 }
 
+/**
+ * Album
+ *
+ *
+ */
+export interface Album extends SanityDocument {
+  _type: "album";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title: string;
+
+  /**
+   * Main image — `image`
+   *
+   *
+   */
+  mainImage: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     * Important for SEO and accessiblity.
+     */
+    alt: string;
+  };
+
+  /**
+   * Body — `localeBlockContent`
+   *
+   *
+   */
+  body: LocaleBlockContent;
+
+  /**
+   * Tags — `array`
+   *
+   *
+   */
+  tags?: Array<SanityKeyed<string>>;
+
+  /**
+   * Main Artist — `string`
+   *
+   *
+   */
+  mainArtist: string;
+
+  /**
+   * Main Writer — `string`
+   *
+   *
+   */
+  mainWriter: string;
+
+  /**
+   * Featuring Artists — `array`
+   *
+   *
+   */
+  featuringArtists?: Array<SanityKeyed<string>>;
+
+  /**
+   * Co Writers — `array`
+   *
+   *
+   */
+  coWriters?: Array<SanityKeyed<string>>;
+
+  /**
+   * Track List — `array`
+   *
+   *
+   */
+  trackList: Array<
+    SanityKeyed<{
+      _type: "track";
+      /**
+       * Title — `string`
+       *
+       *
+       */
+      title: string;
+
+      /**
+       * Song — `reference`
+       *
+       *
+       */
+      song?: SanityReference<Song>;
+
+      /**
+       * Single — `boolean`
+       *
+       *
+       */
+      isSingle?: boolean;
+
+      /**
+       * Featuring Artists — `array`
+       *
+       *
+       */
+      featuringArtists?: Array<SanityKeyed<string>>;
+
+      /**
+       * Trad Arr. — `array`
+       *
+       *
+       */
+      tradArr?: Array<SanityKeyed<string>>;
+
+      /**
+       * Track Length - Minutes — `number`
+       *
+       *
+       */
+      trackLengthMinutes: number;
+
+      /**
+       * Track Length - Seconds — `number`
+       *
+       *
+       */
+      trackLengthSeconds: number;
+    }>
+  >;
+
+  /**
+   * Genres — `array`
+   *
+   *
+   */
+  genres?: Array<SanityKeyed<string>>;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug: { _type: "slug"; current: string };
+
+  /**
+   * Recognition — `array`
+   *
+   * Praise, awards, kind words from people of organizations
+   */
+  recongnition?: Array<SanityKeyed<Appraiser>>;
+}
+
+/**
+ * Song
+ *
+ *
+ */
+export interface Song extends SanityDocument {
+  _type: "song";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title: string;
+
+  /**
+   * Main image — `image`
+   *
+   *
+   */
+  mainImage?: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     * Important for SEO and accessiblity.
+     */
+    alt: string;
+  };
+
+  /**
+   * Lyrics — `blockContent`
+   *
+   *
+   */
+  lyrics: BlockContent;
+
+  /**
+   * Back Story — `blockContent`
+   *
+   *
+   */
+  backStory?: BlockContent;
+
+  /**
+   * Tags — `array`
+   *
+   *
+   */
+  tags?: Array<SanityKeyed<string>>;
+
+  /**
+   * Covering Artists — `array`
+   *
+   *
+   */
+  coveringArtists?: Array<
+    SanityKeyed<{
+      _type: "artist";
+      /**
+       * Image — `image`
+       *
+       *
+       */
+      thumbnail?: {
+        _type: "image";
+        asset: SanityAsset;
+        crop?: SanityImageCrop;
+        hotspot?: SanityImageHotspot;
+
+        /**
+         * Alternative text — `string`
+         *
+         * Important for SEO and accessiblity.
+         */
+        alt: string;
+      };
+
+      /**
+       * Name — `string`
+       *
+       *
+       */
+      name: string;
+    }>
+  >;
+
+  /**
+   * Co Writers — `array`
+   *
+   *
+   */
+  coWriters?: Array<SanityKeyed<string>>;
+
+  /**
+   * Trad Arr. — `array`
+   *
+   *
+   */
+  tradArr?: Array<SanityKeyed<string>>;
+
+  /**
+   * Single — `boolean`
+   *
+   *
+   */
+  isSingle?: boolean;
+
+  /**
+   * Genres — `array`
+   *
+   *
+   */
+  genres?: Array<SanityKeyed<string>>;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug: { _type: "slug"; current: string };
+
+  /**
+   * Recognition — `array`
+   *
+   * Praise, awards, kind words from people of organizations
+   */
+  recongnition?: Array<SanityKeyed<Appraiser>>;
+}
+
+/**
+ * Film
+ *
+ *
+ */
+export interface Film extends SanityDocument {
+  _type: "film";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title: string;
+
+  /**
+   * Main image — `image`
+   *
+   *
+   */
+  mainImage: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+
+    /**
+     * Alternative text — `string`
+     *
+     * Important for SEO and accessiblity.
+     */
+    alt: string;
+  };
+
+  /**
+   * Story — `blockContent`
+   *
+   *
+   */
+  story: BlockContent;
+
+  /**
+   * Tags — `array`
+   *
+   *
+   */
+  tags?: Array<SanityKeyed<string>>;
+
+  /**
+   * Director — `string`
+   *
+   *
+   */
+  director: string;
+
+  /**
+   * Main Writer — `string`
+   *
+   *
+   */
+  writer: string;
+
+  /**
+   * Producer — `string`
+   *
+   *
+   */
+  producer: string;
+
+  /**
+   * Actors — `array`
+   *
+   *
+   */
+  featuringActors?: Array<SanityKeyed<string>>;
+
+  /**
+   * Co Writers — `array`
+   *
+   *
+   */
+  coWriters?: Array<SanityKeyed<string>>;
+
+  /**
+   * Co Producers — `array`
+   *
+   *
+   */
+  coProducers?: Array<SanityKeyed<string>>;
+
+  /**
+   * Status — `string`
+   *
+   *
+   */
+  status?: "development" | "production" | "completed";
+
+  /**
+   * Available Platforms — `array`
+   *
+   *
+   */
+  platforms: Array<
+    SanityKeyed<{
+      _type: "platform";
+      /**
+       * Title — `string`
+       *
+       *
+       */
+      title: "youtube" | "netflix" | "mubi" | "store";
+
+      /**
+       * link — `url`
+       *
+       * Not required for movies in our store
+       */
+      Link?: string;
+
+      /**
+       * Release Date — `date`
+       *
+       * If status is development it will show the season, if production, the month & if completed, the actual date.
+       */
+      releaseDate?: string;
+
+      /**
+       * Film Length — `number`
+       *
+       *
+       */
+      filmLengthMinutes: number;
+    }>
+  >;
+
+  /**
+   * Genres — `array`
+   *
+   *
+   */
+  genres?: Array<SanityKeyed<string>>;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug: { _type: "slug"; current: string };
+
+  /**
+   * Recognition — `array`
+   *
+   * Praise, awards, kind words from people of organizations
+   */
+  recongnition?: Array<SanityKeyed<Appraiser>>;
+}
+
 export type ProductSection = {
   _type: "productSection";
   /**
@@ -754,8 +1213,8 @@ export type ProductSection = {
 
 export type PhotoCredits = SanityReference<Photographer>;
 
-export type TextWithImage = {
-  _type: "textWithImage";
+export type ImageText = {
+  _type: "imageText";
   /**
    * Title — `string`
    *
@@ -771,11 +1230,11 @@ export type TextWithImage = {
   slug?: { _type: "slug"; current: string };
 
   /**
-   * Body — `blockContent`
+   * Body — `simplePortableText`
    *
    *
    */
-  body: BlockContent;
+  body: SimplePortableText;
 
   /**
    * Image — `image`
@@ -815,13 +1274,6 @@ export type TextWithImage = {
      * Which side for the image? 💡 Alternating ajacent items recommended
      */
     imageOrientation: "left" | "right";
-
-    /**
-     * Lightbox — `boolean`
-     *
-     * Allow the image to be clicked and show in a lightbox?
-     */
-    lightbox?: boolean;
 
     /**
      * Photo Credits — `reference`
@@ -1263,12 +1715,48 @@ export type ProductVariant = {
   >;
 };
 
+export type Appraiser = {
+  _type: "appraiser";
+  /**
+   * Image — `image`
+   *
+   *
+   */
+  thumbnail?: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Name — `string`
+   *
+   *
+   */
+  name: string;
+
+  /**
+   * Organization — `string`
+   *
+   *
+   */
+  organization?: string;
+
+  /**
+   * Quote — `string`
+   *
+   *
+   */
+  quote?: string;
+};
+
 export type Documents =
   | Product
   | Popup
   | Vendor
   | Category
-  | Brand
+  | Act
   | Social
   | Ad
   | Swag
@@ -1276,14 +1764,10 @@ export type Documents =
   | Route
   | SiteConfig
   | Person
-  | Photographer;
-
-/**
- * This interface is a stub. It was referenced in your sanity schema but
- * the definition was not actually found. Future versions of
- * sanity-codegen will let you type this explicity.
- */
-type Color = any;
+  | Photographer
+  | Album
+  | Song
+  | Film;
 
 /**
  * This interface is a stub. It was referenced in your sanity schema but
