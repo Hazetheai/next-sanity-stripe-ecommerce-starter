@@ -18,6 +18,9 @@ import siteConfig from "./documents/siteConfig";
 import person from "./documents/person";
 import popup from "./documents/popup";
 import photographer from "./documents/photographer";
+import album from "./documents/album";
+import song from "./documents/song";
+import film from "./documents/film";
 
 // Object types
 import blockContent from "./objects/blockContent";
@@ -29,6 +32,7 @@ import link from "./objects/link";
 import photoCredits from "./objects/photoCredits";
 import simplePortableText from "./objects/simplePortableText";
 import contactInfo from "./objects/contactInfo";
+import appraiser from "./objects/appraiser";
 
 // Landing page sections
 import productSection from "./objects/productSection";
@@ -65,6 +69,9 @@ export default createSchema({
     siteConfig,
     person,
     photographer,
+    album,
+    song,
+    film,
     // When added to this list, object types can be used as
     productSection,
     photoCredits,
@@ -85,5 +92,6 @@ export default createSchema({
     localeBlockContent,
     localeString,
     productVariant,
+    appraiser,
   ]),
 });

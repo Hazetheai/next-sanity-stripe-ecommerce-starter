@@ -1,9 +1,10 @@
 import { MdLooks } from "react-icons/md";
 
 export default {
-  name: "brand",
+  name: "act",
   type: "document",
-  title: "Brand",
+  title: "Act",
+  description: "A monikor, artist name, band etc.",
   icon: MdLooks,
   fields: [
     {
@@ -14,24 +15,7 @@ export default {
       name: "tagline",
       type: "string",
     },
-    {
-      name: "colors",
-      type: "object",
-      fields: [
-        {
-          name: "primary",
-          type: "color",
-        },
-        {
-          name: "secondary",
-          type: "color",
-        },
-        {
-          name: "ambient",
-          type: "color",
-        },
-      ],
-    },
+
     {
       name: "logo",
       type: "image",
@@ -39,19 +23,30 @@ export default {
       // options: {
       //   hotspot: true,
       // },
-      // fields: [
-      //   {
-      //     name: "alt",
-      //     type: "string",
-      //     title: "Alternative text",
-      //     codegen: { required: true },
-      //     validation: (Rule) => Rule.required(),
-      //     description: "Important for SEO and accessiblity.",
-      //     options: {
-      //       isHighlighted: true,
-      //     },
-      //   },
-      // ],
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+          codegen: { required: true },
+          validation: (Rule) => Rule.required(),
+          description: "Important for SEO and accessiblity.",
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
+    },
+    {
+      name: "members",
+      title: "Members",
+      type: "array",
+      of: [{ type: "string" }],
+    },
+    {
+      name: "active",
+      title: "Active",
+      type: "boolean",
     },
   ],
   preview: {
