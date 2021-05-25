@@ -63,7 +63,7 @@ const CartSummary = () => {
           hrefProp="cart"
           text="View"
           disabled={cartEmpty || loading}
-          className="  my-2 "
+          className="  my-2  text-black"
           icon={{ name: "none" }}
         />
         <Button
@@ -71,7 +71,7 @@ const CartSummary = () => {
           func={clearCart}
           text="Clear"
           disabled={cartEmpty || loading}
-          className=" my-2"
+          className=" my-2 text-black"
         />
       </div>
       <Button
@@ -80,11 +80,11 @@ const CartSummary = () => {
         text="Checkout"
         title={"Go to checkout"}
         disabled={cartEmpty || loading}
-        className="w-full my-2"
+        className="w-full my-2 text-black"
         type="submit"
         icon={{ name: "arrow" }}
       />
-      {console.log(`router`, router)}
+
       {/* <button
         className="cart-style-background"
         type="submit"

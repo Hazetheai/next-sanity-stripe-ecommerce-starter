@@ -11,7 +11,7 @@ export type SiteConfigJSON = typeof SiteConfig;
 export type SiteConfigNav = typeof SiteConfig.mainNavigation;
 export type SiteConfigFooter = typeof SiteConfig.footerNavigation;
 
-export const BRAND_NAME = "BRAND NAME";
+export const BRAND_NAME = "Donagh Long";
 
 export const defaultMetaTags: MetaTags = {
   canonical: SiteConfig.url,

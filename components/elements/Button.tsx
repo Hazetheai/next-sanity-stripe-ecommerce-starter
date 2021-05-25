@@ -12,11 +12,11 @@ export type ButtonType =
   | "clear";
 
 export const btnStyles = {
-  primary: `bg-indigo-500 hover:bg-indigo-600 text-white`,
-  secondary: `bg-gray-500 hover:bg-gray-600 text-white`,
+  primary: `bg-transparent  border-2 hover:bg-white hover:text-gray-900`,
+  secondary: `bg-transparent  border-b-2 hover:bg-white hover:text-gray-900`,
   accent: `bg-indigo-800 hover:bg-indigo-900 text-white`,
   "accent-soft": `bg-indigo-100 hover:bg-indigo-200`,
-  clear: `bg-transparent pl-0 pr-0 text-black`,
+  clear: `bg-transparent py-0 text-white`,
 };
 
 export interface ButtonStyleProps {
@@ -44,6 +44,7 @@ export interface ButtonProps extends ButtonStyleProps {
   id?: string;
   asElement?: "a";
   type?: "button" | "reset" | "submit";
+  noPadding?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -62,6 +63,8 @@ const Button: React.FC<ButtonProps> = ({
   id,
   asElement,
   tabIndex,
+  children,
+  noPadding,
   type = "button",
 }) => {
   const ref = React.useRef(null);
@@ -81,8 +84,8 @@ const Button: React.FC<ButtonProps> = ({
       onKeyDown={(e: any) => e.key === "Enter" && (func ? func({ e }) : null)}
       onTouchMove={(e: any) => (func ? func({ e }) : null)}
       //   Styling
-      className={`
-      inline-flex border-0 py-2 px-6 hover:opacity-50 text-lg ${
+      className={`${noPadding ? "" : "py-2"}
+      inline-flex border-0 px-6 text-lg transition ${
         btnStyle ? btnStyles[btnStyle] : ""
       } ${className || ""}
       `}
@@ -106,7 +109,7 @@ const Button: React.FC<ButtonProps> = ({
           }`}
         >
           <span className="text-wrapper mr-2">
-            <span className={`currentColor`}>{text}</span>
+            <span className={`currentColor`}>{text || children}</span>
           </span>
           {icon && (
             <Icon
@@ -124,7 +127,7 @@ const Button: React.FC<ButtonProps> = ({
           )}
         </div>
       ) : (
-        <span className={`currentColor`}>{text}</span>
+        <span className={`currentColor flex`}>{text || children}</span>
       )}
       {tooltip && (
         <ReactTooltip

@@ -2,7 +2,7 @@ import { PortableText, urlFor } from "utils/sanity";
 import { Hero as HeroProps } from "utils/sanity/types";
 import Cta from "components/common/Cta";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 
 const HeroFullScreen: React.FC<HeroProps> = ({
   heading,
@@ -13,7 +13,7 @@ const HeroFullScreen: React.FC<HeroProps> = ({
   return (
     <>
       {/* component */}
-      <section className="flex flex-wrap md items-center h-full bg-gray-900">
+      <section className="flex flex-wrap md items-center h-full ">
         <div className="w-full md:w-1/2 h-screen">
           <div className="mx-16 md:mx-32">
             <h1 className="text-5xl lg:text-6xl text-white font-bold mt-16">

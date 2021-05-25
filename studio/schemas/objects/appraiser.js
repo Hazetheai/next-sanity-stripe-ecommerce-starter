@@ -12,6 +12,11 @@ export default {
       // },
     },
     {
+      name: "imageOnly",
+      title: "Image Only?",
+      type: "boolean",
+    },
+    {
       name: "name",
       title: "Name",
       type: "string",

@@ -20,7 +20,14 @@ export default {
       of: [
         {
           type: "reference",
-          to: [{ type: "route" }, { type: "product" }],
+          to: [
+            { type: "product" },
+            { type: "route" },
+            { type: "staticRoute" },
+            { type: "album" },
+            { type: "song" },
+            { type: "film" },
+          ],
         },
       ],
     },

@@ -27,6 +27,12 @@ export default {
         { type: "featureSection" },
         { type: "form" },
         { type: "productSection" },
+        { type: "filmSection" },
+        { type: "songSection" },
+        { type: "albumSection" },
+        { type: "videoEmbed" },
+        { type: "creativeFeature" },
+        { type: "coveringArtists" },
       ],
     },
     {

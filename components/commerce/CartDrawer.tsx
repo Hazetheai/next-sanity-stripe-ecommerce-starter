@@ -1,4 +1,4 @@
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 import React from "react";
 import { CartDetails, Product } from "use-shopping-cart";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
@@ -54,7 +54,7 @@ const FloatingCart: React.FC<FloatingCartProps> = ({
                       e.stopPropagation();
                       removeItem(item.sku);
                     }}
-                    className="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700"
+                    className="w-4 h-4 mb-6 hover:bg-red-200 -full cursor-pointer text-red-700"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

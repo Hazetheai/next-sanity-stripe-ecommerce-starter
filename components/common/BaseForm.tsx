@@ -43,7 +43,7 @@ export const BaseForm: React.FC<BaseFormProps> = ({
         setSuccess(true);
         return res;
       })
-      .catch(console.log);
+      .catch(console.error);
 
   // useEffect(() => {
   //   handleSubmit(postData);
@@ -67,6 +67,7 @@ export const BaseForm: React.FC<BaseFormProps> = ({
           register={register(field.register)}
           options={field.options}
           className={field.className}
+          inputClassName={field.inputClassName}
         />
       ))}
 
@@ -79,7 +80,13 @@ export const BaseForm: React.FC<BaseFormProps> = ({
               : "getting in touch. We'll get back to you as soon as possible."}{" "}
           </p>
         ) : (
-          <Button text="Submit" type="submit" className="justify-center" />
+          <Button
+            noPadding
+            text="Submit"
+            type="submit"
+            btnStyle="primary"
+            className="justify-center border-2 py-2.5"
+          />
         )}
       </li>
     </form>

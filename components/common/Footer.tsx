@@ -17,7 +17,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ navigation }) => {
   return (
-    <footer className="text-gray-400 bg-gray-900 body-font">
+    <footer className="text-gray-400  body-font border-t border-gray-800">
       <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
@@ -28,7 +28,7 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+              className="w-10 h-10 text-white p-2 bg-indigo-500 -full"
               viewBox="0 0 24 24"
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -55,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
                       btnStyle="clear"
                       icon={{ name: "none" }}
                       text={item.page || item.title}
-                      className="text-gray-400 hover:text-white"
+                      className="text-gray-400 hover:text-white px-0 py-2"
                     />
                   </li>
                 ))}
@@ -67,7 +67,7 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
       <div className="bg-gray-800 bg-opacity-75">
         <div className="container items-center mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-400 text-sm text-center sm:text-left">
-            © {() => new Date().getFullYear} {defaultMetaTags.title} —
+            © {new Date().getFullYear()} {defaultMetaTags.title} —
             {/* <a
               href="https://twitter.com/knyttneve"
               rel="noopener noreferrer"
@@ -77,7 +77,32 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
               @knyttneve
             </a> */}
           </p>
-          <div className="ml-auto flex lg:flex-row md:flex-col px-4 text-gray-900 items-center  bg-gray-200 rounded border bg-opacity-40 border-gray-700 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div
+            className="ml-auto
+          flex
+          lg:flex-row
+          flex-wrap
+          px-4
+          text-gray-900
+          items-center
+          bg-gray-200
+          
+          border
+          bg-opacity-40
+          border-gray-700
+          focus:ring-2
+          focus:ring-indigo-900
+          focus:bg-transparent
+          focus:border-indigo-500
+          text-base
+          outline-none
+          text-gray-100
+          py-1
+          px-3
+          leading-8
+          transition-colors
+          duration-200 ease-in-out"
+          >
             {Socials.map((social) => (
               <Fragment key={social.handle}>
                 <Link

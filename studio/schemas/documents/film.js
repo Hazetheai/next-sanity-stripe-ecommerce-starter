@@ -37,6 +37,29 @@ export default {
       ],
     },
     {
+      name: "movieBackground",
+      title: "Movie Background",
+      description:
+        "Will play as in the background of the page hero. Should be no longer than 15s & cut to a smooth loop. Not for a full movie trailer. Max Upload size 10MB",
+      type: "file",
+      accept: "video/*",
+    },
+    {
+      name: "trailer",
+      title: "Trailer",
+      description: "Enter Youtube or Vimeo video url",
+      type: "videoEmbed",
+    },
+    {
+      name: "blurb",
+      title: "Blurb",
+      type: "string",
+      description:
+        "Short intro to the film - will be featured on search and social media.",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "story",
       title: "Story",
       type: "blockContent",
@@ -109,11 +132,18 @@ export default {
       },
     },
     {
+      name: "releaseDate",
+      title: "Release Date",
+      type: "date",
+      description:
+        "If status is development it will show the season, if production, the month & if completed, the actual date.",
+    },
+    {
       name: "platforms",
       title: "Available Platforms",
       type: "array",
-      codegen: { required: true },
-      validation: (Rule) => Rule.required(),
+      // codegen: { required: true },
+      // validation: (Rule) => Rule.required(),
       of: [
         {
           name: "platform",
@@ -136,17 +166,17 @@ export default {
               },
             },
             {
-              title: "link",
-              name: "Link",
-              type: "url",
-              description: "Not required for movies in our store",
-            },
-            {
               name: "releaseDate",
               title: "Release Date",
               type: "date",
               description:
-                "If status is development it will show the season, if production, the month & if completed, the actual date.",
+                "Will default to main release date if not specified, with same behaviour.",
+            },
+            {
+              title: "link",
+              name: "Link",
+              type: "url",
+              description: "Not required for movies in our store",
             },
 
             {
@@ -185,7 +215,37 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "recongnition",
+      name: "gallery",
+      title: "Image Gallery",
+      type: "array",
+      of: [
+        {
+          title: "Main image",
+          name: "mainImage",
+          type: "image",
+          codegen: { required: true },
+          validation: (Rule) => Rule.required(),
+          // options: {
+          //   hotspot: true,
+          // },
+          fields: [
+            {
+              name: "alt",
+              type: "string",
+              title: "Alternative text",
+              codegen: { required: true },
+              validation: (Rule) => Rule.required(),
+              description: "Important for SEO and accessiblity.",
+              options: {
+                isHighlighted: true,
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "recognition",
       title: "Recognition",
       description: "Praise, awards, kind words from people of organizations",
       type: "array",
@@ -196,8 +256,18 @@ export default {
   preview: {
     select: {
       title: "title",
-      subtitle: "director",
+      director: "director",
       media: "mainImage",
+      status: "status",
+    },
+    prepare({ title, director, media, status }) {
+      return {
+        title: title,
+        subtitle: `${director} ${
+          status === "completed" ? "" : "| In " + (status || "...")
+        }`,
+        media,
+      };
     },
   },
 };

@@ -15,7 +15,8 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/color-input",
-    "computed-field"
+    "computed-field",
+    "note-field"
   ],
   "env": {
     "development": {

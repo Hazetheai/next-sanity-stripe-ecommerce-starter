@@ -2,7 +2,7 @@ import React from "react";
 import { PortableText, urlFor } from "utils/sanity";
 import { Hero as HeroProps } from "utils/sanity/types";
 import Cta from "components/common/Cta";
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
 
 // TODO
@@ -79,7 +79,7 @@ const HeroFullScreen: React.FC<HeroProps> = ({
                   layout === "imageOnly" ? "h-64" : ""
                 }`}
               >
-                {/* <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
+                {/* <div className="bg-white  shadow-2xl p-7 sm:p-10">
                 <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
                   Sign up for updates
                 </h3>

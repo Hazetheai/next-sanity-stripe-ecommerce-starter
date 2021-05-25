@@ -27,17 +27,14 @@ export default async function handler(
     const inventory = await getAllProducts();
 
     const stripeInventory = inventory.map((el) =>
-      sanityProductToStripe(el.defaultProductVariant)
+      sanityProductToStripe(el, el.defaultProductVariant)
     );
     try {
-      // console.log(`req.body`, req.body);
       // Validate the cart details that were sent from the client.
       const { cartItems, metadata } = req.body;
-      // console.log(`cartItems`, cartItems);
+
       const line_items = validateCartItems(stripeInventory, cartItems);
 
-      console.log(`line_items`, line_items);
-      console.log(`metadata`, metadata);
       // Create Checkout Sessions from body params.
       const params: Stripe.Checkout.SessionCreateParams = {
         submit_type: "pay",

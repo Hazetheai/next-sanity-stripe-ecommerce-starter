@@ -11,7 +11,7 @@ class SimpleErrorBoundary extends Component {
     this.logErrorToServices(error.toString(), info.componentStack);
   }
   // A fake logging service 😬
-  logErrorToServices = console.log;
+  logErrorToServices = console.error;
   render() {
     if (this.state.errorMessage) {
       return <p>{this.state.errorMessage}</p>;

@@ -27,8 +27,6 @@ export default {
           name: "alt",
           type: "string",
           title: "Alternative text",
-          codegen: { required: true },
-          validation: (Rule) => Rule.required(),
           description: "Important for SEO and accessiblity.",
           options: {
             isHighlighted: true,
@@ -36,19 +34,27 @@ export default {
         },
       ],
     },
-    // {
-    //   name: "blurb",
-    //   title: "Blurb",
-    //   type: "localeString",
-    //   codegen: { required: true },
-    //   validation: (Rule) => Rule.required(),
-    // },
+    {
+      name: "blurb",
+      title: "Blurb",
+      type: "string",
+      description:
+        "Short intro to the album - will be featured on search and social media. Also used as the description if album is unreleased.",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: "body",
       title: "Body",
       type: "localeBlockContent",
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "featuredVideo",
+      title: "Featured Video",
+      description: "Enter Youtube or Vimeo video url",
+      type: "videoEmbed",
     },
     {
       title: "Tags",
@@ -78,6 +84,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "mainProducer",
+      title: "Main Producer",
+      type: "string",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "featuringArtists",
       title: "Featuring Artists",
       type: "array",
@@ -88,6 +101,17 @@ export default {
       title: "Co Writers",
       type: "array",
       of: [{ type: "string" }],
+    },
+    {
+      name: "coProducers",
+      title: "Co Producers",
+      type: "array",
+      of: [{ type: "string" }],
+    },
+    {
+      name: "recordingStudio",
+      title: "Recording Studio",
+      type: "string",
     },
     {
       name: "trackList",
@@ -178,7 +202,7 @@ export default {
             }) {
               return {
                 title: `${title} ${isSingle ? "- Single" : ""}`,
-                subtitle: `${minutes}:${seconds} ${
+                subtitle: `${minutes}:${seconds.toString().padStart(2, "0")} ${
                   featuringArtists
                     ? " | Featuring: " + featuringArtists.join(", ")
                     : ""
@@ -205,6 +229,27 @@ export default {
       },
     },
     {
+      name: "status",
+      title: "Status",
+      type: "string",
+      options: {
+        list: [
+          { title: "In Production", value: "production" },
+          { title: "Completed", value: "completed" },
+        ],
+        layout: "radio",
+      },
+    },
+    {
+      name: "releaseDate",
+      title: "Release Date",
+      type: "date",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+      description:
+        "If status is production it will show the season & if completed, the actual date.",
+    },
+    {
       name: "slug",
       title: "Slug",
       type: "slug",
@@ -216,7 +261,7 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "recongnition",
+      name: "recognition",
       title: "Recognition",
       description: "Praise, awards, kind words from people of organizations",
       type: "array",

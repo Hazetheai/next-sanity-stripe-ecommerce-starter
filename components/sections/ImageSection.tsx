@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Cta from "../common/Cta";
 import { PortableText, urlFor } from "../../utils/sanity";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 
 function ImageSection(props) {
   const { heading, label, text, image, cta } = props;
@@ -12,32 +12,30 @@ function ImageSection(props) {
   }
 
   return (
-    <div>
-      <div className="container mx-auto px-6 mt-12">
-        <div className="flex items-center">
-          <div>
-            <figure>
-              <MyImage
-                nextImageProps={{
-                  ...nextSanityImage(image),
-                  alt: heading,
-                  layout: "fill",
-                  width: undefined,
-                  height: undefined,
-                  objectFit: "cover",
-                }}
-                containerClassName="mx-auto h-64 w-full"
-              />
-              <figcaption>
-                <div>
-                  <div>{label}</div>
-                  <h2>{heading}</h2>
-                  {text && <PortableText blocks={text} />}
-                  {cta && cta.route && <Cta {...cta} />}
-                </div>
-              </figcaption>
-            </figure>
-          </div>
+    <div className="container mx-auto px-6 mt-12">
+      <div className="flex items-center">
+        <div>
+          <figure>
+            <MyImage
+              nextImageProps={{
+                ...nextSanityImage(image),
+                alt: heading,
+                layout: "fill",
+                width: undefined,
+                height: undefined,
+                objectFit: "cover",
+              }}
+              containerClassName="mx-auto h-64 w-full"
+            />
+            <figcaption>
+              <div>
+                <div>{label}</div>
+                <h2>{heading}</h2>
+                {text && <PortableText blocks={text} />}
+                {cta && cta.route && <Cta {...cta} />}
+              </div>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>

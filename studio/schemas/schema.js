@@ -21,6 +21,8 @@ import photographer from "./documents/photographer";
 import album from "./documents/album";
 import song from "./documents/song";
 import film from "./documents/film";
+import creativeConfig from "./documents/creativeConfig";
+import staticRoute from "./documents/staticRoute";
 
 // Object types
 import blockContent from "./objects/blockContent";
@@ -34,6 +36,9 @@ import simplePortableText from "./objects/simplePortableText";
 import contactInfo from "./objects/contactInfo";
 import appraiser from "./objects/appraiser";
 
+// Objects with Custom Components
+import videoEmbed from "../src/components/videoEmbed";
+
 // Landing page sections
 import productSection from "./objects/productSection";
 import imageText from "./objects/imageText";
@@ -42,7 +47,13 @@ import hero from "./objects/hero";
 import imageSection from "./objects/imageSection";
 import centerPiece from "./objects/centerPiece";
 import featureSection from "./objects/featureSection";
+import albumSection from "./objects/albumSection";
+import songSection from "./objects/songSection";
+import filmSection from "./objects/filmSection";
+import creativeFeature from "./objects/creativeFeature";
+import coveringArtists from "./objects/coveringArtists";
 
+// Locale Stuff
 import localeString from "./locale/String";
 import localeText from "./locale/Text";
 import localeBlockContent from "./locale/BlockContent";
@@ -72,6 +83,8 @@ export default createSchema({
     album,
     song,
     film,
+    creativeConfig,
+    staticRoute,
     // When added to this list, object types can be used as
     productSection,
     photoCredits,
@@ -93,5 +106,11 @@ export default createSchema({
     localeString,
     productVariant,
     appraiser,
+    songSection,
+    albumSection,
+    filmSection,
+    videoEmbed,
+    creativeFeature,
+    coveringArtists,
   ]),
 });

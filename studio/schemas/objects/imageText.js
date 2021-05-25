@@ -46,6 +46,7 @@ export default {
           title: "Alternative text",
           validation: (Rule) => Rule.required(),
           codegen: { required: true },
+          isHighlighted: true,
         },
         {
           name: "imageFit",
@@ -55,7 +56,7 @@ export default {
             'How would you like the image to fit? 💡 "Cover" Recommended',
           validation: (Rule) => Rule.required(),
           codegen: { required: true },
-
+          isHighlighted: true,
           options: {
             list: [
               { title: "Contain", value: "contain" },
@@ -72,6 +73,7 @@ export default {
             'How would you like the image to be positioned? 💡 "Center" Recommended',
           validation: (Rule) => Rule.required(),
           codegen: { required: true },
+          isHighlighted: true,
           options: {
             list: [
               {
@@ -106,7 +108,7 @@ export default {
             "Which side for the image? 💡 Alternating ajacent items recommended",
           validation: (Rule) => Rule.required(),
           codegen: { required: true },
-
+          isHighlighted: true,
           options: {
             list: [
               {

@@ -32,6 +32,7 @@ export interface FormFieldProps {
     | "week";
 
   className?: string;
+  inputClassName?: string;
 }
 // Styles = https://tailwindcss-custom-forms.netlify.app/
 const FormField: React.FC<FormFieldProps> = ({
@@ -42,9 +43,14 @@ const FormField: React.FC<FormFieldProps> = ({
   options,
   multiple,
   className,
+  inputClassName,
 }) => {
   return (
-    <li className={`relative  list-none flex flex-col ${className || ""}`}>
+    <li
+      className={`relative items-start list-none flex flex-col ${
+        className || ""
+      }`}
+    >
       <label
         htmlFor={`${fieldType}-${label}`}
         className="leading-7 text-sm text-gray-400"
@@ -56,7 +62,10 @@ const FormField: React.FC<FormFieldProps> = ({
           id={`${fieldType}-${label}`}
           type={inputType}
           {...register}
-          className="form-input"
+          placeholder={label}
+          className={`form-input text-gray-900 border-2 py-3 ${
+            inputClassName || ""
+          }`}
         />
       )}
       {fieldType === "textarea" && (

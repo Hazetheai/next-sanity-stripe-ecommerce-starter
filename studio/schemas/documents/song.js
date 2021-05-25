@@ -91,18 +91,27 @@ export default {
       type: "blockContent",
     },
     {
-      title: "Tags",
-      name: "tags",
+      name: "featuredVideo",
+      title: "Music Video",
+      description: "Enter Youtube or Vimeo video url",
       type: "array",
-      of: [
-        {
-          type: "string",
-        },
-      ],
-      options: {
-        layout: "tags",
-      },
+      validation: (Rule) =>
+        Rule.max(1).error("You may only have a single music video."),
+      of: [{ type: "videoEmbed" }],
     },
+    // {
+    //   title: "Tags",
+    //   name: "tags",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       type: "string",
+    //     },
+    //   ],
+    //   options: {
+    //     layout: "tags",
+    //   },
+    // },
 
     {
       name: "coveringArtists",
@@ -141,6 +150,11 @@ export default {
               type: "string",
               codegen: { required: true },
               validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "album",
+              title: "Album",
+              type: "string",
             },
           ],
         },
@@ -189,7 +203,7 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "recongnition",
+      name: "recognition",
       title: "Recognition",
       description: "Praise, awards, kind words from people of organizations",
       type: "array",

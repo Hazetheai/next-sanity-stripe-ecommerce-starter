@@ -22,7 +22,6 @@ function ProductPageContainer({ productData, preview }) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  console.log(`preview`, preview);
   const productData = await getClient(preview).fetch(query, {
     slug: params.slug,
   });

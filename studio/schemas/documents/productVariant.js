@@ -62,6 +62,7 @@ export default {
       type: "array",
       of: [
         {
+          title: "Images",
           type: "image",
           // fields: [
           //   {
@@ -90,7 +91,7 @@ export default {
     },
 
     prepare({ title, media }) {
-      return { title, media: !!media.length ? media[0] : "" };
+      return { title, media: !!media?.length ? media[0] : "" };
     },
   },
 };

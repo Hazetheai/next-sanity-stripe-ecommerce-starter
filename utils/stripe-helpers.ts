@@ -1,6 +1,6 @@
 import { Product } from "use-shopping-cart";
 import { urlFor } from "./sanity";
-import { ProductVariant } from "./sanity/types";
+import { ProductVariant, Product as SanityProduct } from "./sanity/types";
 
 export function formatAmountForDisplay(
   amount: number,
@@ -33,13 +33,18 @@ export function formatAmountForStripe(
   return zeroDecimalCurrency ? amount : Math.round(amount * 100);
 }
 
-export function sanityProductToStripe(productVariant: ProductVariant): Product {
+export function sanityProductToStripe(
+  product: SanityProduct,
+  productVariant: ProductVariant
+): Product {
   const hasImages = productVariant?.images
     ? urlFor(productVariant?.images[0]).url()
-    : null;
+    : product.defaultProductVariant.images
+    ? urlFor(product.defaultProductVariant?.images[0]).url()
+    : urlFor(product.mainImage).url();
   const stripeProduct = {
     ...productVariant,
-    name: productVariant.title,
+    name: `${product.title} - ${productVariant.title}`,
     image: hasImages ?? "",
     price: productVariant.price * 100,
   };

@@ -7,6 +7,13 @@ const STUDIO_REWRITE = {
 };
 
 module.exports = {
+  redirects: [
+    {
+      source: "/films",
+      destination: "/filmmaker",
+      permanent: false,
+    },
+  ],
   rewrites: () => [STUDIO_REWRITE],
   images: { domains: ["cdn.sanity.io"] },
   webpack: (config, { isServer }) => {

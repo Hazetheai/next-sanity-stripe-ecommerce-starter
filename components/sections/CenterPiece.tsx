@@ -12,7 +12,7 @@ const CenterPiece: React.FC<CenterPieceProps> = ({
   ctas,
 }) => {
   return (
-    <div className="container mx-auto px-6 text-center ">
+    <section className="container mx-auto px-6 text-center ">
       <div className="md:flex flex-col md:items-center">
         {heading && (
           <Heading className="heading mt-4" level="h2" text={heading} />
@@ -30,7 +30,7 @@ const CenterPiece: React.FC<CenterPieceProps> = ({
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

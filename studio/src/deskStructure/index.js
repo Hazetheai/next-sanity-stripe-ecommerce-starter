@@ -1,5 +1,11 @@
 import S from "@sanity/desk-tool/structure-builder";
-import { MdWeb, MdSettings, MdWhatshot, MdLooks } from "react-icons/md";
+import {
+  MdWeb,
+  MdSettings,
+  MdWhatshot,
+  MdLooks,
+  MdShoppingBasket,
+} from "react-icons/md";
 import ads from "./ads";
 import categories from "./categories";
 import person from "./person";
@@ -25,6 +31,8 @@ const hiddenDocTypes = (listItem) =>
     "route",
     "siteConfig",
     "brand",
+    "creativeConfig",
+    "staticRoute",
   ].includes(listItem.getId());
 
 const JsonPreview = ({ document }) => (
@@ -45,7 +53,9 @@ export default () =>
   S.list()
     .title("Pulp Inc.")
     .items([
-      S.documentTypeListItem("product").title("Products"),
+      S.documentTypeListItem("product")
+        .title("Products")
+        .icon(MdShoppingBasket),
       S.listItem()
         .title("Website")
         .icon(MdWeb)
@@ -63,7 +73,17 @@ export default () =>
                     .documentId("siteConfig")
                 ),
               S.documentTypeListItem("route").title("Routes"),
+              S.documentTypeListItem("staticRoute").title("Static Routes"),
               S.documentTypeListItem("page").title("Pages"),
+              S.listItem()
+                .title("Creative Content configuration")
+                .icon(MdSettings)
+                .child(
+                  S.document()
+                    .title("Creative Content Configuration")
+                    .schemaType("creativeConfig")
+                    .documentId("creativeConfig")
+                ),
             ])
         ),
       // ads,

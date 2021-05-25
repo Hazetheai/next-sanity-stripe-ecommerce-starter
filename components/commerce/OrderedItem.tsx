@@ -1,4 +1,4 @@
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 import React from "react";
 
 interface OrderedItemProps {

@@ -1,10 +1,10 @@
-import { MdLocalDrink } from "react-icons/md";
+import { MdShoppingBasket } from "react-icons/md";
 
 export default {
   name: "product",
   title: "Product",
   type: "document",
-  icon: MdLocalDrink,
+  icon: MdShoppingBasket,
   fields: [
     {
       name: "title",
@@ -37,6 +37,12 @@ export default {
       ],
     },
     {
+      name: "sourceMedia",
+      title: "Source Media",
+      type: "reference",
+      to: [{ type: "album" }, { type: "film" }],
+    },
+    {
       name: "blurb",
       title: "Blurb",
       type: "localeString",
@@ -45,7 +51,7 @@ export default {
     },
     {
       name: "body",
-      title: "Body",
+      title: "Description",
       type: "localeBlockContent",
       codegen: { required: true },
       validation: (Rule) => Rule.required(),

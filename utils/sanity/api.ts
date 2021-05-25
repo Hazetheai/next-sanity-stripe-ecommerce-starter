@@ -12,9 +12,24 @@
 //     Q_SHIPPING_INFO,
 // } from './queries';
 import { previewClient, sanityClient } from "./index";
-import { Q_ALL_PRODUCTS, Q_SITE_CONFIG } from "./queries";
+import { AlbumProduct, FilmProduct } from "./manualTypes";
+import {
+  Q_ALBUM_INDEX_PAGE,
+  Q_ALL_ALBUMS,
+  Q_ALL_FILMS,
+  Q_ALL_PRODUCTS,
+  Q_ALL_SOURCE_MEDIA_WITH_PRODUCTS,
+  Q_CREATIVE_CONFIG,
+  Q_FILMS_BY_STATUS,
+  Q_FILM_INDEX_PAGE,
+  Q_SITE_CONFIG,
+  Q_SONG,
+  Q_SONG_INDEX_PAGE,
+  Q_SOURCE_MEDIA_PRODUCT,
+  Q_SOURCE_MEDIA_WITH_PRODUCT,
+} from "./queries";
 
-import { Page, Product } from "./types";
+import { Album, Film, Page, Product, Song } from "./types";
 const getUniqueArticles = (posts) => {
   const slugs = new Set();
   return posts.filter((post) => {
@@ -34,10 +49,98 @@ export async function getAllProducts(): Promise<Product[]> {
 
   return products;
 }
+export async function getAllAlbums(): Promise<Album[]> {
+  const albums = await getClient().fetch(Q_ALL_ALBUMS);
+
+  return albums;
+}
+export async function getAllFilms(): Promise<Film[]> {
+  const films = await getClient().fetch(Q_ALL_FILMS);
+
+  return films;
+}
+export async function getFilmsByStatus(
+  status: Film["status"]
+): Promise<Film[]> {
+  const films = await getClient().fetch(Q_FILMS_BY_STATUS, { status });
+
+  return films;
+}
+export async function getSong(slug): Promise<Song> {
+  const song = await getClient().fetch(Q_SONG, { slug });
+
+  return song;
+}
 
 export async function getSiteConfig() {
   const siteConfig = await getClient().fetch(Q_SITE_CONFIG);
   return siteConfig;
+}
+export async function getCreativeConfig(): Promise<{
+  featuredAlbum: Album;
+  featuredFilm: Film;
+  featuredSong: Song;
+}> {
+  const creativeConfig = await getClient().fetch(Q_CREATIVE_CONFIG);
+  return creativeConfig;
+}
+export async function getSourceMediaProduct(
+  slug,
+  type: "album" | "film"
+): Promise<Product> {
+  const sourceMedia = await getClient().fetch(Q_SOURCE_MEDIA_PRODUCT, {
+    slug,
+    type,
+  });
+  return sourceMedia?.product;
+}
+
+export async function getSourceMediaWithProduct(
+  slug,
+  type: "album" | "film"
+): Promise<AlbumProduct | FilmProduct> {
+  const sourceMedia = await getClient().fetch(Q_SOURCE_MEDIA_WITH_PRODUCT, {
+    slug,
+    type,
+  });
+  return sourceMedia;
+}
+export async function getAllSourceMediasWithProduct(
+  type: "album" | "film"
+): Promise<Array<AlbumProduct | FilmProduct>> {
+  const sourceMedia = await getClient().fetch(
+    Q_ALL_SOURCE_MEDIA_WITH_PRODUCTS,
+    {
+      type,
+    }
+  );
+  return sourceMedia;
+}
+
+export async function getAlbumsPage(): Promise<{
+  albums: Array<AlbumProduct>;
+  featuredAlbum: AlbumProduct;
+}> {
+  const pageData = await getClient().fetch(Q_ALBUM_INDEX_PAGE);
+
+  return pageData;
+}
+export async function getFilmsPage(): Promise<{
+  films: Array<FilmProduct>;
+  featuredFilm: FilmProduct;
+}> {
+  const pageData = await getClient().fetch(Q_FILM_INDEX_PAGE);
+
+  return pageData;
+}
+
+export async function getSongsPage(): Promise<{
+  songs: Array<Song>;
+  featuredSong: Song;
+}> {
+  const pageData = await getClient().fetch(Q_SONG_INDEX_PAGE);
+
+  return pageData;
 }
 
 // export async function getCurrentAlert(): Promise<Alertbar> {

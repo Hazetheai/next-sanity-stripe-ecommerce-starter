@@ -6,7 +6,7 @@ import { formatSocialLinks, socialLinks, Socials } from "config/general";
 import Link from "components/elements/Link";
 import { capitalize } from "utils/stringFunctions";
 import { Social } from "utils/sanity/types";
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
 import { BaseForm } from "components/common/BaseForm";
 
@@ -45,7 +45,7 @@ const DisplayItems: React.FC<DisplayItemsProps> = ({ displayItems }) => {
                 height: undefined,
                 objectFit: "cover",
               }}
-              containerClassName=" w-full lg:h-screen h-64 rounded"
+              containerClassName=" w-full lg:h-screen h-64 "
             />
           )}
         </div>
@@ -72,7 +72,7 @@ export const ThankYouHero: React.FC<ThankYouPage> = ({ data }) => {
 
   const nameParts = name.split(" ");
   return (
-    <section className="ABOUT text-gray-400 bg-gray-900 body-font">
+    <section className="ABOUT text-gray-400  body-font">
       {/* <h1>Checkout Payment Result</h1>
 
       <h2>Status: {data?.payment_intent?.status ?? "loading..."}</h2>
@@ -115,7 +115,7 @@ export const ThankYouHero: React.FC<ThankYouPage> = ({ data }) => {
             We'll never sell your data, or send you spam.
           </p>
           <p className="mt-2 text-gray-400 w-full">Visit us on Social</p>
-          <div className="flex lg:flex-row md:flex-col px-4 text-gray-900 items-center  bg-gray-200 rounded border bg-opacity-40 border-gray-700 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div className="flex lg:flex-row md:flex-col px-4 text-gray-900 items-center  bg-gray-200  border bg-opacity-40 border-gray-700 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
             {Socials.map((social) => (
               <Fragment key={social.handle}>
                 <Link

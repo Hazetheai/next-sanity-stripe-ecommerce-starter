@@ -1,4 +1,4 @@
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 import Button from "components/elements/Button";
 import Link, { ElementLink } from "components/elements/Link";
 import React, { useState } from "react";
@@ -176,7 +176,7 @@ const CartPage: React.FC<CartPageProps> = ({}) => {
             <hr className="pb-6 mt-6" />
             <div className="my-4 mt-6 -mx-2 lg:flex">
               <div className="lg:px-2 lg:w-1/2">
-                {/* <div className="p-4 bg-gray-100 rounded-full">
+                {/* <div className="p-4 bg-gray-100 -full">
                   <h1 className="ml-2 font-bold uppercase">Coupon Code</h1>
                 </div>
                 <div className="p-4">
@@ -185,7 +185,7 @@ const CartPage: React.FC<CartPageProps> = ({}) => {
                   </p>
                   <div className="justify-center md:flex">
                     <form action="#0" method="POST">
-                      <div className="flex items-center w-full h-13 pl-3 bg-white bg-gray-100 border rounded-full">
+                      <div className="flex items-center w-full h-13 pl-3 bg-white bg-gray-100 border -full">
                         <input
                           type="coupon"
                           name="code"
@@ -196,7 +196,7 @@ const CartPage: React.FC<CartPageProps> = ({}) => {
                         />
                         <button
                           type="submit"
-                          className="text-sm flex items-center px-3 py-1 text-white bg-gray-800 rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none"
+                          className="text-sm flex items-center px-3 py-1 text-white bg-gray-800 -full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none"
                         >
                           <svg
                             aria-hidden="true"
@@ -217,7 +217,7 @@ const CartPage: React.FC<CartPageProps> = ({}) => {
                     </form>
                   </div>
                 </div> */}
-                <div className="p-4 bg-gray-100 rounded-full">
+                <div className="p-4 bg-gray-100 -full">
                   <h4 className="ml-2 font-bold uppercase">
                     Instruction for seller
                   </h4>
@@ -228,7 +228,7 @@ const CartPage: React.FC<CartPageProps> = ({}) => {
                     them in the box below
                   </p>
                   <textarea
-                    className="w-full h-24 p-2 bg-gray-100 rounded"
+                    className="w-full h-24 p-2 bg-gray-100 "
                     defaultValue={""}
                     onKeyDown={(event: React.KeyboardEvent) =>
                       debounce(
@@ -243,7 +243,7 @@ const CartPage: React.FC<CartPageProps> = ({}) => {
                 </div>
               </div>
               <div className="lg:px-2 lg:w-1/2">
-                <div className="p-4 bg-gray-100 rounded-full">
+                <div className="p-4 bg-gray-100 -full">
                   <h4 className="ml-2 font-bold uppercase">Order Details</h4>
                 </div>
                 <div className="p-4">
@@ -311,7 +311,7 @@ const CartPage: React.FC<CartPageProps> = ({}) => {
                     <button
                       onClick={handleCheckout}
                       onKeyDown={handleCheckout}
-                      className="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none"
+                      className="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 -full shadow item-center hover:bg-gray-700 focus:ring focus:outline-none"
                     >
                       <svg
                         aria-hidden="true"

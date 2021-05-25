@@ -9,10 +9,12 @@ const ProductSection: React.FC<ProductSectionProps> = ({
   tagline,
 }) => {
   return (
-    <div>
-      {/* @ts-expect-error */}
-      {products && <ProductList products={products} />}
-    </div>
+    <section className="text-gray-400  body-font">
+      <div className="container px-5 py-24 mx-auto">
+        {/* @ts-expect-error */}
+        {products && <ProductList products={products} />}
+      </div>
+    </section>
   );
 };
 

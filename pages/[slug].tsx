@@ -31,6 +31,8 @@ export const getStaticProps: GetStaticProps = async ({
     slug,
   });
 
+  // console.log(`pageData`, pageData);
+
   return {
     props: { preview, pageData, slug },
   };

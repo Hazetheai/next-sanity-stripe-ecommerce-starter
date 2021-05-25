@@ -26,7 +26,14 @@ export default {
       description: "Use this to link between pages on the website",
       name: "route",
       type: "reference",
-      to: [{ type: "route" }, { type: "product" }],
+      to: [
+        { type: "route" },
+        { type: "product" },
+        { type: "staticRoute" },
+        { type: "album" },
+        { type: "film" },
+        { type: "song" },
+      ],
       fieldset: "link",
     },
     {

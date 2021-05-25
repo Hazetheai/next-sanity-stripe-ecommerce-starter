@@ -7,16 +7,17 @@ import { PortableText, urlFor } from "utils/sanity";
 import { sanityProductToStripe } from "utils/stripe-helpers";
 import Button from "components/elements/Button";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 
-const ProductPage: React.FC<Product> = ({
-  title,
-  defaultProductVariant,
-  mainImage,
-  body,
-  _id,
-  variants,
-}) => {
+const ProductPage: React.FC<Product> = (product) => {
+  const {
+    title,
+    defaultProductVariant,
+    mainImage,
+    body,
+    _id,
+    variants,
+  } = product;
   const [count, setCount] = useState(1);
 
   const [currentVariant, setCurrentVariant] = useState(defaultProductVariant);
@@ -34,10 +35,7 @@ const ProductPage: React.FC<Product> = ({
         .filter((el) => el.sku !== currentVariant.sku)
     : [];
   return (
-    <section
-      id={_id}
-      className="text-gray-400 bg-gray-900 body-font overflow-hidden"
-    >
+    <section id={_id} className="text-gray-400  body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
@@ -83,7 +81,7 @@ const ProductPage: React.FC<Product> = ({
 
             {body && currentView === "description" ? (
               <PortableText
-                blocks={body?.en}
+                blocks={body?.en || body}
                 className="leading-relaxed mb-4"
               />
             ) : currentView === "reviews" ? (
@@ -160,13 +158,13 @@ const ProductPage: React.FC<Product> = ({
               </span>
               <button
                 onClick={() =>
-                  addItem(sanityProductToStripe(currentVariant), count)
+                  addItem(sanityProductToStripe(product, currentVariant), count)
                 }
-                className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 "
               >
                 Add to Cart
               </button>
-              <button className="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+              <button className="-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                 <svg
                   fill="currentColor"
                   strokeLinecap="round"
@@ -190,7 +188,7 @@ const ProductPage: React.FC<Product> = ({
               height: undefined,
               objectFit: "cover",
             }}
-            containerClassName="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+            containerClassName="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center "
           />
         </div>
       </div>

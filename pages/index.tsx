@@ -16,21 +16,12 @@ function IndexPage(props) {
   if (!router.isFallback && !productsData) {
     return <Error statusCode={404} />;
   }
-  const { data: products } = usePreviewSubscription(query, {
-    initialData: productsData,
+  const { data: page } = usePreviewSubscription(Q_ROUTE_BY_SLUG, {
+    initialData: pageData,
     enabled: preview || router.query.preview !== null,
   });
 
-  return (
-    <>
-      <LandingPage page={pageData} />
-      <div className="my-8">
-        <div className="mt-4">
-          <ProductList products={products} />
-        </div>
-      </div>
-    </>
-  );
+  return <LandingPage page={page || pageData} />;
 }
 
 export async function getStaticProps({ params = {}, preview = false }) {

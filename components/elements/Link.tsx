@@ -1,6 +1,7 @@
 import NextLink from "next/link";
 import React, { ReactNode } from "react";
 import ReactTooltip from "react-tooltip";
+import { handleSlug } from "utils/sanity";
 import { slugify } from "utils/stringUtils";
 import { btnStyles, ButtonProps } from "./Button";
 import Icon from "./Icon";
@@ -74,7 +75,7 @@ export const Link: React.FC<LinkProps> = ({
 }) => {
   return (
     <NextLink
-      href={external ? hrefProp : `/${hrefProp}`}
+      href={external ? handleSlug(hrefProp) : `/${handleSlug(hrefProp)}`}
       as={as}
       scroll={scroll}
       passHref
@@ -87,9 +88,13 @@ export const Link: React.FC<LinkProps> = ({
         onClick={(e: any) => {
           func ? func({ e }) : null;
         }}
-        className={`group inline-flex border-0 hover:opacity-50 py-2 px-6 text-lg ${
+        className={`${
+          /p[lrtbxy-]-?\d/.test(className || "") ? "" : "py-2 px-6"
+        } ${
+          className || ""
+        } group inline-flex border-0 hover:opacity-50 text-lg ${
           btnStyle ? btnStyles[btnStyle] : ""
-        } ${className || ""} `}
+        }  `}
         title={
           title ||
           text ||

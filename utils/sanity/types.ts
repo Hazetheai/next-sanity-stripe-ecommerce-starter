@@ -61,6 +61,13 @@ export interface Product extends SanityDocument {
   };
 
   /**
+   * Source Media — `reference`
+   *
+   *
+   */
+  sourceMedia?: SanityReference<Album | Film>;
+
+  /**
    * Blurb — `localeString`
    *
    *
@@ -68,7 +75,7 @@ export interface Product extends SanityDocument {
   blurb: LocaleString;
 
   /**
-   * Body — `localeBlockContent`
+   * Description — `localeBlockContent`
    *
    *
    */
@@ -460,6 +467,12 @@ export interface Page extends SanityDocument {
     | SanityKeyed<FeatureSection>
     | SanityKeyed<Form>
     | SanityKeyed<ProductSection>
+    | SanityKeyed<FilmSection>
+    | SanityKeyed<SongSection>
+    | SanityKeyed<AlbumSection>
+    | SanityKeyed<VideoEmbed>
+    | SanityKeyed<CreativeFeature>
+    | SanityKeyed<CoveringArtists>
   >;
 
   /**
@@ -598,7 +611,7 @@ export interface SiteConfig extends SanityDocument {
    *
    * Select pages for the top menu
    */
-  mainNavigation?: Array<SanityKeyedReference<Route>>;
+  mainNavigation?: Array<SanityKeyedReference<Route | StaticRoute>>;
 
   /**
    * Footer navigation items — `array`
@@ -620,7 +633,11 @@ export interface SiteConfig extends SanityDocument {
        *
        *
        */
-      footerNavigationItem?: Array<SanityKeyedReference<Route | Product>>;
+      footerNavigationItem?: Array<
+        SanityKeyedReference<
+          Product | Route | StaticRoute | Album | Song | Film
+        >
+      >;
     }>
   >;
 
@@ -770,8 +787,15 @@ export interface Album extends SanityDocument {
      *
      * Important for SEO and accessiblity.
      */
-    alt: string;
+    alt?: string;
   };
+
+  /**
+   * Blurb — `string`
+   *
+   * Short intro to the album - will be featured on search and social media. Also used as the description if album is unreleased.
+   */
+  blurb: string;
 
   /**
    * Body — `localeBlockContent`
@@ -779,6 +803,13 @@ export interface Album extends SanityDocument {
    *
    */
   body: LocaleBlockContent;
+
+  /**
+   * Featured Video — `videoEmbed`
+   *
+   * Enter Youtube or Vimeo video url
+   */
+  featuredVideo?: VideoEmbed;
 
   /**
    * Tags — `array`
@@ -802,6 +833,13 @@ export interface Album extends SanityDocument {
   mainWriter: string;
 
   /**
+   * Main Producer — `string`
+   *
+   *
+   */
+  mainProducer: string;
+
+  /**
    * Featuring Artists — `array`
    *
    *
@@ -814,6 +852,20 @@ export interface Album extends SanityDocument {
    *
    */
   coWriters?: Array<SanityKeyed<string>>;
+
+  /**
+   * Co Producers — `array`
+   *
+   *
+   */
+  coProducers?: Array<SanityKeyed<string>>;
+
+  /**
+   * Recording Studio — `string`
+   *
+   *
+   */
+  recordingStudio?: string;
 
   /**
    * Track List — `array`
@@ -882,6 +934,20 @@ export interface Album extends SanityDocument {
   genres?: Array<SanityKeyed<string>>;
 
   /**
+   * Status — `string`
+   *
+   *
+   */
+  status?: "production" | "completed";
+
+  /**
+   * Release Date — `date`
+   *
+   * If status is production it will show the season & if completed, the actual date.
+   */
+  releaseDate: string;
+
+  /**
    * Slug — `slug`
    *
    *
@@ -893,7 +959,7 @@ export interface Album extends SanityDocument {
    *
    * Praise, awards, kind words from people of organizations
    */
-  recongnition?: Array<SanityKeyed<Appraiser>>;
+  recognition?: Array<SanityKeyed<Appraiser>>;
 }
 
 /**
@@ -945,11 +1011,11 @@ export interface Song extends SanityDocument {
   backStory?: BlockContent;
 
   /**
-   * Tags — `array`
+   * Music Video — `array`
    *
-   *
+   * Enter Youtube or Vimeo video url
    */
-  tags?: Array<SanityKeyed<string>>;
+  featuredVideo?: Array<SanityKeyed<VideoEmbed>>;
 
   /**
    * Covering Artists — `array`
@@ -984,6 +1050,13 @@ export interface Song extends SanityDocument {
        *
        */
       name: string;
+
+      /**
+       * Album — `string`
+       *
+       *
+       */
+      album?: string;
     }>
   >;
 
@@ -1027,7 +1100,7 @@ export interface Song extends SanityDocument {
    *
    * Praise, awards, kind words from people of organizations
    */
-  recongnition?: Array<SanityKeyed<Appraiser>>;
+  recognition?: Array<SanityKeyed<Appraiser>>;
 }
 
 /**
@@ -1063,6 +1136,27 @@ export interface Film extends SanityDocument {
      */
     alt: string;
   };
+
+  /**
+   * Movie Background — `file`
+   *
+   * Will play as in the background of the page hero. Should be no longer than 15s & cut to a smooth loop. Not for a full movie trailer. Max Upload size 10MB
+   */
+  movieBackground?: { _type: "file"; asset: SanityAsset };
+
+  /**
+   * Trailer — `videoEmbed`
+   *
+   * Enter Youtube or Vimeo video url
+   */
+  trailer?: VideoEmbed;
+
+  /**
+   * Blurb — `string`
+   *
+   * Short intro to the film - will be featured on search and social media.
+   */
+  blurb: string;
 
   /**
    * Story — `blockContent`
@@ -1128,11 +1222,18 @@ export interface Film extends SanityDocument {
   status?: "development" | "production" | "completed";
 
   /**
+   * Release Date — `date`
+   *
+   * If status is development it will show the season, if production, the month & if completed, the actual date.
+   */
+  releaseDate?: string;
+
+  /**
    * Available Platforms — `array`
    *
    *
    */
-  platforms: Array<
+  platforms?: Array<
     SanityKeyed<{
       _type: "platform";
       /**
@@ -1143,18 +1244,18 @@ export interface Film extends SanityDocument {
       title: "youtube" | "netflix" | "mubi" | "store";
 
       /**
+       * Release Date — `date`
+       *
+       * Will default to main release date if not specified, with same behaviour.
+       */
+      releaseDate?: string;
+
+      /**
        * link — `url`
        *
        * Not required for movies in our store
        */
       Link?: string;
-
-      /**
-       * Release Date — `date`
-       *
-       * If status is development it will show the season, if production, the month & if completed, the actual date.
-       */
-      releaseDate?: string;
 
       /**
        * Film Length — `number`
@@ -1180,11 +1281,85 @@ export interface Film extends SanityDocument {
   slug: { _type: "slug"; current: string };
 
   /**
+   * Image Gallery — `array`
+   *
+   *
+   */
+  gallery?: Array<
+    SanityKeyed<{
+      _type: "mainImage";
+      asset: SanityAsset;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+
+      /**
+       * Alternative text — `string`
+       *
+       * Important for SEO and accessiblity.
+       */
+      alt: string;
+    }>
+  >;
+
+  /**
    * Recognition — `array`
    *
    * Praise, awards, kind words from people of organizations
    */
-  recongnition?: Array<SanityKeyed<Appraiser>>;
+  recognition?: Array<SanityKeyed<Appraiser>>;
+}
+
+/**
+ * Creative Content Settings
+ *
+ *
+ */
+export interface CreativeConfig extends SanityDocument {
+  _type: "creativeConfig";
+
+  /**
+   * Featured Film — `reference`
+   *
+   *
+   */
+  featuredFilm?: SanityReference<Film>;
+
+  /**
+   * Featured Album — `reference`
+   *
+   *
+   */
+  featuredAlbum?: SanityReference<Album>;
+
+  /**
+   * Featured Song — `reference`
+   *
+   *
+   */
+  featuredSong?: SanityReference<Song>;
+}
+
+/**
+ * Static Route
+ *
+ *
+ */
+export interface StaticRoute extends SanityDocument {
+  _type: "staticRoute";
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug: { _type: "slug"; current: string };
+
+  /**
+   * title — `string`
+   *
+   *
+   */
+  title: string;
 }
 
 export type ProductSection = {
@@ -1298,7 +1473,7 @@ export type Cta = {
    *
    * Use this to link between pages on the website
    */
-  route?: SanityReference<Route | Product>;
+  route?: SanityReference<Route | Product | StaticRoute | Album | Film | Song>;
 
   /**
    * External link — `url`
@@ -1329,7 +1504,9 @@ export type Figure = {
   alt: string;
 };
 
-export type InternalLink = SanityReference<Product | Route>;
+export type InternalLink = SanityReference<
+  Product | Route | StaticRoute | Album | Song | Film
+>;
 
 export type Link = {
   _type: "link";
@@ -1596,6 +1773,7 @@ export type BlockContent = Array<
       crop?: SanityImageCrop;
       hotspot?: SanityImageHotspot;
     }>
+  | SanityKeyed<VideoEmbed>
 >;
 
 export type LocaleText = {
@@ -1730,6 +1908,13 @@ export type Appraiser = {
   };
 
   /**
+   * Image Only? — `boolean`
+   *
+   *
+   */
+  imageOnly?: boolean;
+
+  /**
    * Name — `string`
    *
    *
@@ -1751,6 +1936,94 @@ export type Appraiser = {
   quote?: string;
 };
 
+export type SongSection = {
+  _type: "songSection";
+  /**
+   * Song — `reference`
+   *
+   *
+   */
+  song?: SanityReference<Song>;
+
+  /**
+   * Show All — `boolean`
+   *
+   * Enabling this will show all songs underneath. Disabling will only show the selected song
+   */
+  showAll?: boolean;
+};
+
+export type AlbumSection = {
+  _type: "albumSection";
+  /**
+   * Label — `string`
+   *
+   *
+   */
+  label?: string;
+
+  /**
+   * Album — `reference`
+   *
+   *
+   */
+  album?: SanityReference<Album>;
+};
+
+export type FilmSection = {
+  _type: "filmSection";
+  /**
+   * Label — `string`
+   *
+   *
+   */
+  label?: string;
+
+  /**
+   * Status — `string`
+   *
+   * Show films of the selected status
+   */
+  status?: "completed" | "production" | "development";
+};
+
+export type VideoEmbed = {
+  _type: "videoEmbed";
+  /**
+   * URL — `url`
+   *
+   *
+   */
+  url?: string;
+};
+
+export type CreativeFeature = {
+  _type: "creativeFeature";
+  /**
+   * Feature Type? — `string`
+   *
+   *
+   */
+  featureType?: "featuredSong" | "featuredAlbum" | "featuredFilm";
+};
+
+export type CoveringArtists = {
+  _type: "coveringArtists";
+  /**
+   * note — `note`
+   *
+   *
+   */
+  note?: Note;
+
+  /**
+   * Content — `blockContent`
+   *
+   * Add a short intro for visitors.
+   */
+  content: BlockContent;
+};
+
 export type Documents =
   | Product
   | Popup
@@ -1767,7 +2040,9 @@ export type Documents =
   | Photographer
   | Album
   | Song
-  | Film;
+  | Film
+  | CreativeConfig
+  | StaticRoute;
 
 /**
  * This interface is a stub. It was referenced in your sanity schema but
@@ -1775,3 +2050,10 @@ export type Documents =
  * sanity-codegen will let you type this explicity.
  */
 type Email = any;
+
+/**
+ * This interface is a stub. It was referenced in your sanity schema but
+ * the definition was not actually found. Future versions of
+ * sanity-codegen will let you type this explicity.
+ */
+type Note = any;

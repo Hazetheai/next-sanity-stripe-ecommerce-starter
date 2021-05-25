@@ -22,7 +22,7 @@ const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
       <div className="flex justify-center w-full px-5 pb-8">
         <BaseForm
           className={
-            "flex flex-wrap md:flex-no-wrap w-full md:w-auto flex-col sm:flex-row items-end md:space-x-4 space-y-4"
+            "flex flex-wrap md:flex-nowrap w-full md:w-auto flex-col sm:flex-row items-end md:space-x-4 space-y-4"
           }
           endpoint={formType}
           submitClassName="sm:w-1/2 px-1 md:w-auto"

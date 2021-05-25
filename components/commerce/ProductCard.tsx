@@ -1,4 +1,4 @@
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 import Link from "next/link";
 import React from "react";
 import { useShoppingCart } from "use-shopping-cart";
@@ -13,9 +13,9 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem } = useShoppingCart();
   return (
-    <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
+    <div className="lg:w-1/3 md:w-1/2 p-4 w-full">
       <Link href={`products/${product.slug.current}`} passHref>
-        <a className="block relative h-48 rounded overflow-hidden" href="0#">
+        <a className="block relative h-64  overflow-hidden" href="0#">
           <MyImage
             nextImageProps={{
               ...nextSanityImage(product.mainImage),
@@ -50,9 +50,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <p className="mt-1">€{product.defaultProductVariant.price}</p>
           <button
             onClick={() =>
-              addItem(sanityProductToStripe(product.defaultProductVariant))
+              addItem(
+                sanityProductToStripe(product, product.defaultProductVariant)
+              )
             }
-            className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none"
+            className="mx-2 text-gray-600 border -md p-2 hover:bg-gray-200 focus:outline-none"
           >
             <svg
               className="h-5 w-5"

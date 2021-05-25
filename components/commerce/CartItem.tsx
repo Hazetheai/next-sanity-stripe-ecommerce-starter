@@ -1,4 +1,4 @@
-import MyImage from "components/common/Image";
+import MyImage from "components/elements/Image";
 import React from "react";
 
 import { CartEntry } from "use-shopping-cart";
@@ -22,18 +22,20 @@ const CartItem: React.FC<CartItemProps> = ({
       className={`flex justify-between mt-6 ${isLast ? "flex-1" : ""}`}
     >
       <div className="flex">
-        <MyImage
-          // alt={product.title}
-          nextImageProps={{
-            src: item.image || "",
-            alt: item.name,
-            layout: "fill",
-            width: undefined,
-            height: undefined,
-            objectFit: "cover",
-          }}
-          containerClassName="h-20 w-20"
-        />
+        {item.image && (
+          <MyImage
+            // alt={product.title}
+            nextImageProps={{
+              src: item.image,
+              alt: item.name,
+              layout: "fill",
+              width: undefined,
+              height: undefined,
+              objectFit: "cover",
+            }}
+            containerClassName="h-20 w-20"
+          />
+        )}
         <div className="mx-3">
           <h3 className="text-sm text-gray-600">{item.name}</h3>
           <div className="flex items-center mt-2">
