@@ -39,6 +39,7 @@ const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
                 label: "Full Name",
                 register: "name",
                 className: "p-2 w-1/2",
+                inputClassName: "w-full",
               },
               {
                 fieldType: "text",
@@ -46,6 +47,7 @@ const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
                 register: "email",
                 inputType: "email",
                 className: "p-2 w-1/2",
+                inputClassName: "w-full",
               },
               {
                 fieldType: "text",
@@ -53,6 +55,7 @@ const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
                 register: "subject",
                 inputType: "text",
                 className: "p-2 w-full",
+                inputClassName: "w-full",
               },
               {
                 fieldType: "textarea",
@@ -60,6 +63,7 @@ const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
                 register: "message",
                 inputType: "text",
                 className: "p-2 w-full",
+                inputClassName: "w-full",
               },
             ]}
           />

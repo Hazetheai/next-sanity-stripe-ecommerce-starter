@@ -70,12 +70,14 @@ const FormField: React.FC<FormFieldProps> = ({
       )}
       {fieldType === "textarea" && (
         <textarea
-          className="form-textarea text-black"
+          className={`form-textarea text-black ${inputClassName || ""}`}
           id={`${fieldType}-${label}`}
           type={inputType}
           {...register}
+          rows={5}
         />
       )}
+      {console.log(`register`, register)}
       {(fieldType === "radio" || fieldType === "checkbox") &&
         options &&
         options.map((option) => (
