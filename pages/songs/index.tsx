@@ -18,7 +18,7 @@ function SongsListContainer({ pageData, preview }) {
 
   return (
     <section className="text-gray-400  body-font">
-      <div className=" px-5 py-24 mx-auto">
+      <div className=" px-5 py-24 mx-auto max-w-7xl">
         <SongSection key={"Songs section"} {...songsPage} />
       </div>
     </section>

@@ -42,7 +42,7 @@ const FilmContainer: FC<FilmPage> = ({
   return (
     <>
       <VideoHeader {...filmData} />
-      <section className="container px-5 py-5 mx-auto">
+      <section className="container max-w-7xl px-5 py-5 mx-auto">
         <Film {...filmData} />
         {/* <LatestReleases films={latestReleases} /> */}
         {upcomingReleases && <UpcomingReleases films={upcomingReleases} />}
