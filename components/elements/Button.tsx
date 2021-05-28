@@ -44,7 +44,8 @@ export interface ButtonProps extends ButtonStyleProps {
   id?: string;
   asElement?: "a";
   type?: "button" | "reset" | "submit";
-  noPadding?: boolean;
+  noPaddingY?: boolean;
+  noPaddingX?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -64,7 +65,8 @@ const Button: React.FC<ButtonProps> = ({
   asElement,
   tabIndex,
   children,
-  noPadding,
+  noPaddingY,
+  noPaddingX,
   type = "button",
 }) => {
   const ref = React.useRef(null);
@@ -84,8 +86,8 @@ const Button: React.FC<ButtonProps> = ({
       onKeyDown={(e: any) => e.key === "Enter" && (func ? func({ e }) : null)}
       onTouchMove={(e: any) => (func ? func({ e }) : null)}
       //   Styling
-      className={`${noPadding ? "" : "py-2"}
-      inline-flex border-0 px-6 text-lg transition ${
+      className={`${noPaddingY ? "" : "py-2"} ${noPaddingX ? "" : "px-6"}
+      inline-flex border-0 text-lg transition ${
         btnStyle ? btnStyles[btnStyle] : ""
       } ${className || ""}
       `}

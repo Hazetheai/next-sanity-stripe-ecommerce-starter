@@ -74,12 +74,10 @@ const Film: React.FC<FilmProduct> = ({
       </div>
       {/* action buttons */}
       <div className="mt-6 flex justify-between"></div>
-      {/* song list   */}
+
       <div className="mt-10"></div>
       <div className="mt-10">
         <div className="flex flex-col justify-center md:mr-12">
-          {/* content */}
-
           <h2 className="mt-0 mb-2 text-white text-xl">Director: {director}</h2>
           <p className="text-gray-600 mb-2 text-sm">
             {featuringActors ? "Starring: " + featuringActors.join(", ") : ""}

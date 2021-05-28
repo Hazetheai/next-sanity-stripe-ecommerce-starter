@@ -1,11 +1,11 @@
 import { BaseForm } from "components/common/BaseForm";
-import Heading from "components/elements/Title";
+import Heading from "components/elements/Heading";
 import React from "react";
 import { Form as FormProps } from "utils/sanity/types";
 
 const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
   return (
-    <>
+    <div className="container max-w-7xl px-5 py-24 mx-auto">
       {title && (
         <Heading
           className="sm:text-3xl text-center text-2xl font-medium title-font mb-4"
@@ -49,7 +49,7 @@ const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
           ]}
         />
       </div>
-    </>
+    </div>
   );
 };
 

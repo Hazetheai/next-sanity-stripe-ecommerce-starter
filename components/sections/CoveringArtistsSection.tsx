@@ -6,7 +6,7 @@ const CoveringArtistsSection: React.FC<CoveringArtistSectionProps> = (
   props
 ) => {
   return (
-    <section className="container px-5 py-5 mx-auto">
+    <section className="">
       <CoveringArtists {...props} />
     </section>
   );

@@ -1,5 +1,5 @@
 import { BaseForm } from "components/common/BaseForm";
-import Heading from "components/elements/Title";
+import Heading from "components/elements/Heading";
 import {
   contactAddress,
   contactEmail,
@@ -12,7 +12,7 @@ import { Form as FormProps } from "utils/sanity/types";
 const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
   return (
     <>
-      <div className="container px-5 py-24 mx-auto">
+      <div className="container max-w-7xl px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-12">
           {title && (
             <Heading

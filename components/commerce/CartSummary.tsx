@@ -9,6 +9,7 @@ import Link from "components/elements/Link";
 import Button from "components/elements/Button";
 import { isBrowser } from "utils/booleans";
 import { useRouter } from "next/router";
+import { useMusicPlayer } from "components/music-player/music-context";
 
 const CartSummary = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const CartSummary = () => {
   } = useShoppingCart();
   const router = useRouter();
   useEffect(() => setCartEmpty(!cartCount), [cartCount]);
-
+  const { state } = useMusicPlayer();
   const handleCheckout: React.FormEventHandler<HTMLFormElement> = async (
     event
   ) => {
@@ -43,7 +44,10 @@ const CartSummary = () => {
   };
 
   return (
-    <form onSubmit={handleCheckout} className="bg-white p-4">
+    <form
+      onSubmit={handleCheckout}
+      className={`bg-white p-4 ${state.album.trackList.length ? "pb-16" : ""}`}
+    >
       <h2 className="text-gray-600">Summary</h2>
       {/* This is where we'll render our cart */}
       <p className="text-gray-500 w-full flex justify-between">

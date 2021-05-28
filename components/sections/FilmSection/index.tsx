@@ -1,3 +1,4 @@
+import Heading from "components/elements/Heading";
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import { FilmProduct } from "utils/sanity/manualTypes";
@@ -18,7 +19,15 @@ const FilmSection: React.FC<FilmSectionProps> = ({
   _key,
 }) => {
   return (
-    <section className="">
+    <section className="text-gray-300">
+      <div className="container max-w-7xl text-4xl font-bold mx-auto px-10 ">
+        <Heading level="h2">
+          {status === "completed"
+            ? "Completed Films"
+            : "In " + (status || "...")}
+        </Heading>
+      </div>
+
       <Carousel key={_key} className="" showThumbs={false}>
         {films
           .filter((film) => film._id !== featuredFilm._ref)

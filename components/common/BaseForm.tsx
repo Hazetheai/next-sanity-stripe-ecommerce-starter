@@ -81,7 +81,7 @@ export const BaseForm: React.FC<BaseFormProps> = ({
           </p>
         ) : (
           <Button
-            noPadding
+            noPaddingY
             text="Submit"
             type="submit"
             btnStyle="primary"

@@ -50,6 +50,7 @@ const Cart: React.FC<FloatingCartProps> = ({ closeHandler, cartOpen }) => {
       <hr className="my-3" />
       {Object.values(cartDetails).map((item, idx, arr) => (
         <CartItem
+          key={item.sku}
           increment={incrementItem}
           decrement={decrementItem}
           item={item}

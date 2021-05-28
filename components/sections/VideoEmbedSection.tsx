@@ -4,8 +4,10 @@ import { VideoEmbed } from "utils/sanity/types";
 
 const VideoEmbedSection: React.FC<VideoEmbed> = ({ url }) => {
   return (
-    <section className="container px-5 py-5 mx-auto h-screen">
-      {url && <Video url={url} className="h-full" />}
+    <section className="">
+      <div className="container max-w-7xl px-5 py-5 mx-auto ">
+        {url && <Video url={url} className="h-full" />}
+      </div>
     </section>
   );
 };

@@ -25,7 +25,11 @@ const UpcomingReleases: React.FC<{ films: Array<Film> }> = ({ films }) => {
 
   return (
     <>
-      <Carousel className="mx-8" showThumbs={false}>
+      <Carousel
+        className="my-12 full-width"
+        useKeyboardArrows
+        showThumbs={false}
+      >
         {films.map((film) => {
           const movieBackgroundURL = (film[
             "movieBackgroundURL"
@@ -33,7 +37,7 @@ const UpcomingReleases: React.FC<{ films: Array<Film> }> = ({ films }) => {
           return (
             <div
               key={film._id}
-              className="relative flex flex-wrap items-center video-cta py-24 px-4"
+              className="relative flex flex-wrap items-center video-cta py-24 px-4 min-h-30rem"
             >
               {movieBackgroundURL ? (
                 <div className="absolute inset-0 z-negative lg:opacity-100 opacity-50">

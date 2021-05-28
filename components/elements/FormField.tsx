@@ -77,7 +77,7 @@ const FormField: React.FC<FormFieldProps> = ({
           rows={5}
         />
       )}
-      {console.log(`register`, register)}
+
       {(fieldType === "radio" || fieldType === "checkbox") &&
         options &&
         options.map((option) => (

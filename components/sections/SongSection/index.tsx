@@ -9,7 +9,7 @@ const SongSection: React.FC<{
 }> = ({ songs, featuredSong }) => {
   if (!featuredSong) return null;
   return (
-    <section className="container px-5 py-5 mx-auto">
+    <section className="text-gray-400  body-font ">
       <FeaturedSong {...featuredSong} />
       {songs && <SongList songs={songs} />}
     </section>

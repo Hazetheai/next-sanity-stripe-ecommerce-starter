@@ -72,7 +72,7 @@ const VideoHeader: React.FC<FilmProduct> = ({
           ) : null}
         </>
       )}
-      <div className="container relative mx-auto lg:mt-56 lg:px-16 md:pb-24 px-4 py-4">
+      <div className="container max-w-7xl relative mx-auto lg:mt-56 lg:px-16 md:pb-24 px-4 py-4">
         <div className="md:pl-8 md:border-l border-white">
           <p className="text-white tracking-wide text-base font-light leading-none">
             Out now

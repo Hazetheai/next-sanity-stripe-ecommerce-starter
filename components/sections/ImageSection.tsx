@@ -12,7 +12,7 @@ function ImageSection(props) {
   }
 
   return (
-    <div className="container mx-auto px-6 mt-12">
+    <div className="container max-w-7xl mx-auto px-6 mt-12">
       <div className="flex items-center">
         <div>
           <figure>

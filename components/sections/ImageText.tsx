@@ -40,8 +40,8 @@ const TextImage: React.FC<TextWithImageProps> = ({
     : "transform-gpu translate-y-10 opacity-0 scale-90";
 
   return (
-    <section className="text-gray-400  body-font container px-5 py-24 mx-auto flex flex-wrap">
-      <div className="flex flex-wrap w-full items-center">
+    <section className="text-gray-400  body-font ">
+      <div className="w-full items-center container max-w-7xl px-5 py-24 mx-auto flex flex-wrap">
         <div className={orientationClassNames[image.imageOrientation].text}>
           {body && <PortableText blocks={body} />}
         </div>

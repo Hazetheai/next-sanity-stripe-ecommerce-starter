@@ -71,7 +71,7 @@ const FilmSectionItem: React.FC<FilmSectionItemProps> = ({
   return (
     <div
       key={film._id}
-      className={`container mx-auto my-12 group flex text-gray-300 px-10 py-20 min-h-30rem relative justify-center items-center md:center ${
+      className={`container max-w-7xl mx-auto my-12 group flex text-gray-300 px-10 py-20 min-h-30rem relative justify-center items-center md:center ${
         isFeatured ? "py-48" : ""
       }`}
     >
