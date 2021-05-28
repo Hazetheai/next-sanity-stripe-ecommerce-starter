@@ -5,13 +5,27 @@ import Layout from "../components/common/Layout";
 import { AppProps } from "next/app";
 import Cart from "components/commerce/CartState";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import dynamic from "next/dynamic";
+import "react-jinke-music-player/assets/index.css";
+import { MusicProvider } from "components/music-player/music-context";
+
+const PlayerWithNoSSR = dynamic(
+  () => import("../components/music-player/Player"),
+  {
+    ssr: false,
+    loading: () => <p>...</p>,
+  }
+);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Cart>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <MusicProvider>
+        <Layout>
+          <Component {...pageProps} />
+          <PlayerWithNoSSR />
+        </Layout>
+      </MusicProvider>
     </Cart>
   );
 }
