@@ -1,20 +1,25 @@
-import MyImage from "components/elements/Image";
-import { handleCurrencySymbol } from "utils/handleCurrencySymbol";
 import Button from "components/elements/Button";
-import Link from "components/elements/Link";
+import MyImage from "components/elements/Image";
+import albumToPlaylist from "components/music-player/lib/sanityAlbumtoPlayer";
+import {
+  InitialMusicPlayerStateType,
+  useMusicPlayer,
+} from "components/music-player/music-context";
+import { Types } from "components/music-player/music-reducers";
 import NextLink from "next/link";
 import React from "react";
 import { useShoppingCart } from "use-shopping-cart";
+import { handleCurrencySymbol } from "utils/handleCurrencySymbol";
 import { PortableText } from "utils/sanity";
 import { AlbumProduct } from "utils/sanity/manualTypes";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
-import {
-  Album as AlbumProperties,
-  Product,
-  ProductVariant,
-} from "utils/sanity/types";
+import { Album as AlbumType, Track } from "utils/sanity/types";
 import { slugify } from "utils/stringUtils";
 import { sanityProductToStripe } from "utils/stripe-helpers";
+import isEqual from "lodash/isEqual";
+import { MdPause, MdPlayCircleOutline } from "react-icons/md";
+import { isTrackPlaying } from "components/music-player/lib/isTrackPlaying";
+import { ReactJkMusicPlayerAudioListProps } from "react-jinke-music-player";
 
 export function handleCredits(
   mainWriter: string,
@@ -36,40 +41,86 @@ export function handleCredits(
   ];
 }
 
-// interface AlbumProps {
-//   albumProperties: AlbumProperties
-//   product?: Product
-// }
-
-const Album: React.FC<AlbumProduct> = ({
-  body,
-  mainArtist,
-  mainImage,
-  mainWriter,
-  mainProducer,
-  trackList,
-  coWriters,
-  coProducers,
-  slug,
-  title,
-  featuringArtists,
-  genres,
-  recognition,
-  tags,
-  product,
-}) => {
+const Album: React.FC<AlbumProduct> = (album) => {
+  const {
+    body,
+    mainArtist,
+    mainImage,
+    mainWriter,
+    mainProducer,
+    trackList,
+    coWriters,
+    coProducers,
+    slug,
+    title,
+    featuringArtists,
+    genres,
+    recognition,
+    tags,
+    product,
+  } = album;
   const credits = handleCredits(
     mainWriter,
     mainProducer,
     coWriters,
     coProducers
   );
-
   const { addItem } = useShoppingCart();
+
+  const { state, dispatch } = useMusicPlayer();
+
+  function shufflePlaylist(
+    track: Track,
+    playList: ReactJkMusicPlayerAudioListProps[]
+  ) {
+    const currIdx = playList.findIndex(
+      (tr) => tr.musicSrc === track["previewUrl"]
+    );
+    const middle = playList.slice(0, currIdx);
+    const end = playList.slice(currIdx + 1);
+    //  @ts-ignore tslib
+    const newOrder = [playList[currIdx], ...middle, ...end];
+
+    return newOrder;
+  }
+
+  function handleMusicPlayer(track: Track, album: AlbumType) {
+    if (!track || !album) return;
+    const isSameAlbum = isEqual(
+      { info: album, trackList: albumToPlaylist(album) },
+      state.album
+    );
+    const playList =
+      isSameAlbum || !state.album.trackList
+        ? albumToPlaylist(album)
+        : shufflePlaylist(track, albumToPlaylist(album));
+    const trackIdx = playList.findIndex(
+      (trc) => trc.musicSrc === track["previewUrl"]
+    );
+
+    console.log(`playList`, playList);
+    const newalbum = isSameAlbum
+      ? state.album
+      : { info: album, trackList: playList };
+
+    dispatch({
+      type: Types.Load,
+      payload: {
+        album: newalbum,
+        track: {
+          src: track["previewUrl"] || "",
+          title: track.title,
+          playIndex: trackIdx,
+        },
+      },
+    });
+  }
+
   return (
     <section className="bg-black text-gray-300 min-h-screen p-10">
+      {console.log(`state`, state)}
       {/* header */}
-      <div className="container px-5 py-5 mx-auto">
+      <div className="container max-w-7xl px-5 py-5 mx-auto">
         <div className="flex flex-wrap">
           {mainImage && (
             <MyImage
@@ -152,7 +203,23 @@ const Album: React.FC<AlbumProduct> = ({
               key={track._key}
               className="flex border-b border-gray-800 hover:bg-gray-800"
             >
-              <div className="p-3 w-8 flex-shrink-0">▶️</div>
+              {track.previewFile ? (
+                <Button
+                  className="p-3 w-8 flex-shrink-0 items-center"
+                  btnStyle="clear"
+                  noPaddingY
+                  noPaddingX
+                  func={() => handleMusicPlayer(track, album)}
+                >
+                  {isTrackPlaying(track, state) ? (
+                    <MdPause />
+                  ) : (
+                    <MdPlayCircleOutline />
+                  )}
+                </Button>
+              ) : (
+                <div className="p-3 w-8 flex-shrink-0 items-center" />
+              )}
               <div className="p-3 w-1/2 flex-shrink-0">
                 {track.song ? (
                   <NextLink

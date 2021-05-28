@@ -21,8 +21,8 @@ const FeaturedSong: React.FC<Song> = ({
   // tags,
 }) => {
   return (
-    <div className="text-gray-400  body-font">
-      <div className="container flex flex-wrap md:flex-nowrap justify-between px-5 py-5 mx-auto">
+    <div className="container px-5 py-5 mx-auto">
+      <div className="container flex flex-wrap md:flex-nowrap justify-between  py-5 mx-auto">
         <div className="flex flex-col items-start mb-12 mr-12">
           <h1 className="text-5xl font-medium title-font mb-4 text-white">
             {title}

@@ -55,9 +55,9 @@ const Song: React.FC<SongProps> = ({
 
   const { addItem } = useShoppingCart();
   return (
-    <div className="bg-black text-gray-300 min-h-screen p-10">
+    <div className="bg-black text-gray-300 min-h-screen p-10 ">
       {/* header */}
-      <div className="container px-5 py-5 mx-auto flex flex-wrap lg:flex-nowrap">
+      <div className="container max-w-7xl px-5 py-5 mx-auto flex flex-wrap lg:flex-nowrap">
         {mainImage?.asset && (
           <MyImage
             containerClassName="mr-6"
@@ -144,7 +144,7 @@ const Song: React.FC<SongProps> = ({
 
       {/* song list   */}
 
-      <div className=" container px-5 py-5 mx-auto flex">
+      <div className="container max-w-7xl px-5 py-5 mx-auto flex flex-wrap lg:flex-nowrap">
         <div className="mt-10">
           <h3>Lyrics</h3>
           <PortableText blocks={lyrics} />

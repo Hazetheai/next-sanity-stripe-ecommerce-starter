@@ -21,22 +21,30 @@ body[]{
   },
 `;
 
+export const F_ALL_MEDIA_FIELDS = `
+...,
+trackList[]{
+  ...,
+  song->,
+  'previewUrl': previewFile.asset->url,
+},
+'movieBackgroundURL':movieBackground.asset->url,
+'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
+...
+}
+
+`;
+
 export const F_CREATIVE_FEATURE = `
 _type == "creativeFeature" => {
   ...,
   'feature': *[_type== "creativeConfig"][1]{
     featuredAlbum->{
-        ...,
-        'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-          ...
-        }
+      ${F_ALL_MEDIA_FIELDS}
   },
     featuredSong->,
     featuredFilm->{
-        ...,
-        'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-        ...
-        }
+      ${F_ALL_MEDIA_FIELDS}
     }
 }
 },
@@ -45,19 +53,13 @@ _type == "creativeFeature" => {
 export const F_FEATURED_CONTENT = `
 _type == "albumSection" => {
   "albumProduct": album->{
-    ...,
-   'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-      ...
-    }
+    ${F_ALL_MEDIA_FIELDS}
   }
 },
 _type == "filmSection" => {
   "featuredFilm": *[_type== "creativeConfig"][1]{"_ref": featuredFilm._ref},
   "films": *[_type=="film" && status == ^.status ][]{
-      ...,
-       'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-        ...
-      }
+      ${F_ALL_MEDIA_FIELDS}
   },
 },
 _type == "songSection" => {

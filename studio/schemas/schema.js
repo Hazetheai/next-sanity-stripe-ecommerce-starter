@@ -52,6 +52,7 @@ import songSection from "./objects/songSection";
 import filmSection from "./objects/filmSection";
 import creativeFeature from "./objects/creativeFeature";
 import coveringArtists from "./objects/coveringArtists";
+import track from "./objects/track";
 
 // Locale Stuff
 import localeString from "./locale/String";
@@ -112,5 +113,6 @@ export default createSchema({
     videoEmbed,
     creativeFeature,
     coveringArtists,
+    track,
   ]),
 });

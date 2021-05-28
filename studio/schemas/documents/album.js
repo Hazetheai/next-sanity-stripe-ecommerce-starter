@@ -1,4 +1,4 @@
-import { MdAlbum } from "react-icons/md";
+import { MdAlbum, MdMusicNote, MdPlayArrow } from "react-icons/md";
 
 export default {
   name: "album",
@@ -119,101 +119,7 @@ export default {
       type: "array",
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
-      of: [
-        {
-          name: "track",
-          title: "Track",
-          type: "object",
-          fields: [
-            {
-              name: "title",
-              title: "Title",
-              type: "string",
-              codegen: { required: true },
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              title: "Song",
-              name: "song",
-              type: "reference",
-              to: [{ type: "song" }],
-            },
-            {
-              name: "isSingle",
-              title: "Single",
-              type: "boolean",
-            },
-            // {
-            //   name: "lyrics",
-            //   title: "Track Lyrics",
-            //   type: "blockContent",
-            // },
-            {
-              name: "featuringArtists",
-              title: "Featuring Artists",
-              type: "array",
-              of: [{ type: "string" }],
-            },
-            // {
-            //   name: "coWriters",
-            //   title: "Co Writers",
-            //   type: "array",
-            //   of: [{ type: "string" }],
-            // },
-            {
-              name: "tradArr",
-              title: "Trad Arr.",
-              type: "array",
-              of: [{ type: "string" }],
-            },
-            {
-              name: "trackLengthMinutes",
-              title: "Track Length - Minutes",
-              type: "number",
-              codegen: { required: true },
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: "trackLengthSeconds",
-              title: "Track Length - Seconds",
-              type: "number",
-              codegen: { required: true },
-              validation: (Rule) => Rule.required(),
-            },
-          ],
-          preview: {
-            select: {
-              title: "title",
-              minutes: "trackLengthMinutes",
-              seconds: "trackLengthSeconds",
-              featuringArtists: "featuringArtists",
-              coWriters: "coWriters",
-              tradArr: "tradArr",
-              isSingle: "isSingle",
-            },
-            prepare({
-              title,
-              minutes,
-              seconds,
-              featuringArtists,
-              coWriters,
-              isSingle,
-              tradArr,
-            }) {
-              return {
-                title: `${title} ${isSingle ? "- Single" : ""}`,
-                subtitle: `${minutes}:${seconds.toString().padStart(2, "0")} ${
-                  featuringArtists
-                    ? " | Featuring: " + featuringArtists.join(", ")
-                    : ""
-                } ${
-                  coWriters ? " | Co-written with: " + coWriters.join(", ") : ""
-                }  ${tradArr ? " | Trad. Arr: " + tradArr.join(", ") : ""}`,
-              };
-            },
-          },
-        },
-      ],
+      of: [{ type: "track" }],
     },
     {
       name: "genres",

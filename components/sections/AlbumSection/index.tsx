@@ -13,6 +13,13 @@ import { nextSanityImage } from "utils/sanity/nextSanityImage";
 import { sanityProductToStripe } from "utils/stripe-helpers";
 import { handleCurrencySymbol } from "utils/handleCurrencySymbol";
 import Testimonial from "components/elements/Testimonial";
+import albumToPlaylist from "components/music-player/lib/sanityAlbumtoPlayer";
+import { Types } from "components/music-player/music-reducers";
+import { Album as AlbumType, Track } from "utils/sanity/types";
+import isEqual from "lodash/isEqual";
+import { useMusicPlayer } from "components/music-player/music-context";
+import { isTrackPlaying } from "components/music-player/lib/isTrackPlaying";
+import { MdPause, MdPlayCircleOutline } from "react-icons/md";
 
 interface AlbumItemProps {
   albumProduct: AlbumProduct;
@@ -29,8 +36,36 @@ const AlbumItem: React.FC<AlbumItemProps> = ({
 
   const { product } = albumProduct;
   const { addItem } = useShoppingCart();
+  const { state, dispatch } = useMusicPlayer();
 
   const album = removeObjectProperty(albumProduct, "product");
+
+  function handleMusicPlayer(track: Track, album: AlbumType) {
+    if (!track || !album) return;
+    const playList = albumToPlaylist(album);
+    const trackIdx = playList.findIndex(
+      (trc) => trc.musicSrc === track["previewUrl"]
+    );
+    const newalbum = isEqual(
+      { info: album, trackList: albumToPlaylist(album) },
+      state.album
+    )
+      ? state.album
+      : { info: album, trackList: albumToPlaylist(album) };
+
+    dispatch({
+      type: Types.Load,
+      payload: {
+        album: newalbum,
+        track: {
+          src: track["previewUrl"] || "",
+          title: track.title,
+          playIndex: trackIdx,
+        },
+      },
+    });
+  }
+
   const releaseMonth = dayjs(album.releaseDate).format("M");
   const releaseDate =
     parseInt(releaseMonth, 10) < 5
@@ -43,8 +78,8 @@ const AlbumItem: React.FC<AlbumItemProps> = ({
   const isReleased = dayjs(album.releaseDate).isBefore(dayjs());
 
   return (
-    <section className="container px-5 py-5 mx-auto">
-      <div className="text-gray-300 min-h-screen py-10">
+    <section className="text-gray-300 min-h-screen">
+      <div className=" py-10 container max-w-7xl px-5 mx-auto">
         <h1 className="mt-0 mb-2 text-white text-5xl text-center">
           {album.title}
         </h1>
@@ -96,7 +131,23 @@ const AlbumItem: React.FC<AlbumItemProps> = ({
                   key={track._key}
                   className="flex border-b border-gray-800 hover:bg-gray-800"
                 >
-                  <div className="p-3 w-8">▶️</div>
+                  {track.previewFile ? (
+                    <Button
+                      className="p-3 w-8 flex-shrink-0 items-center"
+                      btnStyle="clear"
+                      noPaddingY
+                      noPaddingX
+                      func={() => handleMusicPlayer(track, album)}
+                    >
+                      {isTrackPlaying(track, state) ? (
+                        <MdPause />
+                      ) : (
+                        <MdPlayCircleOutline />
+                      )}
+                    </Button>
+                  ) : (
+                    <div className="p-3 w-8 flex-shrink-0 items-center" />
+                  )}
 
                   <div className="p-3 w-full">
                     {track.song ? (
@@ -148,6 +199,12 @@ const AlbumItem: React.FC<AlbumItemProps> = ({
                       className="mr-2 mt-2 sm:mt-0"
                     />
                   ))}
+                  <Link
+                    btnStyle="secondary"
+                    hrefProp={`albums/${album.slug.current}`}
+                    text="View"
+                    className="mt-2"
+                  />
                 </div>
               )}
             </div>

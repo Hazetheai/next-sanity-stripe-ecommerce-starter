@@ -9,8 +9,8 @@ interface SongListProps {
 
 const SongList: React.FC<SongListProps> = ({ songs }) => {
   return (
-    <div className=" text-gray-400  body-font">
-      <div className="px-5 py-5 mx-auto">
+    <div className=" container px-5 py-5 mx-auto">
+      <div className="py-5 mx-auto">
         <>
           <div className="flex flex-wrap -m-2 justify-between">
             {songs?.map((song) => (

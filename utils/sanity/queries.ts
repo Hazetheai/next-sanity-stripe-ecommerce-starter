@@ -1,5 +1,6 @@
 import groq from "groq";
 import {
+  F_ALL_MEDIA_FIELDS,
   F_BODY_WITH_ADD_FIELDS,
   F_COVERING_ARTISTS,
   F_CREATIVE_FEATURE,
@@ -31,9 +32,6 @@ export const Q_ROUTE_BY_PARTIAL_SLUG = Q_ROUTE_BY_SLUG.replace(
   /==\s\$slug/,
   "match $slug"
 );
-// "handle":*[_id == @._ref]{handle},
-// 'internalLinkType' : *[_id == @._ref]{_type},
-// _type in ["album","product","film","product","route","staticRoute"]
 export const Q_ALL_PRODUCTS = groq`
 *[_type == "product"]{
     ...
@@ -80,33 +78,19 @@ export const Q_CREATIVE_CONFIG = groq`
 `;
 
 export const Q_SOURCE_MEDIA_PRODUCT = groq`
-*[_type == "film" && slug.current == $slug][0]{
-   'movieBackgroundURL':movieBackground.asset->url,
-    slug,
-    'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-    ...
-  }
+*[_type == $type && slug.current == $slug][0]{
+  ${F_ALL_MEDIA_FIELDS}
 }
 `;
 export const Q_SOURCE_MEDIA_WITH_PRODUCT = groq`
 *[_type == $type && slug.current == $slug][0]{
-	...,
-  trackList[]{
-    ...,
-    song->
-  },
-  'movieBackgroundURL':movieBackground.asset->url,
-  'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-  ...
-  }
+  ${F_ALL_MEDIA_FIELDS}
 }
 `;
 
 export const Q_ALL_SOURCE_MEDIA_WITH_PRODUCTS = groq`
 *[_type == $type]{
-	...,
-  'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-  ...
+  ${F_ALL_MEDIA_FIELDS}
 }
 }
 `;
@@ -115,16 +99,10 @@ export const Q_ALBUM_INDEX_PAGE = groq`
 
 *[_type=="creativeConfig"][1]{
   featuredAlbum->{
-    ...,
-    'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-    ...
-  }
+    ${F_ALL_MEDIA_FIELDS}
 },
 'albums':*[_type == "album" && _id != ^.featuredAlbum._ref]{
-  ...,
-  'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-    ...
-  }
+  ${F_ALL_MEDIA_FIELDS}
 }
 }
 
@@ -133,17 +111,11 @@ export const Q_FILM_INDEX_PAGE = groq`
 
 *[_type=="creativeConfig"][1]{
   featuredFilm->{
-    ...,
-    'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-    ...
+    ${F_ALL_MEDIA_FIELDS}
   }
 },
 'films':*[_type == "film" && _id != ^.featuredFilm._ref]{
-   'movieBackgroundURL':movieBackground.asset->url,
-  ...,
-  'product' : *[_type == "product" && sourceMedia._ref == ^._id][0]{
-    ...
-  }
+   ${F_ALL_MEDIA_FIELDS}
 }
 }
 `;

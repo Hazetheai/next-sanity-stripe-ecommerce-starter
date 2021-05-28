@@ -872,59 +872,7 @@ export interface Album extends SanityDocument {
    *
    *
    */
-  trackList: Array<
-    SanityKeyed<{
-      _type: "track";
-      /**
-       * Title — `string`
-       *
-       *
-       */
-      title: string;
-
-      /**
-       * Song — `reference`
-       *
-       *
-       */
-      song?: SanityReference<Song>;
-
-      /**
-       * Single — `boolean`
-       *
-       *
-       */
-      isSingle?: boolean;
-
-      /**
-       * Featuring Artists — `array`
-       *
-       *
-       */
-      featuringArtists?: Array<SanityKeyed<string>>;
-
-      /**
-       * Trad Arr. — `array`
-       *
-       *
-       */
-      tradArr?: Array<SanityKeyed<string>>;
-
-      /**
-       * Track Length - Minutes — `number`
-       *
-       *
-       */
-      trackLengthMinutes: number;
-
-      /**
-       * Track Length - Seconds — `number`
-       *
-       *
-       */
-      trackLengthSeconds: number;
-    }>
-  >;
+  trackList: Array<SanityKeyed<Track>>;
 
   /**
    * Genres — `array`
@@ -2022,6 +1970,72 @@ export type CoveringArtists = {
    * Add a short intro for visitors.
    */
   content: BlockContent;
+};
+
+export type Track = {
+  _type: "track";
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title: string;
+
+  /**
+   * Song — `reference`
+   *
+   *
+   */
+  song?: SanityReference<Song>;
+
+  /**
+   * Single — `boolean`
+   *
+   *
+   */
+  isSingle?: boolean;
+
+  /**
+   * Featuring Artists — `array`
+   *
+   *
+   */
+  featuringArtists?: Array<SanityKeyed<string>>;
+
+  /**
+   * Trad Arr. — `array`
+   *
+   *
+   */
+  tradArr?: Array<SanityKeyed<string>>;
+
+  /**
+   * Track Length - Minutes — `number`
+   *
+   *
+   */
+  trackLengthMinutes: number;
+
+  /**
+   * Track Length - Seconds — `number`
+   *
+   *
+   */
+  trackLengthSeconds: number;
+
+  /**
+   * Preview Length - Seconds — `number`
+   *
+   *
+   */
+  previewLengthSeconds?: number;
+
+  /**
+   * Preview File — `file`
+   *
+   *
+   */
+  previewFile?: { _type: "file"; asset: SanityAsset };
 };
 
 export type Documents =

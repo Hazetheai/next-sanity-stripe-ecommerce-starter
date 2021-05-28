@@ -39,7 +39,7 @@ const CoveringArtists: React.FC<CoveringArtistSection> = ({
   );
 
   return (
-    <div className="w-full px-5 mx-auto">
+    <div className="w-full container px-5 py-5 mx-auto">
       <div className="w-2/3 mr-auto pb-4">
         <PortableText blocks={content} />
       </div>
@@ -76,7 +76,7 @@ const CoveringArtists: React.FC<CoveringArtistSection> = ({
                 hrefProp={`songs/${artist.slug}`}
                 text={artist.title}
                 btnStyle="clear"
-                noPadding
+                noPaddingY
                 className="px-0 text-white "
               />
             ) : (
