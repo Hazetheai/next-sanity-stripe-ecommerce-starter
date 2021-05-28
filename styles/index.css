@@ -46,6 +46,15 @@
     @apply w-full;
   }
 
+  .full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
   input:focus-within ~ label,
   input:not(:placeholder-shown) ~ label {
     opacity: 0;
