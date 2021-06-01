@@ -6,7 +6,7 @@
   },
   "project": {
     "name": "Next.JS E-commerce example",
-    "basePath": "/studio"
+    "basePath": "/cms-studio"
   },
   "plugins": [
     "@sanity/base",
@@ -20,9 +20,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [

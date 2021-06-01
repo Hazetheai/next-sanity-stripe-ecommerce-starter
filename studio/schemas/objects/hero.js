@@ -48,6 +48,26 @@ export default {
       },
     },
     {
+      name: "textLayout",
+      title: "Text Layout",
+      description: "Only affects full screen image layouts",
+      type: "string",
+      options: {
+        list: [
+          { title: "Left", value: "left" },
+          { title: "Center", value: "center" },
+          { title: "Right", value: "right" },
+        ],
+      },
+    },
+    {
+      name: "featureCtas",
+      title: "Feature CTAs",
+      description:
+        "Enabling this will make CTA's appear at the bottom of the hero and show the tagline and icon. Best used with >= 2",
+      type: "boolean",
+    },
+    {
       name: "ctas",
       type: "array",
       title: "Call to actions",

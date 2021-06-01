@@ -5,6 +5,7 @@ import {
   MdWhatshot,
   MdLooks,
   MdShoppingBasket,
+  MdPersonOutline,
 } from "react-icons/md";
 import ads from "./ads";
 import categories from "./categories";
@@ -22,6 +23,7 @@ const hiddenDocTypes = (listItem) =>
   ![
     "category",
     "person",
+    "popup",
     "sampleProject",
     "vendor",
     "siteSettings",
@@ -33,6 +35,9 @@ const hiddenDocTypes = (listItem) =>
     "brand",
     "creativeConfig",
     "staticRoute",
+    "photographer",
+    "swag",
+    "artist",
   ].includes(listItem.getId());
 
 const JsonPreview = ({ document }) => (
@@ -76,18 +81,27 @@ export default () =>
               S.documentTypeListItem("staticRoute").title("Static Routes"),
               S.documentTypeListItem("page").title("Pages"),
               S.listItem()
-                .title("Creative Content configuration")
+                .title("Featured Content Configuration")
                 .icon(MdSettings)
                 .child(
                   S.document()
-                    .title("Creative Content Configuration")
+                    .title("Featured Content Configuration")
                     .schemaType("creativeConfig")
                     .documentId("creativeConfig")
                 ),
             ])
         ),
+      S.listItem()
+        .title("Artist")
+        .icon(MdPersonOutline)
+        .child(
+          S.document()
+            .title("Artist Info")
+            .schemaType("artist")
+            .documentId("artistInfo")
+        ),
       // ads,
-      categories,
+      // categories,
       ...S.documentTypeListItems().filter(hiddenDocTypes),
     ]);
 

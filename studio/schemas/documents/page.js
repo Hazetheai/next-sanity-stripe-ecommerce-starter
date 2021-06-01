@@ -25,6 +25,7 @@ export default {
         { type: "imageText" },
         { type: "centerPiece" },
         { type: "featureSection" },
+        { type: "aboutSection" },
         { type: "form" },
         { type: "productSection" },
         { type: "filmSection" },

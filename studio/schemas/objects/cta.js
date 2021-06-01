@@ -22,6 +22,18 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "tagline",
+      title: "Tagline",
+      type: "text",
+    },
+    {
+      name: "icon",
+      title: "Icon",
+      type: "image",
+      description:
+        "Used on hero section featured CTAs. Optimal size is 100x100",
+    },
+    {
       title: "Internal link",
       description: "Use this to link between pages on the website",
       name: "route",

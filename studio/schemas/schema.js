@@ -8,7 +8,7 @@ import category from "./documents/category";
 import product from "./documents/product";
 import vendor from "./documents/vendor";
 import productVariant from "./documents/productVariant";
-import brand from "./documents/brand";
+import artist from "./documents/artist";
 import social from "./documents/social";
 import ad from "./documents/ad";
 import swag from "./documents/swag";
@@ -53,11 +53,50 @@ import filmSection from "./objects/filmSection";
 import creativeFeature from "./objects/creativeFeature";
 import coveringArtists from "./objects/coveringArtists";
 import track from "./objects/track";
+import aboutSection from "./objects/aboutSection";
 
 // Locale Stuff
 import localeString from "./locale/String";
 import localeText from "./locale/Text";
 import localeBlockContent from "./locale/BlockContent";
+import __objectDefaultFields from "./objects/__objectDefaultFields";
+const withPlugs = [
+  productSection,
+  imageText,
+  hero,
+  imageSection,
+  centerPiece,
+  featureSection,
+  form,
+  songSection,
+  albumSection,
+  filmSection,
+  videoEmbed,
+  creativeFeature,
+  coveringArtists,
+  aboutSection,
+].map((object) =>
+  object.fields
+    ? { ...object, fields: __objectDefaultFields.concat(object.fields) }
+    : object
+);
+
+const withoutPlugs = [
+  photoCredits,
+  cta,
+  figure,
+  internalLink,
+  link,
+  contactInfo,
+  localeText,
+  localeBlockContent,
+  localeString,
+  productVariant,
+  appraiser,
+  track,
+  simplePortableText,
+  blockContent,
+];
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -65,54 +104,31 @@ export default createSchema({
   name: "default",
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([
-    // The following are document types which will appear
-    // in the studio.
-    product,
-    popup,
-    vendor,
-    category,
-    brand,
-    social,
-    ad,
-    swag,
-    page,
-    route,
-    siteConfig,
-    person,
-    photographer,
-    album,
-    song,
-    film,
-    creativeConfig,
-    staticRoute,
-    // When added to this list, object types can be used as
-    productSection,
-    photoCredits,
-    imageText,
-    cta,
-    figure,
-    internalLink,
-    link,
-    hero,
-    imageSection,
-    centerPiece,
-    featureSection,
-    form,
-    simplePortableText,
-    contactInfo,
-    blockContent,
-    localeText,
-    localeBlockContent,
-    localeString,
-    productVariant,
-    appraiser,
-    songSection,
-    albumSection,
-    filmSection,
-    videoEmbed,
-    creativeFeature,
-    coveringArtists,
-    track,
-  ]),
+  types: schemaTypes
+    .concat([
+      // The following are document types which will appear
+      // in the studio.
+      product,
+      popup,
+      vendor,
+      category,
+      artist,
+      social,
+      ad,
+      swag,
+      page,
+      route,
+      siteConfig,
+      person,
+      photographer,
+      album,
+      song,
+      film,
+      creativeConfig,
+      staticRoute,
+
+      // When added to this list, object types can be used as
+    ])
+    .concat(withPlugs)
+    .concat(withoutPlugs),
 });
