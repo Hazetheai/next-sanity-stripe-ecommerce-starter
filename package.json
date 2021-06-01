@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "concurrently \"tsc --watch\" \"next\"",
     "dev-s": "concurrently \"tsc --watch\" \"next\" \"cd studio && sanity start\"",
-    "build": "echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
+    "build": "echo 'Building Sanity to public/cms-studio' && cd studio && sanity build ../public/cms-studio -y && cd .. && next build",
+    "build-no-studio": "next build",
     "start": "vercel dev",
     "postinstall": "lerna bootstrap",
     "check-template": "sanity-template check"
