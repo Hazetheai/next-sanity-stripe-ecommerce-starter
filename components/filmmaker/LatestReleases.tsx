@@ -45,7 +45,7 @@ const LatestReleases: React.FC<LatestReleasesProps> = ({ films }) => {
         </ul>
       </div>
       <div
-        className={`flex items-stretch justify-start mb-10 overflow-scroll relative transition duration-500 ease-in-out "container mx-auto my-6 lg:px-8 px-4`}
+        className={`flex items-stretch justify-start mb-10 overflow-scroll relative transition duration-500 ease-in-out "container px-5 sm:px-6 lg:px-8  mx-auto my-6 lg:px-8 px-4`}
       >
         {films?.map((film) => (
           <NextLink

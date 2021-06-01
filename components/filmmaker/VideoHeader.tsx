@@ -1,6 +1,7 @@
 import { handleCredits } from "components/composer/Album";
 import Button from "components/elements/Button";
 import MyImage from "components/elements/Image";
+import { handleFilmRelease } from "components/sections/FilmSection/FilmSectionItem";
 import React from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { handleCurrencySymbol } from "utils/handleCurrencySymbol";
@@ -8,28 +9,30 @@ import { FilmProduct } from "utils/sanity/manualTypes";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
 import { sanityProductToStripe } from "utils/stripe-helpers";
 
-const VideoHeader: React.FC<FilmProduct> = ({
-  featuringActors,
-  story,
-  status,
-  blurb,
-  director,
-  mainImage,
-  platforms,
-  coWriters,
-  coProducers,
-  movieBackgroundURL,
-  slug,
-  title,
-  // actors,
-  producer,
-  writer,
-  genres,
-  recognition,
-  tags,
-  product,
-}) => {
+const VideoHeader: React.FC<FilmProduct> = (film) => {
+  const {
+    featuringActors,
+    story,
+    status,
+    blurb,
+    director,
+    mainImage,
+    platforms,
+    coWriters,
+    coProducers,
+    movieBackgroundURL,
+    slug,
+    title,
+    // actors,
+    producer,
+    writer,
+    genres,
+    recognition,
+    tags,
+    product,
+  } = film;
   const credits = handleCredits(writer, producer, coWriters, coProducers);
+  const release = handleFilmRelease(film, "store");
 
   const { addItem } = useShoppingCart();
   return (
@@ -72,10 +75,10 @@ const VideoHeader: React.FC<FilmProduct> = ({
           ) : null}
         </>
       )}
-      <div className="container max-w-7xl relative mx-auto lg:mt-56 lg:px-16 md:pb-24 px-4 py-4">
+      <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl relative mx-auto lg:mt-56 lg:px-16 md:pb-24 px-4 py-4">
         <div className="md:pl-8 md:border-l border-white">
           <p className="text-white tracking-wide text-base font-light leading-none">
-            Out now
+            {release.releaseDate || "Out Now"}
           </p>
           <h1 className="text-white md:text-6xl text-2xl font-bold font-sans m-0 md:leading-none">
             {title}

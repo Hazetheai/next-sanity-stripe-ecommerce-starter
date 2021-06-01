@@ -72,6 +72,8 @@ export const Link: React.FC<LinkProps> = ({
   external,
   target,
   tabIndex,
+  noPaddingY,
+  noPaddingX,
 }) => {
   return (
     <NextLink
@@ -88,9 +90,7 @@ export const Link: React.FC<LinkProps> = ({
         onClick={(e: any) => {
           func ? func({ e }) : null;
         }}
-        className={`${
-          /p[lrtbxy-]-?\d/.test(className || "") ? "" : "py-2 px-6"
-        } ${
+        className={`${noPaddingY ? "" : "py-2"} ${noPaddingX ? "" : "px-6"} ${
           className || ""
         } group inline-flex border-0 hover:opacity-50 text-lg ${
           btnStyle ? btnStyles[btnStyle] : ""

@@ -18,7 +18,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ navigation }) => {
   return (
     <footer className="text-gray-400  body-font border-t border-gray-800">
-      <div className="container max-w-7xl px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+      <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
             <svg
@@ -55,6 +55,7 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
                       btnStyle="clear"
                       icon={{ name: "none" }}
                       text={item.page || item.title}
+                      noPaddingX
                       className="text-gray-400 hover:text-white px-0 py-2"
                     />
                   </li>
@@ -65,9 +66,9 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
         </div>
       </div>
       <div className="bg-gray-800 bg-opacity-75">
-        <div className="container items-center mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+        <div className="container px-5 sm:px-6 lg:px-8  items-center mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-400 text-sm text-center sm:text-left">
-            © {new Date().getFullYear()} {defaultMetaTags.title} —
+            © {new Date().getFullYear()} {defaultMetaTags.title}
             {/* <a
               href="https://twitter.com/knyttneve"
               rel="noopener noreferrer"
@@ -85,10 +86,9 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
           px-4
           text-gray-900
           items-center
-          bg-gray-200
+          bg-white
           
           border
-          bg-opacity-40
           border-gray-700
           focus:ring-2
           focus:ring-indigo-900
@@ -103,25 +103,27 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
           transition-colors
           duration-200 ease-in-out"
           >
-            {Socials.map((social) => (
-              <Fragment key={social.handle}>
-                <Link
-                  hrefProp={formatSocialLinks(
-                    social.channel as Social["channel"]
-                  )}
-                  text={""}
-                  title={capitalize(social.channel)}
-                  icon={{ name: "none" }}
-                  socialIcon={{
-                    name: social.channel as Social["channel"],
-                  }}
-                  external
-                  target="_blank"
-                  className="transform transition duration-500 ease-in-out hover:-translate-y-1"
-                />
-                <br />
-              </Fragment>
-            ))}
+            {Socials.map((social) =>
+              social.handle ? (
+                <Fragment key={social.handle}>
+                  <Link
+                    hrefProp={formatSocialLinks(
+                      social.channel as Social["channel"]
+                    )}
+                    text={""}
+                    title={capitalize(social.channel)}
+                    icon={{ name: "none" }}
+                    socialIcon={{
+                      name: social.channel as Social["channel"],
+                    }}
+                    external
+                    target="_blank"
+                    className="transform transition duration-500 ease-in-out hover:-translate-y-1"
+                  />
+                  <br />
+                </Fragment>
+              ) : null
+            )}
           </div>
         </div>
       </div>

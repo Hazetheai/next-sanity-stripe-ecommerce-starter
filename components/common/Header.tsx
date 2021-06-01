@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ navLinks }) => {
       <header className="body-font fixed text-gray-400 top-0 w-full z-50">
         <Navbar navLinks={navLinks} handleCart={handleCart} />
       </header>
-      <div className="placehoolder relative top-0 w-full h-20"></div>
+      <div className="placehoolder relative top-0 w-full h-16"></div>
       <Cart closeHandler={closeCart} cartOpen={cartOpen} />
     </>
   );

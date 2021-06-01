@@ -19,7 +19,7 @@ interface FilmSectionItemProps {
   idx?: number;
 }
 
-function handleFilmRelease(
+export function handleFilmRelease(
   film: Film,
   platform?: "mubi" | "store" | "netflix" | "youtube"
 ) {
@@ -119,7 +119,7 @@ const FilmSectionItem: React.FC<FilmSectionItemProps> = ({
             </h1>
 
             {/* {film?.story ? (
-              <PortableText className="max-w-lg" blocks={film?.story} />
+              <PortableText className="max-w-lg PortableText-container" blocks={film?.story} />
             ) : ( */}
             {/* <p className="text-white text-sm tracking-widest   max-w-lg">
               {film.blurb}

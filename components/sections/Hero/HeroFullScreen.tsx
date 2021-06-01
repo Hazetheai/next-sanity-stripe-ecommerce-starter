@@ -4,6 +4,8 @@ import { Hero as HeroProps } from "utils/sanity/types";
 import Cta from "components/common/Cta";
 import MyImage from "components/elements/Image";
 import { nextSanityImage } from "utils/sanity/nextSanityImage";
+import { HeroContentSection } from "./Home/HeroFullScreen";
+import HeroFeatureSection from "./HeroFeatureSection";
 
 // TODO
 // export function formatHeadings(heading:string): string[]{
@@ -18,10 +20,25 @@ const HeroFullScreen: React.FC<HeroProps> = ({
   tagline,
   ctas,
   layout,
+  textLayout,
+  featureCtas,
 }) => {
+  const contentLayout =
+    textLayout === "left"
+      ? "items-start"
+      : textLayout === "right"
+      ? "items-end"
+      : "items-center";
+
+  const text =
+    textLayout === "right"
+      ? "text-right"
+      : textLayout === "left"
+      ? "text-left"
+      : "text-center";
   return (
     <>
-      <div className="relative">
+      <div className={`relative ${featureCtas ? "" : "max-h-screen"}`}>
         {backgroundImage && (
           <MyImage
             nextImageProps={{
@@ -46,58 +63,40 @@ const HeroFullScreen: React.FC<HeroProps> = ({
           />
         </svg> */}
           <div className="relative px-4 py-16 mx-auto overflow-hidden sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-            <div className="flex flex-col items-center justify-between xl:flex-row">
+            <div className={`flex flex-col ${contentLayout} justify-between`}>
               {layout === "imageOnly" ? null : (
-                <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
-                  <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
-                    {/* <br className="hidden md:block" /> */}
-                    {heading}
-                  </h2>
-
-                  {/* <p className="max-w-xl mb-4 text-base text-gray-200 md:text-lg">
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudan, totam rem aperiam, eaque ipsa
-                  quae.
-                </p> */}
-                  {tagline && (
-                    <PortableText
-                      className="max-w-xl mb-4 text-base text-gray-200 md:text-lg"
-                      blocks={tagline}
-                    />
-                  )}
-                  {ctas && (
-                    <div>
-                      {ctas.map((cta) => (
-                        <Cta {...cta} key={cta._key} />
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <HeroContentSection
+                  className={`w-full max-w-xl mb-4 ${
+                    featureCtas ? "" : "lg:py-36"
+                  } h-full flex flex-col justify-center ${text}`}
+                  orientation={textLayout}
+                  ctas={featureCtas ? undefined : ctas}
+                  tagline={tagline}
+                  heading={heading}
+                />
               )}
-              <div
+              {/* <div
                 className={`w-full max-w-xl xl:px-8 xl:w-5/12 lg:h-screen ${
                   layout === "imageOnly" ? "h-64" : ""
                 }`}
               >
-                {/* <div className="bg-white  shadow-2xl p-7 sm:p-10">
-                <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
-                  Sign up for updates
-                </h3>
-                <BaseForm />
+       
               </div> */}
-              </div>
             </div>
           </div>
         </div>
+        {featureCtas && <HeroFeatureSection ctas={ctas} />}
       </div>
       {layout === "imageOnly" ? (
-        <div className="w-full mt-8 md:mt-16">
-          {" "}
-          <h2 className="mx-auto text-4xl md:text-6xl font-semibold text-center">
-            {heading}
-          </h2>{" "}
-          <hr className="w-1/4 mx-auto mt-2 mb-8" />
-        </div>
+        <HeroContentSection
+          className={`w-full max-w-xl mb-4 ${
+            featureCtas ? "" : "lg:py-36"
+          } h-full flex flex-col justify-center ${text}`}
+          orientation={textLayout}
+          ctas={featureCtas ? undefined : ctas}
+          tagline={tagline}
+          heading={heading}
+        />
       ) : null}
     </>
   );

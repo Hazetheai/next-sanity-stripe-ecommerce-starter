@@ -46,7 +46,7 @@ const CartSummary = () => {
   return (
     <form
       onSubmit={handleCheckout}
-      className={`bg-white p-4 ${state.album.trackList.length ? "pb-16" : ""}`}
+      className={`bg-white py-4 ${state.album.trackList.length ? "pb-16" : ""}`}
     >
       <h2 className="text-gray-600">Summary</h2>
       {/* This is where we'll render our cart */}
@@ -61,33 +61,38 @@ const CartSummary = () => {
 
       {/* Redirects the user to Stripe */}
       {/* <StripeTestCards /> */}
-      <div className="flex justify-between">
-        <Link
-          btnStyle="secondary"
-          hrefProp="cart"
-          text="View"
-          disabled={cartEmpty || loading}
-          className="  my-2  text-black"
-          icon={{ name: "none" }}
-        />
-        <Button
-          btnStyle="secondary"
-          func={clearCart}
-          text="Clear"
-          disabled={cartEmpty || loading}
-          className=" my-2 text-black"
-        />
-      </div>
-      <Button
-        btnStyle="primary"
-        // hrefProp={router.pathname.slice(1)}
-        text="Checkout"
-        title={"Go to checkout"}
-        disabled={cartEmpty || loading}
-        className="w-full my-2 text-black"
-        type="submit"
-        icon={{ name: "arrow" }}
-      />
+      {cartCount > 0 && (
+        <>
+          {" "}
+          <div className="flex justify-between">
+            <Link
+              btnStyle="secondary"
+              hrefProp="cart"
+              text="View"
+              disabled={cartEmpty || loading}
+              className="  my-2  text-black"
+              icon={{ name: "none" }}
+            />
+            <Button
+              btnStyle="secondary"
+              func={clearCart}
+              text="Clear"
+              disabled={cartEmpty || loading}
+              className=" my-2 text-black"
+            />
+          </div>
+          <Button
+            btnStyle="primary"
+            // hrefProp={router.pathname.slice(1)}
+            text="Checkout"
+            title={"Go to checkout"}
+            disabled={cartEmpty || loading}
+            className="w-full my-2 text-black"
+            type="submit"
+            icon={{ name: "arrow" }}
+          />
+        </>
+      )}
 
       {/* <button
         className="cart-style-background"

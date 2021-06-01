@@ -29,6 +29,7 @@ const RenderSections: React.FC<Props> = ({ sections }) => {
     <Fragment>
       {sections.map((section) => {
         const SectionComponent = resolveSections(section);
+        if (!section.active) return null;
         if (!SectionComponent) {
           return <div key={section._key}>Missing section {section._type}</div>;
         }

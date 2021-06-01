@@ -13,14 +13,17 @@ const HeroFramed: React.FC<HeroProps> = ({
   return (
     <>
       <section className="text-gray-400  body-font">
-        <div className="container max-w-7xl mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+        <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
               {heading}
               <br className="hidden lg:inline-block" />
             </h1>
             {tagline && (
-              <PortableText className="mb-8 leading-relaxed" blocks={tagline} />
+              <PortableText
+                className="mb-8 leading-relaxed PortableText-container"
+                blocks={tagline}
+              />
             )}
             <div className="flex justify-center">
               {ctas && (

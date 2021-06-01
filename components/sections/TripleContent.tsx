@@ -5,7 +5,7 @@ interface TriContentProps {}
 const TriContent: React.FC<TriContentProps> = ({}) => {
   return (
     <section className="text-gray-400  body-font ">
-      <div className="container max-w-7xl px-5 py-24 mx-auto">
+      <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl px-5 py-24 mx-auto">
         <h1 className="sm:text-3xl text-2xl font-medium title-font text-center text-white mb-20">
           Raw Denim Heirloom Man Braid
           <br className="hidden sm:block" />

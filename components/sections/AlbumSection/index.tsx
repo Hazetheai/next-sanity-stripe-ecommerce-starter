@@ -78,7 +78,7 @@ const AlbumItem: React.FC<AlbumItemProps> = ({
   const isReleased = dayjs(album.releaseDate).isBefore(dayjs());
 
   return (
-    <section className="text-gray-300 min-h-screen">
+    <section className="text-gray-300 min-h-screen border-b border-gray-800">
       <div className=" py-10 container max-w-7xl px-5 mx-auto">
         <h1 className="mt-0 mb-2 text-white text-5xl text-center">
           {album.title}
@@ -111,8 +111,13 @@ const AlbumItem: React.FC<AlbumItemProps> = ({
 
             <div className="mt-6 flex justify-center lg:justify-between">
               {isFeatured ? (
-                <div className="text-gray-600 text-sm tracking-widest text-center lg:text-left">
-                  {album?.body?.en && <PortableText blocks={album?.body?.en} />}
+                <div className="text-gray-300 text-sm tracking-widest text-center lg:text-left">
+                  {album?.body?.en && (
+                    <PortableText
+                      className="PortableText-container"
+                      blocks={album?.body?.en}
+                    />
+                  )}
                 </div>
               ) : null}
             </div>
@@ -218,7 +223,7 @@ const AlbumItem: React.FC<AlbumItemProps> = ({
               <h4 className="text-center lg:text-left">
                 {isReleased ? "Available now" : "Catch The Release!"}
               </h4>
-              <p className="text-gray-600 text-sm tracking-widest text-center lg:text-left">
+              <p className="text-gray-300 text-sm tracking-widest text-center lg:text-left">
                 {album.blurb}
               </p>
               {isReleased && product ? (

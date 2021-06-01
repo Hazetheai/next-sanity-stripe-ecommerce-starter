@@ -7,7 +7,7 @@ import {
   XIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/outline";
-import { SiteConfigNav } from "config/general";
+import { BRAND_NAME, SiteConfigNav } from "config/general";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import Link from "next/link";
@@ -31,7 +31,7 @@ const Navbar: React.FC<NavProps> = ({ navLinks, handleCart }) => {
     <Disclosure as="nav" className="bg-black border-b border-gray-800">
       {({ open }) => (
         <>
-          <div className="container max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -47,7 +47,7 @@ const Navbar: React.FC<NavProps> = ({ navLinks, handleCart }) => {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-between">
                 <NextLink href="/" passHref>
                   <a href="#0" className="flex-shrink-0 flex items-center">
-                    <img
+                    {/* <img
                       className="block lg:hidden h-8 w-auto"
                       src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                       alt="Workflow"
@@ -56,10 +56,13 @@ const Navbar: React.FC<NavProps> = ({ navLinks, handleCart }) => {
                       className="hidden lg:block h-8 w-auto"
                       src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
                       alt="Workflow"
-                    />
+                    /> */}
+                    <h2 className="text-xl md:text-4xl tracking-tight font-extrabold text-white">
+                      {BRAND_NAME}
+                    </h2>
                   </a>
                 </NextLink>
-                <div className="hidden sm:block sm:ml-6">
+                <div className="hidden sm:flex items-center sm:ml-6">
                   <div className="flex space-x-4">
                     {navLinks.map((link) => (
                       <Link
@@ -91,7 +94,7 @@ const Navbar: React.FC<NavProps> = ({ navLinks, handleCart }) => {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button className="bg-gray-800 p-1 -full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                  <span className="sr-only">View notifications</span>
+                  <span className="sr-only">View cart</span>
                   <ShoppingCartIcon
                     className="h-6 w-6"
                     aria-hidden="true"
@@ -100,7 +103,7 @@ const Navbar: React.FC<NavProps> = ({ navLinks, handleCart }) => {
                 </button>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="ml-3 relative">
+                {/* <Menu as="div" className="ml-3 relative">
                   {({ open }) => (
                     <>
                       <div>
@@ -170,7 +173,7 @@ const Navbar: React.FC<NavProps> = ({ navLinks, handleCart }) => {
                       </Transition>
                     </>
                   )}
-                </Menu>
+                </Menu> */}
               </div>
             </div>
           </div>

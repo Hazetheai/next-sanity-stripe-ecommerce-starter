@@ -14,6 +14,7 @@ const Cta: React.FC<CTAProp> = (props) => {
         text={title}
         btnStyle="clear"
         className="text-indigo-500 hover:text-white"
+        noPaddingX
       />
     );
   }
@@ -25,6 +26,7 @@ const Cta: React.FC<CTAProp> = (props) => {
         text={title}
         btnStyle="clear"
         className="text-indigo-500 hover:text-white"
+        noPaddingX
         external
       />
     );

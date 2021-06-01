@@ -12,7 +12,7 @@ function ImageSection(props) {
   }
 
   return (
-    <div className="container max-w-7xl mx-auto px-6 mt-12">
+    <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl mx-auto px-6 mt-12">
       <div className="flex items-center">
         <div>
           <figure>
@@ -31,7 +31,12 @@ function ImageSection(props) {
               <div>
                 <div>{label}</div>
                 <h2>{heading}</h2>
-                {text && <PortableText blocks={text} />}
+                {text && (
+                  <PortableText
+                    blocks={text}
+                    className="PortableText-container"
+                  />
+                )}
                 {cta && cta.route && <Cta {...cta} />}
               </div>
             </figcaption>

@@ -57,7 +57,7 @@ const Song: React.FC<SongProps> = ({
   return (
     <div className="bg-black text-gray-300 min-h-screen p-10 ">
       {/* header */}
-      <div className="container max-w-7xl px-5 py-5 mx-auto flex flex-wrap lg:flex-nowrap">
+      <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl py-5 mx-auto flex flex-wrap lg:flex-nowrap">
         {mainImage?.asset && (
           <MyImage
             containerClassName="mr-6"
@@ -97,7 +97,10 @@ const Song: React.FC<SongProps> = ({
           {backStory && (
             <div className="mt-10 w-5/6">
               <h3>Back Story</h3>
-              <PortableText blocks={backStory} />
+              <PortableText
+                blocks={backStory}
+                className="PortableText-container"
+              />
             </div>
           )}
         </div>
@@ -144,10 +147,13 @@ const Song: React.FC<SongProps> = ({
 
       {/* song list   */}
 
-      <div className="container max-w-7xl px-5 py-5 mx-auto flex flex-wrap lg:flex-nowrap">
+      <div
+        id="lyrics"
+        className="container px-5 sm:px-6 lg:px-8  max-w-7xl py-5 mx-auto flex flex-wrap lg:flex-nowrap"
+      >
         <div className="mt-10">
           <h3>Lyrics</h3>
-          <PortableText blocks={lyrics} />
+          <PortableText blocks={lyrics} className="PortableText-container" />
         </div>
       </div>
     </div>

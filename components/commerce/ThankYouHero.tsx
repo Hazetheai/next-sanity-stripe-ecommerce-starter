@@ -77,7 +77,7 @@ export const ThankYouHero: React.FC<ThankYouPage> = ({ data }) => {
 
       <h2>Status: {data?.payment_intent?.status ?? "loading..."}</h2>
       <h3>CheckoutSession response:</h3> */}
-      <div className="container mx-auto flex max-w-7xl px-5 py-24 md:flex-row flex-col items-center">
+      <div className="container px-5 sm:px-6 lg:px-8  mx-auto flex max-w-7xl px-5 py-24 md:flex-row flex-col items-center">
         {data?.display_items ? (
           <DisplayItems displayItems={data?.display_items} />
         ) : null}

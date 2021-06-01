@@ -5,7 +5,7 @@ interface ReleasesFormProps {}
 
 const ReleasesForm: React.FC<ReleasesFormProps> = ({}) => {
   return (
-    <div className="container max-w-7xl relative mx-auto lg:my-12 lg:px-12 ">
+    <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl relative mx-auto lg:my-12 lg:px-12 ">
       <div className=" md:border-l border-white text-white   px-8 py-4">
         <p className="opacity-75">My Newsletter</p>
         <h3 className="md:text-4xl text-xl font-sans font-bold mb-4">

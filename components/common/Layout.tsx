@@ -6,7 +6,7 @@ function Layout({ children }) {
   return (
     <div className="bg-black relative">
       <Header navLinks={SiteConfig.mainNavigation} />
-      <main className="my-8">{children}</main>
+      <main className="">{children}</main>
       <Footer navigation={SiteConfig.footerNavigation} />
     </div>
   );

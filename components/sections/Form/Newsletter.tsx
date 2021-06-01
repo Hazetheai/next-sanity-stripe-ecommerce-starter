@@ -5,7 +5,7 @@ import { Form as FormProps } from "utils/sanity/types";
 
 const Form: React.FC<FormProps> = ({ formType, tagline, title }) => {
   return (
-    <div className="container max-w-7xl px-5 py-24 mx-auto">
+    <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl px-5 py-24 mx-auto">
       {title && (
         <Heading
           className="sm:text-3xl text-center text-2xl font-medium title-font mb-4"

@@ -17,7 +17,12 @@ const CenterPiece: React.FC<CenterPieceProps> = ({
         {heading && (
           <Heading className="heading mt-4" level="h2" text={heading} />
         )}
-        {text && <PortableText className="mb-8 text-center" blocks={text} />}
+        {text && (
+          <PortableText
+            className="mb-8 text-center PortableText-container"
+            blocks={text}
+          />
+        )}
         {/* TODO */}
         {signup && <EmailForm formType="newsletter" _type="form" />}
         {ctas && (

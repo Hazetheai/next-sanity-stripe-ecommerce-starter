@@ -41,7 +41,7 @@ export enum Types {
 // ) => {
 //   switch (action.type) {
 //     case Types.Load:
-//       // console.log(`state`, state);
+
 //       return {
 //         ...state,
 //         info: action.payload,

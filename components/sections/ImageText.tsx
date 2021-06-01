@@ -43,7 +43,9 @@ const TextImage: React.FC<TextWithImageProps> = ({
     <section className="text-gray-400  body-font ">
       <div className="w-full items-center container max-w-7xl px-5 py-24 mx-auto flex flex-wrap">
         <div className={orientationClassNames[image.imageOrientation].text}>
-          {body && <PortableText blocks={body} />}
+          {body && (
+            <PortableText blocks={body} className="PortableText-container" />
+          )}
         </div>
         <div
           ref={ref}

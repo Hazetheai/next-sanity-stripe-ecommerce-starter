@@ -5,7 +5,7 @@ interface SplitContentProps {}
 const SplitContent: React.FC<SplitContentProps> = ({}) => {
   return (
     <section className="text-gray-400  body-font ">
-      <div className="container max-w-7xl px-5 py-24 flex flex-wrap -mx-4 -mb-10 text-center">
+      <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl px-5 py-24 flex flex-wrap -mx-4 -mb-10 text-center">
         <div className="sm:w-1/2 mb-10 px-4">
           <div className="-lg h-64 overflow-hidden">
             <img

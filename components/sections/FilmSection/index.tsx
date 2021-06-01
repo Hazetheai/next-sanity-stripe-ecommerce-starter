@@ -19,8 +19,8 @@ const FilmSection: React.FC<FilmSectionProps> = ({
   _key,
 }) => {
   return (
-    <section className="text-gray-300">
-      <div className="container max-w-7xl text-4xl font-bold mx-auto px-10 ">
+    <section className="text-gray-300 border-b border-gray-800">
+      <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl text-4xl font-bold mx-auto px-10 ">
         <Heading level="h2">
           {status === "completed"
             ? "Completed Films"

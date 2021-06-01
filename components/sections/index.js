@@ -11,3 +11,4 @@ export { default as SongSection } from "./SongSection";
 export { default as VideoEmbed } from "./VideoEmbedSection";
 export { default as CreativeFeature } from "./CreativeFeature";
 export { default as CoveringArtists } from "./CoveringArtistsSection";
+export { default as AboutSection } from "./AboutSection";

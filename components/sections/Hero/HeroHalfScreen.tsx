@@ -45,7 +45,7 @@ const HeroFullScreen: React.FC<HeroProps> = ({
             <div className="description w-full sm: md:w-2/3 mt-16 text-gray-500 text-sm">
               {tagline && (
                 <PortableText
-                  className="description w-full sm: md:w-2/3 mt-16 text-gray-500 text-sm"
+                  className="description w-full sm: md:w-2/3 mt-16 text-gray-500 text-sm PortableText-container"
                   blocks={tagline}
                 />
               )}

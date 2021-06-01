@@ -53,7 +53,6 @@ const Player: FC = ({}) => {
   //   audioInstance?.play();
   // }, [state.album, state.track]);
 
-  console.log(`audioInstance`, audioInstance);
   return musicPlayer.state.album.info ? (
     <ReactJkMusicPlayer
       quietUpdate

@@ -16,7 +16,7 @@ function FeatureSection({
 }) {
   return (
     <section className=" text-gray-400  body-font">
-      <div className="container max-w-7xl px-5 py-24 mx-auto flex flex-wrap justify-center">
+      <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl px-5 py-24 mx-auto flex flex-wrap justify-center">
         <div className=" w-screen min-h-30rem lg:w-1/2 -mb-16  lg:mb-0 lg:-ml-16 overflow-hidden">
           <MyImage
             nextImageProps={{
@@ -52,7 +52,7 @@ function FeatureSection({
               {/* <p className="leading-relaxed text-base">{tagline1}</p> */}
               {tagline1 && (
                 <PortableText
-                  className="leading-relaxed text-base"
+                  className="leading-relaxed text-base PortableText-container"
                   renderContainerOnSingleChild
                   blocks={tagline1}
                 />
@@ -82,7 +82,7 @@ function FeatureSection({
               </h2>
               {tagline2 && (
                 <PortableText
-                  className="leading-relaxed text-base"
+                  className="leading-relaxed text-base PortableText-container"
                   renderContainerOnSingleChild
                   blocks={tagline2}
                 />
@@ -112,7 +112,7 @@ function FeatureSection({
               </h2>
               {tagline2 && (
                 <PortableText
-                  className="leading-relaxed text-base"
+                  className="leading-relaxed text-base PortableText-container"
                   renderContainerOnSingleChild
                   blocks={tagline2}
                 />

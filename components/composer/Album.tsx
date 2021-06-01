@@ -1,13 +1,14 @@
 import Button from "components/elements/Button";
 import MyImage from "components/elements/Image";
+import { isTrackPlaying } from "components/music-player/lib/isTrackPlaying";
 import albumToPlaylist from "components/music-player/lib/sanityAlbumtoPlayer";
-import {
-  InitialMusicPlayerStateType,
-  useMusicPlayer,
-} from "components/music-player/music-context";
+import { useMusicPlayer } from "components/music-player/music-context";
 import { Types } from "components/music-player/music-reducers";
+import isEqual from "lodash/isEqual";
 import NextLink from "next/link";
 import React from "react";
+import { MdPause, MdPlayCircleOutline } from "react-icons/md";
+import { ReactJkMusicPlayerAudioListProps } from "react-jinke-music-player";
 import { useShoppingCart } from "use-shopping-cart";
 import { handleCurrencySymbol } from "utils/handleCurrencySymbol";
 import { PortableText } from "utils/sanity";
@@ -16,10 +17,6 @@ import { nextSanityImage } from "utils/sanity/nextSanityImage";
 import { Album as AlbumType, Track } from "utils/sanity/types";
 import { slugify } from "utils/stringUtils";
 import { sanityProductToStripe } from "utils/stripe-helpers";
-import isEqual from "lodash/isEqual";
-import { MdPause, MdPlayCircleOutline } from "react-icons/md";
-import { isTrackPlaying } from "components/music-player/lib/isTrackPlaying";
-import { ReactJkMusicPlayerAudioListProps } from "react-jinke-music-player";
 
 export function handleCredits(
   mainWriter: string,
@@ -27,7 +24,11 @@ export function handleCredits(
   coWriters: string[] | undefined,
   coProducers: string[] | undefined
 ) {
-  if (slugify(mainWriter) === slugify(mainProducer)) {
+  if (
+    mainWriter &&
+    mainProducer &&
+    slugify(mainWriter) === slugify(mainProducer)
+  ) {
     return [`Written and produced by ${mainProducer}`];
   }
 
@@ -36,12 +37,16 @@ export function handleCredits(
       coWriters ? " | Co-writers: " + coWriters.join(", ") : ""
     }`,
     `Produced by ${mainProducer} ${
-      coProducers ? " | Co-writers: " + coProducers.join(", ") : ""
+      coProducers ? " | Co-producers: " + coProducers.join(", ") : ""
     }`,
   ];
 }
 
-const Album: React.FC<AlbumProduct> = (album) => {
+const Album: React.FC<{ albumProduct: AlbumProduct }> = ({ albumProduct }) => {
+  if (!albumProduct.slug) {
+    console.log(`NO albumProduct in COMPONENT`, albumProduct);
+    return <div>No Props</div>;
+  }
   const {
     body,
     mainArtist,
@@ -58,7 +63,7 @@ const Album: React.FC<AlbumProduct> = (album) => {
     recognition,
     tags,
     product,
-  } = album;
+  } = albumProduct;
   const credits = handleCredits(
     mainWriter,
     mainProducer,
@@ -87,18 +92,23 @@ const Album: React.FC<AlbumProduct> = (album) => {
   function handleMusicPlayer(track: Track, album: AlbumType) {
     if (!track || !album) return;
     const isSameAlbum = isEqual(
-      { info: album, trackList: albumToPlaylist(album) },
+      {
+        info: album,
+        trackList: albumToPlaylist({ mainArtist, mainImage, trackList }),
+      },
       state.album
     );
     const playList =
       isSameAlbum || !state.album.trackList
-        ? albumToPlaylist(album)
-        : shufflePlaylist(track, albumToPlaylist(album));
+        ? albumToPlaylist({ mainArtist, mainImage, trackList })
+        : shufflePlaylist(
+            track,
+            albumToPlaylist({ mainArtist, mainImage, trackList })
+          );
     const trackIdx = playList.findIndex(
       (trc) => trc.musicSrc === track["previewUrl"]
     );
 
-    console.log(`playList`, playList);
     const newalbum = isSameAlbum
       ? state.album
       : { info: album, trackList: playList };
@@ -118,9 +128,8 @@ const Album: React.FC<AlbumProduct> = (album) => {
 
   return (
     <section className="bg-black text-gray-300 min-h-screen p-10">
-      {console.log(`state`, state)}
       {/* header */}
-      <div className="container max-w-7xl px-5 py-5 mx-auto">
+      <div className="container px-5 sm:px-6 lg:px-8  max-w-7xl py-5 mx-auto">
         <div className="flex flex-wrap">
           {mainImage && (
             <MyImage
@@ -209,7 +218,7 @@ const Album: React.FC<AlbumProduct> = (album) => {
                   btnStyle="clear"
                   noPaddingY
                   noPaddingX
-                  func={() => handleMusicPlayer(track, album)}
+                  func={() => handleMusicPlayer(track, albumProduct)}
                 >
                   {isTrackPlaying(track, state) ? (
                     <MdPause />
@@ -256,7 +265,7 @@ const Album: React.FC<AlbumProduct> = (album) => {
           ))}
         </div>
         <div className="mt-10">
-          <PortableText blocks={body.en} />
+          <PortableText blocks={body.en} className="PortableText-container" />
         </div>
       </div>
     </section>

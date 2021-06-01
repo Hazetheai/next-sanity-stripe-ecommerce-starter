@@ -1,3 +1,4 @@
+import Heading from "components/elements/Heading";
 import MyImage from "components/elements/Image";
 import Link from "components/elements/Link";
 import { BRAND_NAME } from "config/general";
@@ -39,9 +40,10 @@ const CoveringArtists: React.FC<CoveringArtistSection> = ({
   );
 
   return (
-    <div className="w-full container px-5 py-5 mx-auto">
+    <div className="w-full container px-5 py-5 mx-auto max-w-7xl">
+      <Heading level="h2">Covering Artists</Heading>
       <div className="w-2/3 mr-auto pb-4">
-        <PortableText blocks={content} />
+        <PortableText blocks={content} className="PortableText-container" />
       </div>
       {/* song list header */}
       <div className="flex text-gray-600">
@@ -77,6 +79,7 @@ const CoveringArtists: React.FC<CoveringArtistSection> = ({
                 text={artist.title}
                 btnStyle="clear"
                 noPaddingY
+                noPaddingX
                 className="px-0 text-white "
               />
             ) : (
