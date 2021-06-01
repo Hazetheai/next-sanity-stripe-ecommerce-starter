@@ -98,8 +98,6 @@ export const PortableText = createPortableTextComponent({
         return (
           <MyLink
             external
-            // TODO
-            // target={mark.blank ? '_blank' : '_self'}
             target={mark.blank ? "_blank" : "_self"}
             rel={mark.blank ? "noopener" : undefined}
             hrefProp={href}

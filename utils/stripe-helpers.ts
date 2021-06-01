@@ -38,8 +38,8 @@ export function sanityProductToStripe(
   productVariant: ProductVariant
 ): Product {
   const hasImages = productVariant?.images
-    ? urlFor(productVariant?.images[0]).url()
-    : product.defaultProductVariant.images
+    ? urlFor(productVariant?.images?.[0]).url()
+    : product.defaultProductVariant?.images
     ? urlFor(product.defaultProductVariant?.images[0]).url()
     : urlFor(product.mainImage).url();
   const stripeProduct = {

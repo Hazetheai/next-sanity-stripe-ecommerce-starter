@@ -249,19 +249,19 @@ export interface Category extends SanityDocument {
 }
 
 /**
- * Act
+ * Artist
  *
  * A monikor, artist name, band etc.
  */
-export interface Act extends SanityDocument {
-  _type: "act";
+export interface Artist extends SanityDocument {
+  _type: "artist";
 
   /**
    * name — `string`
    *
    *
    */
-  name?: string;
+  name: string;
 
   /**
    * tagline — `string`
@@ -271,23 +271,23 @@ export interface Act extends SanityDocument {
   tagline?: string;
 
   /**
-   * logo — `image`
+   * profileImage — `image`
    *
    *
    */
-  logo?: {
+  profileImage: {
     _type: "image";
     asset: SanityAsset;
     crop?: SanityImageCrop;
     hotspot?: SanityImageHotspot;
-
-    /**
-     * Alternative text — `string`
-     *
-     * Important for SEO and accessiblity.
-     */
-    alt: string;
   };
+
+  /**
+   * Bio — `blockContent`
+   *
+   *
+   */
+  bio: BlockContent;
 
   /**
    * Members — `array`
@@ -465,6 +465,7 @@ export interface Page extends SanityDocument {
     | SanityKeyed<ImageText>
     | SanityKeyed<CenterPiece>
     | SanityKeyed<FeatureSection>
+    | SanityKeyed<AboutSection>
     | SanityKeyed<Form>
     | SanityKeyed<ProductSection>
     | SanityKeyed<FilmSection>
@@ -1313,6 +1314,13 @@ export interface StaticRoute extends SanityDocument {
 export type ProductSection = {
   _type: "productSection";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Title — `string`
    *
    *
@@ -1338,6 +1346,13 @@ export type PhotoCredits = SanityReference<Photographer>;
 
 export type ImageText = {
   _type: "imageText";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * Title — `string`
    *
@@ -1410,11 +1425,37 @@ export type ImageText = {
 export type Cta = {
   _type: "cta";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Title — `string`
    *
    *
    */
   title: string;
+
+  /**
+   * Tagline — `text`
+   *
+   *
+   */
+  tagline?: string;
+
+  /**
+   * Icon — `image`
+   *
+   * Used on hero section featured CTAs. Optimal size is 100x100
+   */
+  icon?: {
+    _type: "image";
+    asset: SanityAsset;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
 
   /**
    * Internal link — `reference`
@@ -1438,6 +1479,13 @@ export type Figure = {
   hotspot?: SanityImageHotspot;
 
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Caption — `string`
    *
    *
@@ -1459,6 +1507,13 @@ export type InternalLink = SanityReference<
 export type Link = {
   _type: "link";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * URL — `url`
    *
    *
@@ -1468,6 +1523,13 @@ export type Link = {
 
 export type Hero = {
   _type: "hero";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * Heading — `string`
    *
@@ -1509,6 +1571,20 @@ export type Hero = {
   layout?: "imageOnly" | "framed" | "halfScreen" | "fullScreen";
 
   /**
+   * Text Layout — `string`
+   *
+   * Only affects full screen image layouts
+   */
+  textLayout?: "left" | "center" | "right";
+
+  /**
+   * Feature CTAs — `boolean`
+   *
+   * Enabling this will make CTA's appear at the bottom of the hero and show the tagline and icon. Best used with >= 2
+   */
+  featureCtas?: boolean;
+
+  /**
    * Call to actions — `array`
    *
    *
@@ -1518,6 +1594,13 @@ export type Hero = {
 
 export type ImageSection = {
   _type: "imageSection";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * Heading — `string`
    *
@@ -1557,6 +1640,13 @@ export type ImageSection = {
 export type CenterPiece = {
   _type: "centerPiece";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Label — `string`
    *
    *
@@ -1594,6 +1684,13 @@ export type CenterPiece = {
 
 export type FeatureSection = {
   _type: "featureSection";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * Heading 1 — `string`
    *
@@ -1659,6 +1756,13 @@ export type FeatureSection = {
 export type Form = {
   _type: "form";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Title — `string`
    *
    *
@@ -1680,10 +1784,15 @@ export type Form = {
   formType: "newsletter" | "contact";
 };
 
-export type SimplePortableText = Array<SanityKeyed<SanityBlock>>;
-
 export type ContactInfo = {
   _type: "contactInfo";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * LinkedIn — `string`
    *
@@ -1713,19 +1822,15 @@ export type ContactInfo = {
   phone?: string;
 };
 
-export type BlockContent = Array<
-  | SanityKeyed<SanityBlock>
-  | SanityKeyed<{
-      _type: "image";
-      asset: SanityAsset;
-      crop?: SanityImageCrop;
-      hotspot?: SanityImageHotspot;
-    }>
-  | SanityKeyed<VideoEmbed>
->;
-
 export type LocaleText = {
   _type: "localeText";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * English — `text`
    *
@@ -1744,6 +1849,13 @@ export type LocaleText = {
 export type LocaleBlockContent = {
   _type: "localeBlockContent";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * English — `blockContent`
    *
    *
@@ -1761,6 +1873,13 @@ export type LocaleBlockContent = {
 export type LocaleString = {
   _type: "localeString";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * English — `string`
    *
    *
@@ -1777,6 +1896,13 @@ export type LocaleString = {
 
 export type ProductVariant = {
   _type: "productVariant";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * Title — `string`
    *
@@ -1844,6 +1970,13 @@ export type ProductVariant = {
 export type Appraiser = {
   _type: "appraiser";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Image — `image`
    *
    *
@@ -1887,6 +2020,13 @@ export type Appraiser = {
 export type SongSection = {
   _type: "songSection";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Song — `reference`
    *
    *
@@ -1903,6 +2043,13 @@ export type SongSection = {
 
 export type AlbumSection = {
   _type: "albumSection";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * Label — `string`
    *
@@ -1921,6 +2068,13 @@ export type AlbumSection = {
 export type FilmSection = {
   _type: "filmSection";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Label — `string`
    *
    *
@@ -1938,6 +2092,13 @@ export type FilmSection = {
 export type VideoEmbed = {
   _type: "videoEmbed";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * URL — `url`
    *
    *
@@ -1948,6 +2109,13 @@ export type VideoEmbed = {
 export type CreativeFeature = {
   _type: "creativeFeature";
   /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
    * Feature Type? — `string`
    *
    *
@@ -1957,6 +2125,13 @@ export type CreativeFeature = {
 
 export type CoveringArtists = {
   _type: "coveringArtists";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * note — `note`
    *
@@ -1974,6 +2149,13 @@ export type CoveringArtists = {
 
 export type Track = {
   _type: "track";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
   /**
    * Title — `string`
    *
@@ -2038,12 +2220,42 @@ export type Track = {
   previewFile?: { _type: "file"; asset: SanityAsset };
 };
 
+export type SimplePortableText = Array<SanityKeyed<SanityBlock>>;
+
+export type BlockContent = Array<
+  | SanityKeyed<SanityBlock>
+  | SanityKeyed<{
+      _type: "image";
+      asset: SanityAsset;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+    }>
+  | SanityKeyed<VideoEmbed>
+>;
+
+export type AboutSection = {
+  _type: "aboutSection";
+  /**
+   * active — `boolean`
+   *
+   *
+   */
+  active?: boolean;
+
+  /**
+   * Label — `string`
+   *
+   *
+   */
+  label?: string;
+};
+
 export type Documents =
   | Product
   | Popup
   | Vendor
   | Category
-  | Act
+  | Artist
   | Social
   | Ad
   | Swag

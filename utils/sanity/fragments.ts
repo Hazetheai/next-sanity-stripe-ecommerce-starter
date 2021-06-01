@@ -35,6 +35,22 @@ trackList[]{
 
 `;
 
+export const F_ABOUT_SECTION = `
+_type=="aboutSection" => {
+  ...,
+  'artist': *[_type=="artist"][0]
+},
+`;
+
+export const F_HERO_FIELDS = `
+_type == "hero" => {
+  ctas[]{
+    ...,
+    route->
+  }
+ },
+`;
+
 export const F_CREATIVE_FEATURE = `
 _type == "creativeFeature" => {
   ...,

@@ -83,12 +83,19 @@ const socialsQuery = groq`
   handle
 }
 `;
+const artistQuery = groq`
+*[_type == "artist"]{
+  ...
+}
+`;
 module.exports = async () => {
   // fetch from wherever you've stored the layout
   const globalData = await getClient().fetch(globalQuery); // gets items from db or api
   const socialData = await getClient().fetch(socialsQuery); // gets items from db or api
+  const artistData = await getClient().fetch(artistQuery); // gets items from db or api
 
   // save the result the public folder
   fs.writeFileSync("public/global-data.json", JSON.stringify(globalData));
   fs.writeFileSync("public/social-data.json", JSON.stringify(socialData));
+  fs.writeFileSync("public/artist-data.json", JSON.stringify(artistData));
 };

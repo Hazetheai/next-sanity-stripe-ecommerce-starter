@@ -1,10 +1,12 @@
 import groq from "groq";
 import {
+  F_ABOUT_SECTION,
   F_ALL_MEDIA_FIELDS,
   F_BODY_WITH_ADD_FIELDS,
   F_COVERING_ARTISTS,
   F_CREATIVE_FEATURE,
   F_FEATURED_CONTENT,
+  F_HERO_FIELDS,
 } from "./fragments";
 
 export const Q_ROUTE_BY_SLUG = groq`
@@ -17,6 +19,8 @@ export const Q_ROUTE_BY_SLUG = groq`
     ${F_CREATIVE_FEATURE}
     ${F_COVERING_ARTISTS}
     ${F_BODY_WITH_ADD_FIELDS}
+    ${F_ABOUT_SECTION}
+    ${F_HERO_FIELDS}
     products[]->{
       ...
     },
@@ -91,7 +95,6 @@ export const Q_SOURCE_MEDIA_WITH_PRODUCT = groq`
 export const Q_ALL_SOURCE_MEDIA_WITH_PRODUCTS = groq`
 *[_type == $type]{
   ${F_ALL_MEDIA_FIELDS}
-}
 }
 `;
 
