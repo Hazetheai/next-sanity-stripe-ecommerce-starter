@@ -30,6 +30,10 @@ const FilmContainer: FC<FilmPage> = ({
     return <Error statusCode={404} />;
   }
 
+  if (!filmData?.slug) {
+    return <Error statusCode={404} />;
+  }
+
   const { data: product = {} } = usePreviewSubscription(
     Q_SOURCE_MEDIA_WITH_PRODUCT,
     {

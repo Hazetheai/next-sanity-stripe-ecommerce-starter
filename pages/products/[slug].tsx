@@ -18,7 +18,7 @@ function ProductPageContainer({ productData, preview }) {
     enabled: preview || router.query.preview !== null,
   });
 
-  return <ProductPage {...product} />;
+  return product.slug ? <ProductPage {...product} /> : null;
 }
 
 export async function getStaticProps({ params, preview = false }) {
@@ -27,7 +27,7 @@ export async function getStaticProps({ params, preview = false }) {
   });
 
   return {
-    props: { preview, productData },
+    props: { preview, productData: productData || null },
   };
 }
 

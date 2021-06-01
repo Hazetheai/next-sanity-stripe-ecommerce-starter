@@ -14,10 +14,18 @@ import { validateCartItems } from "use-shopping-cart/src/serverUtil";
 import Stripe from "stripe";
 import { getAllProducts } from "utils/sanity/api";
 import { sanityProductToStripe } from "utils/stripe-helpers";
+import { Product, ProductVariant } from "utils/sanity/types";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
   apiVersion: "2020-03-02",
 });
+
+export function getAllVariants(product: Product) {
+  const dfVar = product.defaultProductVariant;
+  const variants = product.variants || [];
+
+  return variants.concat({ ...dfVar, _key: dfVar.sku });
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,9 +34,18 @@ export default async function handler(
   if (req.method === "POST") {
     const inventory = await getAllProducts();
 
-    const stripeInventory = inventory.map((el) =>
-      sanityProductToStripe(el, el.defaultProductVariant)
-    );
+    const stripeInventory = inventory
+      .reduce((acc, curr) => {
+        return acc.concat(
+          getAllVariants(curr).map((el) => {
+            return {
+              product: curr,
+              variant: el,
+            };
+          })
+        );
+      }, [] as any[])
+      .map((el) => sanityProductToStripe(el.product, el.variant));
     try {
       // Validate the cart details that were sent from the client.
       const { cartItems, metadata } = req.body;

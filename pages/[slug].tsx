@@ -43,9 +43,12 @@ export async function getStaticPaths() {
     .fetch(`*[_type == "route" && defined(slug.current)]{
     "params": {"slug": slug.current}
   }`);
+  const staticRoutes = ["albums", "songs", "products", "films"];
+  const dynamicRoutes = routes.filter((r) => !staticRoutes.includes(r));
 
+  console.log(`dynamicRoutes`, dynamicRoutes);
   return {
-    paths: routes || null,
+    paths: dynamicRoutes || null,
     fallback: true,
   };
 }

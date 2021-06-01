@@ -18,7 +18,7 @@ function AlbumsListContainer({ pageData, preview }) {
 
   return (
     <section className="text-gray-400  body-font">
-      <div className="container px-5 py-5 mx-auto max-w-7xl">
+      <div className="container px-5 sm:px-6 lg:px-8  px-5 py-5 mx-auto max-w-7xl">
         {albumsPage.featuredAlbum && (
           <AlbumSection
             albumProduct={albumsPage.featuredAlbum}
@@ -40,7 +40,7 @@ export async function getStaticProps({ params = {}, preview = false }) {
   return {
     props: {
       preview,
-      pageData,
+      pageData: pageData || null,
     },
   };
 }
