@@ -55,6 +55,12 @@
     margin-right: -50vw;
   }
 
+  .PortableText-container blockquote {
+    @apply py-4;
+    font-size: 150%;
+    font-weight: 100;
+  }
+
   input:focus-within ~ label,
   input:not(:placeholder-shown) ~ label {
     opacity: 0;

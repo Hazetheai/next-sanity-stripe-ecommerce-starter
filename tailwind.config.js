@@ -26,6 +26,9 @@ module.exports = {
       "40rem": "40rem",
       "50rem": "50rem",
     },
+    objectPosition: {
+      "hero-left": "-8rem",
+    },
     extend: {
       colors: {
         "accent-1": "#333",
