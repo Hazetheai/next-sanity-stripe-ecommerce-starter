@@ -7,6 +7,7 @@ import {
   Socials,
 } from "config/general";
 import React, { Fragment } from "react";
+import { buildSanityLink } from "utils/sanity";
 import { SiteConfig, Social } from "utils/sanity/types";
 import { capitalize } from "utils/stringFunctions";
 
@@ -47,11 +48,7 @@ const Footer: React.FC<FooterProps> = ({ navigation }) => {
                 {nav.footerNavigationItem.map((item) => (
                   <li key={item._rev}>
                     <Link
-                      hrefProp={
-                        item._type === "product"
-                          ? `products/${item.slug}`
-                          : item.slug
-                      }
+                      hrefProp={buildSanityLink(item._type, item.slug)}
                       btnStyle="clear"
                       icon={{ name: "none" }}
                       text={item.page || item.title}

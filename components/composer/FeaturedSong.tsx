@@ -21,7 +21,7 @@ const FeaturedSong: React.FC<Song> = ({
   // tags,
 }) => {
   return (
-    <div className="container px-5 sm:px-6 lg:px-8  px-5 py-5 mx-auto max-w-7xl">
+    <div className="container sm:px-6 lg:px-8  px-5 py-5 mx-auto max-w-7xl">
       <div className="container px-5 sm:px-6 lg:px-8  flex flex-wrap md:flex-nowrap justify-between  py-5 mx-auto">
         <div className="flex flex-col items-start mb-12 mr-12">
           <h1 className="text-5xl font-medium title-font mb-4 text-white">

@@ -81,7 +81,7 @@ export default () =>
               S.documentTypeListItem("staticRoute").title("Static Routes"),
               S.documentTypeListItem("page").title("Pages"),
               S.listItem()
-                .title("Featured Content Configuration")
+                .title("Featured Content")
                 .icon(MdSettings)
                 .child(
                   S.document()

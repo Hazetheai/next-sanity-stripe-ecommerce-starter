@@ -23,6 +23,11 @@ export default {
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: "description",
+      title: "Description",
+      type: "text",
+    },
   ],
   preview: {
     select: {
